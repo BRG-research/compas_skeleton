@@ -18,7 +18,7 @@ __all__ = ['Skeleton']
 
 class Skeleton(Mesh):
     """Skeleton is a low poly mesh typologically generated from a group of lines.
-    It takes lines as input to generate a mesh. Editing skeleton lines afterwards will update the mesh.
+    *descriptions to be updated
 
     Attributes
     ----------
