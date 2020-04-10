@@ -158,8 +158,8 @@ class Skeleton(Mesh):
         # assign default mesh width, because with 0 width the mesh cannot be visualised.
         if self.node_width == 0 and self.leaf_width == 0:  
             average_edge_length = sum([self.edge_length(u, v) for u, v in self.edges()])/self.number_of_edges()
-            self.leaf_width = average_edge_length * 0.1
-            self.node_width = average_edge_length * 0.1 * 2
+            self.leaf_width = average_edge_length * 0.2
+            self.node_width = average_edge_length * 0.2 * 2
 
         # add generated vertices keys and faces
         network = self._add_boundary_vertices(network)
@@ -418,54 +418,6 @@ class Skeleton(Mesh):
 
         mesh.name = 'Skeleton'
         return mesh
-
-    def to_pattern(self):
-        """ Generate a form pattern mesh for compas_rv2 and compas_tna. """
-        from compas_rv2.datastructures import Pattern
-
-        mesh = self.to_mesh()
-        xyz = mesh.vertices_attributes('xyz')
-        faces = [mesh.face_vertices(fkey) for fkey in mesh.faces()]
-        pattern = Pattern.from_vertices_and_faces(xyz, faces)
-
-        anchor_vertices = self._get_anchor_vertices()
-        if anchor_vertices:
-            pattern.vertices_attributes(['is_anchor', 'is_fixed'], [True, True], keys=anchor_vertices)
-
-        return pattern
-
-    def _get_anchor_vertices(self):
-        """ Get default anchor vertices for pattern. """
-        anchor_vertices = []
-        leaf_vertices = list(self.vertices_where({'type': 'skeleton_leaf'}))
-
-        if not leaf_vertices:  # this is a dome
-            mesh = self.to_mesh()
-            anchor_vertices = mesh.vertices_on_boundary()
-
-        else:
-            iterations = self.attributes['sub_level']
-
-            for key in leaf_vertices:
-                vertices_on_edge = [key]
-                for nbr in self.vertex_neighbors(key):
-                    if self.vertex[nbr]['type'] != 'skeleton_node':
-                        vertices_on_edge.append(nbr)
-
-                vertices_temp = [key]
-                for i in range(iterations):
-                    vertices_temp_2 = []
-                    mesh = self._subdivide(i+1)
-                    for v in vertices_temp:
-                        for nbr in mesh.vertex_neighbors(v):
-                            if mesh.vertex_degree(nbr) == 3:
-                                vertices_on_edge.append(nbr)
-                                vertices_temp_2.append(nbr)
-                    vertices_temp = vertices_temp_2
-
-                anchor_vertices.extend(vertices_on_edge)
-
-        return anchor_vertices
 
 
 if __name__ == '__main__':
