@@ -10,6 +10,7 @@ from compas.datastructures.network import duality
 from compas.geometry import centroid_points
 from compas.geometry import Vector
 from compas.geometry import add_vectors
+from compas.geometry import Frame
 
 import copy
 
@@ -56,6 +57,7 @@ class Skeleton(Mesh):
             'sub_level': 0
         })
         self.update_default_vertex_attributes({'type': None})
+        self.update_default_vertex_attributes({'transform': None})
         self.update_default_edge_attributes({'type': None})
 
     # --------------------------------------------------------------------------
@@ -264,7 +266,7 @@ class Skeleton(Mesh):
     # modifiers
     # --------------------------------------------------------------------------
 
-    def update_mesh_vertices_pos(self):
+    def update_mesh_vertices_pos(self, f2=None, f1=None):
 
         def update_node_boundary_vertex(u, v):
             fkey = self.halfedge[u][v]
@@ -280,6 +282,15 @@ class Skeleton(Mesh):
             key2 = self.face[fkey2][2]
 
             pt1, pt2 = self._get_leaf_boundary_vertex_pos(u, v)
+
+            # add transformations
+            vec = Vector(*self.vertex[key1]['transform'])
+            vec = Frame.local_to_local_coords(f2, f1, vec)
+            pt1 = add_vectors(pt1, vec)
+
+            vec = Vector(*self.vertex[key2]['transform'])
+            vec = Frame.local_to_local_coords(f2, f1, vec)
+            pt2 = add_vectors(pt2, vec)
 
             self.vertex[key1].update({'x': pt1[0], 'y': pt1[1], 'z': pt1[2]})
             self.vertex[key2].update({'x': pt2[0], 'y': pt2[1], 'z': pt2[2]})
@@ -381,6 +392,22 @@ class Skeleton(Mesh):
         nbrs = self.vertex[u]['neighbors']
         prvs = nbrs[(nbrs.index(v) + 1) % len(nbrs)]
         return prvs
+
+    def _get_vec_along_branch(self, u):
+        v = None
+        for key in self.halfedge[u]:
+            if self.vertex_attribute(key, 'type') == 'skeleton_node':
+                v = key
+        return Vector(*(self.edge_vector(v, u)))
+
+    def _get_leaf_vertex_frame(self, key):
+        pt = self.vertex_coordinates(key)
+        vec_along_edge = self._get_vec_along_branch(key)
+        vec_perp = vec_along_edge.cross(Vector.Zaxis())
+        
+        return Frame(pt, vec_along_edge, vec_perp)
+
+
 
     # --------------------------------------------------------------------------
     # visualization

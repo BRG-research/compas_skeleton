@@ -4,6 +4,7 @@ from __future__ import division
 
 from compas.geometry import Vector
 from compas.geometry import dot_vectors
+from compas.geometry import Frame
 import compas_rhino
 from compas_rhino.modifiers import mesh_move_vertex
 from compas_rhino import delete_objects
@@ -185,17 +186,10 @@ class SkeletonObject(object):
 
             for line in lines:
                 e.Display.DrawLine(line, FromArgb(0, 0, 0), 2)
-
-        def _get_vec_along_branch(u):
-            v = None
-            for key in self.datastructure.halfedge[u]:
-                if self.datastructure.vertex_attribute(key, 'type') == 'skeleton_node':
-                    v = key
-            return Vector(*(self.datastructure.edge_vector(v, u)))
         
         def _get_constrain(param):
             u = leaf_vertex
-            vec_along_edge = _get_vec_along_branch(u)
+            vec_along_edge = self.datastructure._get_vec_along_branch(u)
             
             if param == 'leaf_width':                
                 vec_offset = vec_along_edge.cross(Vector.Zaxis())
@@ -210,7 +204,7 @@ class SkeletonObject(object):
 
         def _get_leaf_extend_direction(cp):
             u = leaf_vertex
-            vec_along_edge = _get_vec_along_branch(u)
+            vec_along_edge = self.datastructure._get_vec_along_branch(u)
             vec_sp_np = Vector.from_start_end(sp, cp)
             dot_vec = dot_vectors(vec_along_edge, vec_sp_np)
             
@@ -252,8 +246,12 @@ class SkeletonObject(object):
         guid = compas_rhino.rs.GetObject(message="Select a vertex.", preselect=True, filter=rs.filter.point | rs.filter.textdot)
         if guid in list(self.guid_skeleton_vertices.keys()):
             key = self.guid_skeleton_vertices[guid]
+            f1 = self.datastructure._get_leaf_vertex_frame(key)
+
             mesh_move_vertex(self.datastructure, key)
-            self.datastructure.update_mesh_vertices_pos()
+            f2 = self.datastructure._get_leaf_vertex_frame(key)
+            self.datastructure.update_mesh_vertices_pos(f2, f1)
+        
         else:
             print('Not a skeleton vertex! Please select again:')
             return
@@ -263,8 +261,14 @@ class SkeletonObject(object):
         guid = compas_rhino.rs.GetObject(message="Select a vertex.", preselect=True, filter=rs.filter.point | rs.filter.textdot)
         guid_key = self.guid_coarse_mesh_vertices
         guid_key.update(self.guid_skeleton_vertices)
+        
         key = guid_key[guid]
+        sp = self.datastructure.vertex_coordinates(key)
         mesh_move_vertex(self.datastructure, key)
+        ep = self.datastructure.vertex_coordinates(key)
+        vec = Vector.from_start_end(sp, ep)
+
+        self.datastructure.vertex[key].update({'transform': list(vec)})
 
     def update(self):
         """update skeleton and skeleton mesh by typing command name in rhino command line.
