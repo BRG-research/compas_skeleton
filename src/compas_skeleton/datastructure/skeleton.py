@@ -57,7 +57,7 @@ class Skeleton(Mesh):
             'sub_level': 0
         })
         self.update_default_vertex_attributes({'type': None})
-        self.update_default_vertex_attributes({'transform': None})
+        self.update_default_vertex_attributes({'transform': [0, 0, 0]})
         self.update_default_edge_attributes({'type': None})
 
     # --------------------------------------------------------------------------
@@ -284,13 +284,22 @@ class Skeleton(Mesh):
             pt1, pt2 = self._get_leaf_boundary_vertex_pos(u, v)
 
             # add transformations
-            vec = Vector(*self.vertex[key1]['transform'])
-            vec = Frame.local_to_local_coords(f2, f1, vec)
-            pt1 = add_vectors(pt1, vec)
+            if f1 and f2:
+                if self.vertex_attribute(key1, 'transform'):
+                    vec = Vector(*self.vertex_attribute(key1, 'transform'))
+                    vec_l = f1.to_local_coords(vec)
+                    vec = f2.to_world_coords(vec_l)
+                    # vec = Frame.local_to_local_coords(f2, f1, vec)
+                    pt1 = add_vectors(pt1, vec)
+                    self.vertex[key1].update({'transform': list(vec)})
 
-            vec = Vector(*self.vertex[key2]['transform'])
-            vec = Frame.local_to_local_coords(f2, f1, vec)
-            pt2 = add_vectors(pt2, vec)
+                if self.vertex_attribute(key2, 'transform'):
+                    vec = Vector(*self.vertex_attribute(key2, 'transform'))
+                    vec_l = f1.to_local_coords(vec)
+                    vec = f2.to_world_coords(vec_l)
+                    vec = Frame.local_to_local_coords(f2, f1, vec)
+                    pt2 = add_vectors(pt2, vec)
+                    self.vertex[key2].update({'transform': list(vec)})
 
             self.vertex[key1].update({'x': pt1[0], 'y': pt1[1], 'z': pt1[2]})
             self.vertex[key2].update({'x': pt2[0], 'y': pt2[1], 'z': pt2[2]})

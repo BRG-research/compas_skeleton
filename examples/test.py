@@ -41,9 +41,16 @@ f2 = Frame([1, 2, 0], [1, 1, 0], [-1, 1, 0])
 # vec_l = f1.to_local_coords(vec)
 # vec = f2.to_world_coords(vec_l)
 
+f1 = None
+f2 = None
+
 vec = Frame.local_to_local_coords(f2, f1, vec)
+print(vec)
 
-from compas.geometry import Vector
+# from compas.geometry import Vector
 
-vec = Vector(0, 0, 0)
-print(list(vec))
+# # vec = Vector(0, 0, 0)
+# # print(list(vec))
+# list1 = [0, 0, 1]
+# vec = Vector(*list1)
+# print(vec)

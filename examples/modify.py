@@ -16,7 +16,7 @@ FILE = os.path.join(DATA, 'skeleton.json')
 # ==============================================================================
 
 skeleton = Skeleton.from_json(FILE)
-# print(skeleton.vertex[8])
+# print(skeleton.vertex_attribute(8, 'transform'))
 skeletonobject = SkeletonObject(skeleton)
 skeletonobject.draw()
 skeletonobject.update()

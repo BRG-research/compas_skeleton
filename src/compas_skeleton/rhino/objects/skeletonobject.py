@@ -4,6 +4,7 @@ from __future__ import division
 
 from compas.geometry import Vector
 from compas.geometry import dot_vectors
+from compas.geometry import add_vectors
 from compas.geometry import Frame
 import compas_rhino
 from compas_rhino.modifiers import mesh_move_vertex
@@ -266,8 +267,10 @@ class SkeletonObject(object):
         sp = self.datastructure.vertex_coordinates(key)
         mesh_move_vertex(self.datastructure, key)
         ep = self.datastructure.vertex_coordinates(key)
-        vec = Vector.from_start_end(sp, ep)
 
+        vec = Vector.from_start_end(sp, ep)
+        vec_prvs = self.datastructure.vertex_attribute(key, 'transform')
+        vec = add_vectors(vec_prvs, vec)
         self.datastructure.vertex[key].update({'transform': list(vec)})
 
     def update(self):
