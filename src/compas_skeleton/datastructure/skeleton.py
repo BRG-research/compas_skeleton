@@ -378,10 +378,8 @@ class Skeleton(Mesh):
         return next
 
     def _get_vec_along_branch(self, v):
-        u = None
-        for key in self.halfedge[v]:
-            if self.vertex_attribute(key, 'type') == 'skeleton_node':
-                u = key
+        u = self.vertex_attribute(v, 'neighbors')[0]
+
         return Vector(*(self.edge_vector(u, v)))
 
     def _get_vec_offsetfrom_branch(self, u, v, dirct):
@@ -418,9 +416,7 @@ class Skeleton(Mesh):
         
         return Frame(pt, vec_along_edge, vec_perp)
 
-    def _get_joint_vertex_frame(self, key):
-        v = key
-        u = self.vertex_attribute(v, 'neighbors')[0]
+    def _get_joint_vertex_frame(self, u, v):
         pt = self.vertex_coordinates(u)
 
         vec_offsetfrom_edge = self._get_vec_offsetfrom_branch(u, v, 'left')
@@ -433,40 +429,28 @@ class Skeleton(Mesh):
 
         return frame_left, frame_right
 
-    def _mount_leaf_transformation(self, sk_v_key, f1, f2):
+    def _mount_leaf_transformation(self, v, f1, f2):
         #  mount the transformation of skeleton vertice to related mesh vertices
-        v = sk_v_key  # leaf key
-        u = None
-        for key in self.halfedge[v]:
-            if self.vertex_attribute(key, 'type') == 'skeleton_node':
-                u = key
-
-        descendents = [self._get_descendent(u, v)[0], self._get_descendent(u, v)[1]]
+        u = self.vertex_attribute(v, 'neighbors')[0]
+        descendents = self._get_descendent(u, v)[:2]
 
         for key in descendents:
-            if self.vertex_attribute(key, 'transform'):
-                vec = Vector(*self.vertex_attribute(key, 'transform'))
-                vec_l = f1.to_local_coords(vec)
-                vec = f2.to_world_coords(vec_l)
-                self.vertex[key].update({'transform': list(vec)})
+            vec = Vector(*self.vertex_attribute(key, 'transform'))
+            vec_l = f1.to_local_coords(vec)
+            vec = f2.to_world_coords(vec_l)
+            self.vertex[key].update({'transform': list(vec)})
 
-    def _mount_joint_transformation(self, sk_v_key, f1, f2, dirct):
-        v = sk_v_key  # leaf key
-        u = None  # joint key
-        for key in self.halfedge[v]:
-            if self.vertex_attribute(key, 'type') == 'skeleton_node':
-                u = key
+    def _mount_joint_transformation(self, u, v, f1, f2, dirct):
 
         if dirct == 'left':
             key = self._get_descendent(u, v)[2]
         else:
             key = self._get_descendent(u, v)[3]
 
-        if self.vertex_attribute(key, 'transform'):
-            vec = Vector(*self.vertex_attribute(key, 'transform'))
-            vec_l = f1.to_local_coords(vec)
-            vec = f2.to_world_coords(vec_l)
-            self.vertex[key].update({'transform': list(vec)})
+        vec = Vector(*self.vertex_attribute(key, 'transform'))
+        vec_l = f1.to_local_coords(vec)
+        vec = f2.to_world_coords(vec_l)
+        self.vertex[key].update({'transform': list(vec)})
 
     def _get_descendent(self, u, v):
         fkey1 = self.halfedge[u][v]

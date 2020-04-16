@@ -242,51 +242,6 @@ class SkeletonObject(object):
 
         self.draw_mesh()
 
-    def move_skeleton_vertex(self):
-        """ Change the position of a skeleton vertex and update all vertices affected by it. """
-        guid = compas_rhino.rs.GetObject(message="Select a vertex.", preselect=True, filter=rs.filter.point | rs.filter.textdot)
-        if guid not in list(self.guid_skeleton_vertices.keys()):
-            print('Not a skeleton vertex! Please select again:')
-            return
-
-        else:
-            key = self.guid_skeleton_vertices[guid]
-
-            if self.datastructure.vertex_attribute(key, 'type') == 'skeleton_leaf':
-                leaf_f_before = self.datastructure._get_leaf_vertex_frame(key)
-                joints_f_before = self.datastructure._get_joint_vertex_frame(key)
-
-                mesh_move_vertex(self.datastructure, key)
-
-                leaf_f_after = self.datastructure._get_leaf_vertex_frame(key)
-                joints_f_after = self.datastructure._get_joint_vertex_frame(key)
-
-                self.datastructure._mount_leaf_transformation(key, leaf_f_before, leaf_f_after)
-                self.datastructure._mount_joint_transformation(key, joints_f_before[0], joints_f_after[0], 'left')
-                self.datastructure._mount_joint_transformation(key, joints_f_before[1], joints_f_after[1], 'right')
-
-            else:
-                leafs_f_before = []
-                joints_f_before = []
-                leafs_f_after = []
-                joints_f_after = []
-
-                for nbr in self.datastructure.vertex_attribute(key, 'neighbors'):
-                    leafs_f_before.append(self.datastructure._get_leaf_vertex_frame(nbr))
-                    joints_f_before.append(self.datastructure._get_joint_vertex_frame(nbr)[0])
-                
-                mesh_move_vertex(self.datastructure, key)
-
-                for nbr in self.datastructure.vertex_attribute(key, 'neighbors'):
-                    leafs_f_after.append(self.datastructure._get_leaf_vertex_frame(nbr))
-                    joints_f_after.append(self.datastructure._get_joint_vertex_frame(nbr)[0])
-
-                for i, nbr in enumerate(self.datastructure.vertex_attribute(key, 'neighbors')):
-                    self.datastructure._mount_leaf_transformation(nbr, leafs_f_before[i], leafs_f_after[i])
-                    self.datastructure._mount_joint_transformation(nbr, joints_f_before[i], joints_f_after[i], 'left')
-            
-            self.datastructure.update_mesh_vertices_pos()
-
     def move_mesh_vertex(self):
         """ Update the position of a mesh vertex. """
         guid = compas_rhino.rs.GetObject(message="Select a vertex.", preselect=True, filter=rs.filter.point | rs.filter.textdot)
@@ -302,6 +257,88 @@ class SkeletonObject(object):
         vec_prvs = self.datastructure.vertex_attribute(key, 'transform')
         vec = add_vectors(vec_prvs, vec)
         self.datastructure.vertex[key].update({'transform': list(vec)})
+
+    def move_skeleton_vertex(self):
+        """ Change the position of a skeleton vertex and update all vertices affected by it. """
+        guid = compas_rhino.rs.GetObject(
+            message="Select a vertex.",
+            preselect=True,
+            filter=rs.filter.point | rs.filter.textdot
+            )
+
+        if guid not in list(self.guid_skeleton_vertices.keys()):
+            print('Not a skeleton vertex! Please select again:')
+            return
+
+        else:
+            key = self.guid_skeleton_vertices[guid]
+            if self.datastructure.vertex_attribute(key, 'type') == 'skeleton_leaf':
+                self._move_skeleton_leaf(key)
+            else:
+                self._move_skeleton_joint(key)
+
+    def _move_skeleton_joint(self, key):
+
+        joints_f_before = []
+        nbrs_f_before = []
+        joints_f_after = []
+        nbrs_f_after = []
+
+        nbrs = self.datastructure.vertex_attribute(key, 'neighbors')
+
+        for nbr in nbrs:
+            if self.datastructure.vertex_attribute(nbr, 'type') == 'skeleton_leaf':
+                nbrs_f_before.append(self.datastructure._get_leaf_vertex_frame(nbr))
+            else:
+                f_left = self.datastructure._get_joint_vertex_frame(nbr, key)[0]
+                f_right = self.datastructure._get_joint_vertex_frame(nbr, key)[1]
+                nbrs_f_before.append([f_left, f_right])
+
+            joints_f_before.append(self.datastructure._get_joint_vertex_frame(key, nbr)[0])
+
+        mesh_move_vertex(self.datastructure, key)
+
+        for nbr in nbrs:
+            if self.datastructure.vertex_attribute(nbr, 'type') == 'skeleton_leaf':
+                nbrs_f_after.append(self.datastructure._get_leaf_vertex_frame(nbr))
+            else:
+                f_left = self.datastructure._get_joint_vertex_frame(nbr, key)[0]
+                f_right = self.datastructure._get_joint_vertex_frame(nbr, key)[1]
+                nbrs_f_after.append([f_left, f_right])
+
+            joints_f_after.append(self.datastructure._get_joint_vertex_frame(key, nbr)[0])
+
+        for i, nbr in enumerate(nbrs):
+            if self.datastructure.vertex_attribute(nbr, 'type') == 'skeleton_leaf':
+                self.datastructure._mount_leaf_transformation(nbr, nbrs_f_before[i], nbrs_f_after[i])
+            else:
+                self.datastructure._mount_joint_transformation(
+                    nbr, key, nbrs_f_before[i][0], nbrs_f_after[i][0], 'left')
+                self.datastructure._mount_joint_transformation(
+                    nbr, key, nbrs_f_before[i][1], nbrs_f_after[i][1], 'right')
+
+            self.datastructure._mount_joint_transformation(
+                key, nbr, joints_f_before[i], joints_f_after[i], 'left')
+
+        self.datastructure.update_mesh_vertices_pos()
+
+    def _move_skeleton_leaf(self, key):
+        v = key
+        u = self.datastructure.vertex_attribute(v, 'neighbors')[0]
+        
+        leaf_f_before = self.datastructure._get_leaf_vertex_frame(v)
+        joints_f_before = self.datastructure._get_joint_vertex_frame(u, v)
+
+        mesh_move_vertex(self.datastructure, v)
+
+        leaf_f_after = self.datastructure._get_leaf_vertex_frame(v)
+        joints_f_after = self.datastructure._get_joint_vertex_frame(u, v)
+
+        self.datastructure._mount_leaf_transformation(v, leaf_f_before, leaf_f_after)
+        self.datastructure._mount_joint_transformation(u, v, joints_f_before[0], joints_f_after[0], 'left')
+        self.datastructure._mount_joint_transformation(u, v, joints_f_before[1], joints_f_after[1], 'right')
+
+        self.datastructure.update_mesh_vertices_pos()
 
     def update(self):
         """update skeleton and skeleton mesh by typing command name in rhino command line.
