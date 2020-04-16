@@ -266,12 +266,14 @@ class Skeleton(Mesh):
     # modifiers
     # --------------------------------------------------------------------------
 
-    def update_mesh_vertices_pos(self, f2=None, f1=None):
+    def update_mesh_vertices_pos(self):
 
         def update_node_boundary_vertex(u, v):
             fkey = self.halfedge[u][v]
             key = self.face[fkey][3]
             pt = self._get_node_boundary_vertex_pos(u, v)
+            vec = Vector(*self.vertex_attribute(key, 'transform'))
+            pt = add_vectors(pt, vec)
 
             self.vertex[key].update({'x': pt[0], 'y': pt[1], 'z': pt[2]})
 
@@ -282,24 +284,10 @@ class Skeleton(Mesh):
             key2 = self.face[fkey2][2]
 
             pt1, pt2 = self._get_leaf_boundary_vertex_pos(u, v)
-
-            # add transformations
-            if f1 and f2:
-                if self.vertex_attribute(key1, 'transform'):
-                    vec = Vector(*self.vertex_attribute(key1, 'transform'))
-                    vec_l = f1.to_local_coords(vec)
-                    vec = f2.to_world_coords(vec_l)
-                    # vec = Frame.local_to_local_coords(f2, f1, vec)
-                    pt1 = add_vectors(pt1, vec)
-                    self.vertex[key1].update({'transform': list(vec)})
-
-                if self.vertex_attribute(key2, 'transform'):
-                    vec = Vector(*self.vertex_attribute(key2, 'transform'))
-                    vec_l = f1.to_local_coords(vec)
-                    vec = f2.to_world_coords(vec_l)
-                    vec = Frame.local_to_local_coords(f2, f1, vec)
-                    pt2 = add_vectors(pt2, vec)
-                    self.vertex[key2].update({'transform': list(vec)})
+            vec1 = Vector(*self.vertex_attribute(key1, 'transform'))
+            vec2 = Vector(*self.vertex_attribute(key2, 'transform'))
+            pt1 = add_vectors(pt1, vec1)
+            pt2 = add_vectors(pt2, vec2)
 
             self.vertex[key1].update({'x': pt1[0], 'y': pt1[1], 'z': pt1[2]})
             self.vertex[key2].update({'x': pt2[0], 'y': pt2[1], 'z': pt2[2]})
@@ -333,27 +321,8 @@ class Skeleton(Mesh):
             self.leaf_extend = dist
 
     def _get_node_boundary_vertex_pos(self, u, v):
-        vertex_prvs = self._find_previous_vertex(u, v)
-        vec1 = Vector(*self.edge_vector(u, v))
-        vec2 = Vector(*self.edge_vector(vertex_prvs, u))
-        normal = vec1.cross(vec2)
 
-        # if the two adjacent edges are parallel, the crossproduct length will be zero or nearly zero(tollerance).
-        # then use world z instead.
-        if normal.length < 0.001:
-            vec_offset = Vector.Zaxis().cross(vec1)
-        else:
-            pt_face_center = centroid_points([
-                self.vertex_coordinates(vertex_prvs),
-                self.vertex_coordinates(u),
-                self.vertex_coordinates(v)
-                ])
-            vec_offset = Vector.from_start_end(self.vertex_coordinates(u), pt_face_center)
-
-            # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
-            vec_offset.scale(normal[2] * -1)
-
-        vec_offset.unitize()
+        vec_offset = self._get_vec_offsetfrom_branch(u, v, 'left')
         vec_offset.scale(self.node_width)
         pt_node = add_vectors(self.vertex_coordinates(u), vec_offset)
 
@@ -402,12 +371,45 @@ class Skeleton(Mesh):
         prvs = nbrs[(nbrs.index(v) + 1) % len(nbrs)]
         return prvs
 
-    def _get_vec_along_branch(self, u):
-        v = None
-        for key in self.halfedge[u]:
+    def _find_next_vertex(self, u, v):
+        """ Find the next vertex of a halfedge[u][v] through sorted nbrs. """
+        nbrs = self.vertex[u]['neighbors']
+        next = nbrs[(nbrs.index(v) - 1) % len(nbrs)]
+        return next
+
+    def _get_vec_along_branch(self, v):
+        u = None
+        for key in self.halfedge[v]:
             if self.vertex_attribute(key, 'type') == 'skeleton_node':
-                v = key
-        return Vector(*(self.edge_vector(v, u)))
+                u = key
+        return Vector(*(self.edge_vector(u, v)))
+
+    def _get_vec_offsetfrom_branch(self, u, v, dirct):
+        if dirct == 'left':
+            vertex = self._find_previous_vertex(u, v)
+        else:
+            vertex = self._find_next_vertex(u, v)
+        
+        vec1 = Vector(*self.edge_vector(u, v))
+        vec2 = Vector(*self.edge_vector(vertex, u))
+        normal = vec1.cross(vec2)
+
+        if normal.length < 0.001:  # if the two adjacent edges are parallel
+            vec_offset = Vector.Zaxis().cross(vec1)
+        else:
+            pt_face_center = centroid_points([
+                self.vertex_coordinates(vertex),
+                self.vertex_coordinates(u),
+                self.vertex_coordinates(v)
+                ])
+            vec_offset = Vector.from_start_end(self.vertex_coordinates(u), pt_face_center)
+            vec_offset.scale(normal[2] * -1)  # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
+
+        vec_offset.unitize()
+        if dirct == 'right':
+            vec_offset.scale(-1)
+        
+        return vec_offset
 
     def _get_leaf_vertex_frame(self, key):
         pt = self.vertex_coordinates(key)
@@ -416,7 +418,66 @@ class Skeleton(Mesh):
         
         return Frame(pt, vec_along_edge, vec_perp)
 
+    def _get_joint_vertex_frame(self, key):
+        v = key
+        u = self.vertex_attribute(v, 'neighbors')[0]
+        pt = self.vertex_coordinates(u)
 
+        vec_offsetfrom_edge = self._get_vec_offsetfrom_branch(u, v, 'left')
+        vec_perp = vec_offsetfrom_edge.cross(Vector.Zaxis())
+        frame_left = Frame(pt, vec_offsetfrom_edge, vec_perp)
+
+        vec_offsetfrom_edge = self._get_vec_offsetfrom_branch(u, v, 'right')
+        vec_perp = vec_offsetfrom_edge.cross(Vector.Zaxis())
+        frame_right = Frame(pt, vec_offsetfrom_edge, vec_perp)
+
+        return frame_left, frame_right
+
+    def _mount_leaf_transformation(self, sk_v_key, f1, f2):
+        #  mount the transformation of skeleton vertice to related mesh vertices
+        v = sk_v_key  # leaf key
+        u = None
+        for key in self.halfedge[v]:
+            if self.vertex_attribute(key, 'type') == 'skeleton_node':
+                u = key
+
+        descendents = [self._get_descendent(u, v)[0], self._get_descendent(u, v)[1]]
+
+        for key in descendents:
+            if self.vertex_attribute(key, 'transform'):
+                vec = Vector(*self.vertex_attribute(key, 'transform'))
+                vec_l = f1.to_local_coords(vec)
+                vec = f2.to_world_coords(vec_l)
+                self.vertex[key].update({'transform': list(vec)})
+
+    def _mount_joint_transformation(self, sk_v_key, f1, f2, dirct):
+        v = sk_v_key  # leaf key
+        u = None  # joint key
+        for key in self.halfedge[v]:
+            if self.vertex_attribute(key, 'type') == 'skeleton_node':
+                u = key
+
+        if dirct == 'left':
+            key = self._get_descendent(u, v)[2]
+        else:
+            key = self._get_descendent(u, v)[3]
+
+        if self.vertex_attribute(key, 'transform'):
+            vec = Vector(*self.vertex_attribute(key, 'transform'))
+            vec_l = f1.to_local_coords(vec)
+            vec = f2.to_world_coords(vec_l)
+            self.vertex[key].update({'transform': list(vec)})
+
+    def _get_descendent(self, u, v):
+        fkey1 = self.halfedge[u][v]
+        fkey2 = self.halfedge[v][u]
+
+        leaf_left = self.face[fkey1][2]
+        joint_left = self.face[fkey1][3]
+        leaf_right = self.face[fkey2][3]
+        joint_right = self.face[fkey2][2]
+
+        return leaf_left, leaf_right, joint_left, joint_right
 
     # --------------------------------------------------------------------------
     # visualization
