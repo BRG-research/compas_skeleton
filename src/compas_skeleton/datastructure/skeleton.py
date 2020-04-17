@@ -10,6 +10,7 @@ from compas.datastructures.network import duality
 from compas.geometry import centroid_points
 from compas.geometry import Vector
 from compas.geometry import add_vectors
+from compas.geometry import Frame
 
 import copy
 
@@ -56,6 +57,7 @@ class Skeleton(Mesh):
             'sub_level': 0
         })
         self.update_default_vertex_attributes({'type': None})
+        self.update_default_vertex_attributes({'transform': [0, 0, 0]})
         self.update_default_edge_attributes({'type': None})
 
     # --------------------------------------------------------------------------
@@ -270,6 +272,8 @@ class Skeleton(Mesh):
             fkey = self.halfedge[u][v]
             key = self.face[fkey][3]
             pt = self._get_node_boundary_vertex_pos(u, v)
+            vec = Vector(*self.vertex_attribute(key, 'transform'))
+            pt = add_vectors(pt, vec)
 
             self.vertex[key].update({'x': pt[0], 'y': pt[1], 'z': pt[2]})
 
@@ -280,6 +284,10 @@ class Skeleton(Mesh):
             key2 = self.face[fkey2][2]
 
             pt1, pt2 = self._get_leaf_boundary_vertex_pos(u, v)
+            vec1 = Vector(*self.vertex_attribute(key1, 'transform'))
+            vec2 = Vector(*self.vertex_attribute(key2, 'transform'))
+            pt1 = add_vectors(pt1, vec1)
+            pt2 = add_vectors(pt2, vec2)
 
             self.vertex[key1].update({'x': pt1[0], 'y': pt1[1], 'z': pt1[2]})
             self.vertex[key2].update({'x': pt2[0], 'y': pt2[1], 'z': pt2[2]})
@@ -313,27 +321,8 @@ class Skeleton(Mesh):
             self.leaf_extend = dist
 
     def _get_node_boundary_vertex_pos(self, u, v):
-        vertex_prvs = self._find_previous_vertex(u, v)
-        vec1 = Vector(*self.edge_vector(u, v))
-        vec2 = Vector(*self.edge_vector(vertex_prvs, u))
-        normal = vec1.cross(vec2)
 
-        # if the two adjacent edges are parallel, the crossproduct length will be zero or nearly zero(tollerance).
-        # then use world z instead.
-        if normal.length < 0.001:
-            vec_offset = Vector.Zaxis().cross(vec1)
-        else:
-            pt_face_center = centroid_points([
-                self.vertex_coordinates(vertex_prvs),
-                self.vertex_coordinates(u),
-                self.vertex_coordinates(v)
-                ])
-            vec_offset = Vector.from_start_end(self.vertex_coordinates(u), pt_face_center)
-
-            # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
-            vec_offset.scale(normal[2] * -1)
-
-        vec_offset.unitize()
+        vec_offset = self._get_vec_offsetfrom_branch(u, v, 'left')
         vec_offset.scale(self.node_width)
         pt_node = add_vectors(self.vertex_coordinates(u), vec_offset)
 
@@ -381,6 +370,98 @@ class Skeleton(Mesh):
         nbrs = self.vertex[u]['neighbors']
         prvs = nbrs[(nbrs.index(v) + 1) % len(nbrs)]
         return prvs
+
+    def _find_next_vertex(self, u, v):
+        """ Find the next vertex of a halfedge[u][v] through sorted nbrs. """
+        nbrs = self.vertex[u]['neighbors']
+        next = nbrs[(nbrs.index(v) - 1) % len(nbrs)]
+        return next
+
+    def _get_vec_along_branch(self, v):
+        u = self.vertex_attribute(v, 'neighbors')[0]
+
+        return Vector(*(self.edge_vector(u, v)))
+
+    def _get_vec_offsetfrom_branch(self, u, v, dirct):
+        if dirct == 'left':
+            vertex = self._find_previous_vertex(u, v)
+        else:
+            vertex = self._find_next_vertex(u, v)
+        
+        vec1 = Vector(*self.edge_vector(u, v))
+        vec2 = Vector(*self.edge_vector(vertex, u))
+        normal = vec1.cross(vec2)
+
+        if normal.length < 0.001:  # if the two adjacent edges are parallel
+            vec_offset = Vector.Zaxis().cross(vec1)
+        else:
+            pt_face_center = centroid_points([
+                self.vertex_coordinates(vertex),
+                self.vertex_coordinates(u),
+                self.vertex_coordinates(v)
+                ])
+            vec_offset = Vector.from_start_end(self.vertex_coordinates(u), pt_face_center)
+            vec_offset.scale(normal[2] * -1)  # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
+
+        vec_offset.unitize()
+        if dirct == 'right':
+            vec_offset.scale(-1)
+        
+        return vec_offset
+
+    def _get_leaf_vertex_frame(self, key):
+        pt = self.vertex_coordinates(key)
+        vec_along_edge = self._get_vec_along_branch(key)
+        vec_perp = vec_along_edge.cross(Vector.Zaxis())
+        
+        return Frame(pt, vec_along_edge, vec_perp)
+
+    def _get_joint_vertex_frame(self, u, v):
+        pt = self.vertex_coordinates(u)
+
+        vec_offsetfrom_edge = self._get_vec_offsetfrom_branch(u, v, 'left')
+        vec_perp = vec_offsetfrom_edge.cross(Vector.Zaxis())
+        frame_left = Frame(pt, vec_offsetfrom_edge, vec_perp)
+
+        vec_offsetfrom_edge = self._get_vec_offsetfrom_branch(u, v, 'right')
+        vec_perp = vec_offsetfrom_edge.cross(Vector.Zaxis())
+        frame_right = Frame(pt, vec_offsetfrom_edge, vec_perp)
+
+        return frame_left, frame_right
+
+    def _mount_leaf_transformation(self, v, f1, f2):
+        #  mount the transformation of skeleton vertice to related mesh vertices
+        u = self.vertex_attribute(v, 'neighbors')[0]
+        descendents = self._get_descendent(u, v)[:2]
+
+        for key in descendents:
+            vec = Vector(*self.vertex_attribute(key, 'transform'))
+            vec_l = f1.to_local_coords(vec)
+            vec = f2.to_world_coords(vec_l)
+            self.vertex[key].update({'transform': list(vec)})
+
+    def _mount_joint_transformation(self, u, v, f1, f2, dirct):
+
+        if dirct == 'left':
+            key = self._get_descendent(u, v)[2]
+        else:
+            key = self._get_descendent(u, v)[3]
+
+        vec = Vector(*self.vertex_attribute(key, 'transform'))
+        vec_l = f1.to_local_coords(vec)
+        vec = f2.to_world_coords(vec_l)
+        self.vertex[key].update({'transform': list(vec)})
+
+    def _get_descendent(self, u, v):
+        fkey1 = self.halfedge[u][v]
+        fkey2 = self.halfedge[v][u]
+
+        leaf_left = self.face[fkey1][2]
+        joint_left = self.face[fkey1][3]
+        leaf_right = self.face[fkey2][3]
+        joint_right = self.face[fkey2][2]
+
+        return leaf_left, leaf_right, joint_left, joint_right
 
     # --------------------------------------------------------------------------
     # visualization

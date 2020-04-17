@@ -11,15 +11,15 @@ except NameError:
 DATA = os.path.join(HERE, '../data')
 FILE = os.path.join(DATA, 'skeleton.json')
 
-# ==============================================================================
+# ====================m_==========================================================
 # Load skeleton from file
 # ==============================================================================
 
 skeleton = Skeleton.from_json(FILE)
+# print(skeleton.vertex_attribute(8, 'transform'))
 skeletonobject = SkeletonObject(skeleton)
 skeletonobject.draw()
 skeletonobject.update()
-
 
 """
 following functions are available:
@@ -39,4 +39,4 @@ following functions are available:
 # Export
 # ==============================================================================
 
-skeletonobject.datastructure.to_json(FILE)
+skeletonobject.datastructure.to_json(FILE, pretty=True)

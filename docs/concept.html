@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>compas_skeleton</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="_static/images/compas.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="_static/css/prism.css" /> -->
+    <link rel="stylesheet" type="text/css" href="_static/css/compas.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/compas-reference.css" />
+
+    
+        <link rel="next" title="Getting Started" href="gettingstarted.html" />
+    
+    
+    
+        <link rel="prev" title="Introduction" href="intro.html" />
+    
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</head>
+
+<body data-spy="scroll" data-target="#compas-localnav">
+
+    <nav class="navbar navbar-expand compas-navbar">
+        <a class="navbar-brand" href="/">
+            <img src="_static/images/compas_icon_white.png" width="36px" height="36px" alt="compas" />
+        </a>
+
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.html">compas_skeleton</a></li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" target="_blank" href="">Github</a></li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://compas-dev.github.io">COMPAS framework</a></li>
+        </ul>
+    </nav>    
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+
+            <main class="col-12 col-md-9 col-xl-8 compas-content" role="main">
+                <div class="container">
+                
+
+                    
+
+                    <div class="section" id="concept">
+<h1>Concept</h1>
+<div class="section" id="skeleton">
+<h2>Skeleton</h2>
+<p>Skeleton is an extention of COMPAS Mesh with special attributes which can be serialized and loaded for modification.</p>
+<div class="section" id="skeleton-branches-and-skeleton-vertices">
+<h3>skeleton branches and skeleton vertices</h3>
+<p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>. The start and end points are stored as <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>.
+There are two typs of <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>: <code class="docutils literal notranslate"><span class="pre">skeleton_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">skeleton_leaf</span></code>.</p>
+</div>
+<div class="section" id="skeleton-coarse-mesh">
+<h3>skeleton coarse mesh</h3>
+<p>Each skeleton branch halfedge generates two new vertices as <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code>. Together with the two <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>, they compose a mesh face.
+Descendent vertices and face are then added to the skeleton coarse mesh.</p>
+</div>
+<div class="section" id="special-attributes">
+<h3>special attributes</h3>
+<p>Parameters <code class="docutils literal notranslate"><span class="pre">node_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_extend</span></code> represent the features of skeleton coarse mesh, respectively.</p>
+</div>
+<div class="section" id="skeleton-hight-poly-mesh">
+<h3>skeleton hight-poly mesh</h3>
+<p>Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code>.
+<code class="docutils literal notranslate"><span class="pre">sub_leve</span></code> can be increased or decreased during any step of modification, for a preferred visualisation.</p>
+</div>
+</div>
+<div class="section" id="skeleton-object">
+<h2>Skeleton object</h2>
+<p>Skeleton object is the implementation of skeleton in Rhino.
+Each skeleton object contains a Skeleton as its datastructre, and a customized skeleton artist. It can be added as a scene object.
+Skeleton object provides interactive editing methods and visulisation in Rhino.</p>
+<div class="section" id="interactive-editing">
+<h3>interactive editing</h3>
+<p>After the skeleton mesh is created, it can be modified through interactive input.
+Editing <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code> or changing width parameters will update all the relative <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code> and ultimately update the whole mesh(both coarse and high-poly).</p>
+</div>
+</div>
+<div class="section" id="application">
+<h2>Application</h2>
+<p>Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs.
+For example, it can be used to create force patterns for <a class="reference external" href="https://blockresearchgroup.github.io/compas-RV2">RhinoVault</a> and <a class="reference external" href="https://blockresearchgroup.github.io/compas_tna">TNA</a>.</p>
+</div>
+</div>
+
+                    
+                
+                </div>
+            </main>
+
+            <!-- site navigation sidebar -->
+
+            <div class="col-12 col-md-3 col-xl-2 compas-sidebar" role="navigation"> 
+                <div class="navbar-light">
+
+                    <form id="" class="d-flex compas-searchbox" action="search.html" method="get">
+                        <input class="form-control" type="text" name="q" placeholder="Search docs" />
+                        <input type="hidden" name="check_keywords" value="yes" />
+                        <input type="hidden" name="area" value="default" />
+
+                        <button class="navbar-toggler d-md-none compas-navigation-toggler" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </form>
+
+                    
+                    
+
+                        <div class="navbar-expand-md">
+                            <div id="compas-navigation" class="collapse navbar-collapse compas-navigation">
+
+                            <ul class="nav flex-column active">
+<li class="nav-item"><a class="nav-link reference internal" href="intro.html">Introduction</a></li>
+<li class="nav-item active"><a class="nav-link active current reference internal" href="#">Concept</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="user_manual.html">User manual</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="examples.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="api.html">API Reference</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="license.html">License</a></li>
+</ul>
+
+
+                            </div>
+                        </div>
+
+                    
+
+                </div>
+            </div>
+
+            <!-- table of contents of main content -->
+            
+            <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+
+                
+
+                <ul class="nav flex-column" id="compas-localnav">
+<li class="nav-item"><a class="nav-link reference internal" href="#">Concept</a><ul class="nav">
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton">Skeleton</a><ul class="nav">
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-branches-and-skeleton-vertices">skeleton branches and skeleton vertices</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-coarse-mesh">skeleton coarse mesh</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#special-attributes">special attributes</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-hight-poly-mesh">skeleton hight-poly mesh</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-object">Skeleton object</a><ul class="nav">
+<li class="nav-item"><a class="nav-link reference internal" href="#interactive-editing">interactive editing</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#application">Application</a></li>
+</ul>
+</li>
+</ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="bg-dark pb-5">
+        <div class="container text-center pt-5 pb-5 text-muted">
+            
+                Last updated on Apr 17, 2020.
+            
+
+            
+                Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+            
+        </div>
+    </footer>
+
+    
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+            URL_ROOT          : '',
+            VERSION           : '0.1.0',
+            COLLAPSE_INDEX    : false,
+            FILE_SUFFIX       : '.html',
+            HAS_SOURCE        : 'false',
+            SOURCELINK_SUFFIX : '.txt'
+            };
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/js/searchtools_.js"></script>
+        <!-- <script src="_static/js/prism.js"></script> -->
+
+        <script>
+        $(document).ready(function() {
+        $(".language-default code").addClass("python");
+        $(".language-python code").addClass("python");
+        $(".language-bash code").addClass("bash");
+        $(".language-cpp code").addClass("cpp");
+        $(".language-json code").addClass("json");
+        $(".language-none code").addClass("plaintext");
+
+        hljs.initHighlighting();
+        anchors.add();
+        });
+        </script>
+    
+</body>
+</html>
