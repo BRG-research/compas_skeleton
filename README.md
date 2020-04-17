@@ -1,3 +1,3 @@
 # compas_skeleton
 
-topologically generating mesh out of branching diagram. 
+Topologically generating mesh from a set of lines and allowing interactive editing.
