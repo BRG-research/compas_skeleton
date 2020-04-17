@@ -70,9 +70,9 @@ Interactive edit attributes
 
 There are 3 steps of ``dynamic_update_mesh``: 
 
-* 01.click on the joint node, move cursor to decide node width
-* 02.click on the leaf vertex, move cursor to decide leaf width 
-* 03.click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.
+* click on the joint node, move cursor to decide node width
+* click on the leaf vertex, move cursor to decide leaf width 
+* click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.
 
 .. code-block:: python
 
