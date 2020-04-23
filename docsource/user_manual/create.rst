@@ -14,6 +14,8 @@ Create Skeleton and SkeletonObject from lines
     :class: figure-img img-fluid
 
 
+Create Skeleton from lines:
+
 .. code-block:: python
 
     from compas_skeleton.datastructure import Skeleton
@@ -30,6 +32,7 @@ Create Skeleton and SkeletonObject from lines
     skeleton.to_json(FILE, pretty=True)
 
 
+Create SkeletonObject:
 Skeleton object contains a ``Skeleton`` as its datastructre, and a customized ``SkeletonArtist``.
 
 .. code-block:: python
@@ -57,11 +60,6 @@ But after a skeleton object is created, we should always choose the second metho
 
 Create Skeleton and SkeletonObject from single point
 ====================================================
-
-
-.. figure:: /_images/skeleton_dynamic_draw.gif
-    :figclass: figure
-    :class: figure-img img-fluid
 
 
 .. code-block:: python

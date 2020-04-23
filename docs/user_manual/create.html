@@ -65,6 +65,7 @@ So the codes need to be run in Rhino python editor or through CodeListener.</p>
 <div class="figure align-default">
 <img alt="../_images/skeleton_create.gif" class="figure-img img-fluid" src="../_images/skeleton_create.gif" />
 </div>
+<p>Create Skeleton from lines:</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
 <span class="kn">import</span> <span class="nn">compas_rhino</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -79,7 +80,8 @@ So the codes need to be run in Rhino python editor or through CodeListener.</p>
 <span class="n">skeleton</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 </div>
-<p>Skeleton object contains a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> as its datastructre, and a customized <code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code>.</p>
+<p>Create SkeletonObject:
+Skeleton object contains a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> as its datastructre, and a customized <code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code>.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
 
 <span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
@@ -102,9 +104,6 @@ But after a skeleton object is created, we should always choose the second metho
 </div>
 <div class="section" id="create-skeleton-and-skeletonobject-from-single-point">
 <h2>Create Skeleton and SkeletonObject from single point</h2>
-<div class="figure align-default">
-<img alt="../_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="../_images/skeleton_dynamic_draw.gif" />
-</div>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
 <span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
 <span class="kn">import</span> <span class="nn">compas_rhino</span>
