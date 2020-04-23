@@ -39,13 +39,16 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "matplotlib.sphinxext.plot_directive",
+    'm2r',
+    'nbsphinx',
+    'sphinx.ext.viewcode'
 ]
 
 # autodoc options
 
 autodoc_default_flags = [
     "undoc-members",
-    "show-inheritance",
+    'show-inheritance',
 ]
 
 autodoc_member_order = "alphabetical"

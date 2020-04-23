@@ -9,6 +9,9 @@ compas_skeleton
 .. toctree::
     :maxdepth: 1
 
+    compas_skeleton.datastructure
+    compas_skeleton.rhino
+
 
 """
 

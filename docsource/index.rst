@@ -7,8 +7,8 @@ compas_skeleton
    :titlesonly:
 
    intro
-   concept
    gettingstarted
+   concept
    user_manual
    examples
    api

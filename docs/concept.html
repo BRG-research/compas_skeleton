@@ -19,11 +19,11 @@
     <link rel="stylesheet" type="text/css" href="_static/css/compas-reference.css" />
 
     
-        <link rel="next" title="Getting Started" href="gettingstarted.html" />
+        <link rel="next" title="User manual" href="user_manual.html" />
     
     
     
-        <link rel="prev" title="Introduction" href="intro.html" />
+        <link rel="prev" title="Getting Started" href="gettingstarted.html" />
     
 
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -63,20 +63,32 @@
 <p>Skeleton is an extention of COMPAS Mesh with special attributes which can be serialized and loaded for modification.</p>
 <div class="section" id="skeleton-branches-and-skeleton-vertices">
 <h3>skeleton branches and skeleton vertices</h3>
+<div class="figure align-default">
+<img alt="_images/skeleton_branches_vertices.png" class="figure-img img-fluid" src="_images/skeleton_branches_vertices.png" />
+</div>
 <p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>. The start and end points are stored as <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>.
 There are two typs of <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>: <code class="docutils literal notranslate"><span class="pre">skeleton_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">skeleton_leaf</span></code>.</p>
 </div>
 <div class="section" id="skeleton-coarse-mesh">
 <h3>skeleton coarse mesh</h3>
+<div class="figure align-default">
+<img alt="_images/skeleton_coarse_mesh.png" class="figure-img img-fluid" src="_images/skeleton_coarse_mesh.png" />
+</div>
 <p>Each skeleton branch halfedge generates two new vertices as <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code>. Together with the two <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>, they compose a mesh face.
 Descendent vertices and face are then added to the skeleton coarse mesh.</p>
 </div>
 <div class="section" id="special-attributes">
 <h3>special attributes</h3>
+<div class="figure align-default">
+<img alt="_images/skeleton_spacial_attributes.png" class="figure-img img-fluid" src="_images/skeleton_spacial_attributes.png" />
+</div>
 <p>Parameters <code class="docutils literal notranslate"><span class="pre">node_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_extend</span></code> represent the features of skeleton coarse mesh, respectively.</p>
 </div>
 <div class="section" id="skeleton-hight-poly-mesh">
 <h3>skeleton hight-poly mesh</h3>
+<div class="figure align-default">
+<img alt="_images/skeleton_highpoly_mesh.png" class="figure-img img-fluid" src="_images/skeleton_highpoly_mesh.png" />
+</div>
 <p>Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code>.
 <code class="docutils literal notranslate"><span class="pre">sub_leve</span></code> can be increased or decreased during any step of modification, for a preferred visualisation.</p>
 </div>
@@ -88,6 +100,9 @@ Each skeleton object contains a Skeleton as its datastructre, and a customized s
 Skeleton object provides interactive editing methods and visulisation in Rhino.</p>
 <div class="section" id="interactive-editing">
 <h3>interactive editing</h3>
+<div class="figure align-default">
+<img alt="_images/skeleton_interactive_editing_02.gif" class="figure-img img-fluid" src="_images/skeleton_interactive_editing_02.gif" />
+</div>
 <p>After the skeleton mesh is created, it can be modified through interactive input.
 Editing <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code> or changing width parameters will update all the relative <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code> and ultimately update the whole mesh(both coarse and high-poly).</p>
 </div>
@@ -127,8 +142,8 @@ For example, it can be used to create force patterns for <a class="reference ext
 
                             <ul class="nav flex-column active">
 <li class="nav-item"><a class="nav-link reference internal" href="intro.html">Introduction</a></li>
-<li class="nav-item active"><a class="nav-link active current reference internal" href="#">Concept</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="nav-item active"><a class="nav-link active current reference internal" href="#">Concept</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="user_manual.html">User manual</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="examples.html">Examples</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="api.html">API Reference</a></li>
@@ -177,7 +192,7 @@ For example, it can be used to create force patterns for <a class="reference ext
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 17, 2020.
+                Last updated on Apr 24, 2020.
             
 
             

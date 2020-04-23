@@ -5,8 +5,14 @@ Create
 This user manual example takes input from Rhino and makes visulisation in Rhino.
 So the codes need to be run in Rhino python editor or through CodeListener.
 
-Create skeleton from lines
-==========================
+Create Skeleton and SkeletonObject from lines
+=============================================
+
+
+.. figure:: /_images/skeleton_create.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
 
 .. code-block:: python
 
@@ -24,10 +30,7 @@ Create skeleton from lines
     skeleton.to_json(FILE, pretty=True)
 
 
-Create skeleton object
-======================
-
-Skeleton object contains a Skeleton as its datastructre, and a customized skeleton artist.
+Skeleton object contains a ``Skeleton`` as its datastructre, and a customized ``SkeletonArtist``.
 
 .. code-block:: python
 
@@ -39,7 +42,7 @@ Skeleton object contains a Skeleton as its datastructre, and a customized skelet
 
     skeletonobject.datastructure.to_json(FILE)
 
-SkeletonObject.datastructure is a Skeleton object. So the result of the two methods below are the same. 
+``SkeletonObject.datastructure`` is a ``Skeleton`` object. So the result of the two methods below are the same. 
 But after a skeleton object is created, we should always choose the second method so that all the modifications will be stored.
 
 .. code-block:: python
@@ -52,23 +55,39 @@ But after a skeleton object is created, we should always choose the second metho
     skeletonobject.datastructure.to_json(FILE)
 
 
-Edit attributes
-===============
+Create Skeleton and SkeletonObject from single point
+====================================================
+
+
+.. figure:: /_images/skeleton_dynamic_draw.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
 
 .. code-block:: python
 
-    skeletonobject.datastructure.node_width = 20.0
-    skeletonobject.datastructure.leaf_width = 10.0
-    skeletonobject.datastructure.leaf_extend = -2.0
-    
+    from compas_skeleton.datastructure import Skeleton
+    from compas_skeleton.rhino import SkeletonObject
+    import compas_rhino
+
+    guids = compas_rhino.select_points()
+    point = compas_rhino.get_point_coordinates(guids)[0]
+
+    skeleton = Skeleton.from_center_point(point)
+    skeletonobject = SkeletonObject(skeleton)
     skeletonobject.draw()
-    skeletonobject.datastructure.to_json(FILE)
 
 
-Interactive edit attributes
-===========================
+Interactive input width
+========================
 
-There are 3 steps of ``dynamic_update_mesh``: 
+
+.. figure:: /_images/skeleton_dynamic_draw.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
+
+There are 3 steps of ``dynamic_draw_widths``: 
 
 * click on the joint node, move cursor to decide node width
 * click on the leaf vertex, move cursor to decide leaf width 
@@ -76,5 +95,5 @@ There are 3 steps of ``dynamic_update_mesh``:
 
 .. code-block:: python
 
-    skeletonobject.dynamic_update_mesh()
+    skeletonobject.dynamic_draw_widths()
     skeletonobject.datastructure.to_json(FILE, pretty=True)

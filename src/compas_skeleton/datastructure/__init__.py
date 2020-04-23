@@ -1,18 +1,18 @@
 """
 ********************************************************************************
-compas_skeleton.datastructures
+compas_skeleton.datastructure
 ********************************************************************************
 
-.. currentmodule:: compas_skeleton.datastructures
+.. currentmodule:: compas_skeleton.datastructure
 
-Data Structure
-==============
+Skeleton
+========
 
 .. autosummary::
     :toctree: generated/
     :nosignatures:
 
-    Skeleton2D
+    Skeleton
 
 """
 from __future__ import print_function

@@ -12,6 +12,8 @@ Artists
     :toctree: generated/
     :nosignatures:
 
+    SkeletonArtist
+
 
 Objects
 =======

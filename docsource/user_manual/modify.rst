@@ -18,20 +18,40 @@ Skeleton object provides interactive editing methods for the resulting mesh, by 
     skeletonobject.datastructure.to_json(FILE, pretty=True)
 
 
-It calls editing methods from Rhino by typing command name in Rhino command line. Following commands are available:
+It runs editing methods in Rhino by typing command name in Rhino command line. Following commands are available:
 
 node_width
 ------------
+
+
+.. figure:: /_images/skeleton_node_width.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
 change the skeleton mesh width at all joint nodes.
 
 
 leaf_width
 ------------
+
+
+.. figure:: /_images/skeleton_leaf_width.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
+
 change the skeleton mesh width at all leaf ends.
 
 
 leaf_extend
 ------------
+
+
+.. figure:: /_images/skeleton_leaf_extend.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
+
 change how far or to which direction to extend the leaf ends.
 
 
@@ -57,11 +77,25 @@ decrease the high poly mesh subdivision level by decreasing attribute `sub_level
 
 add_lines
 ---------
+
+
+.. figure:: /_images/skeleton_add_lines.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
+
 add more lines to the current skeleton branches.
 
 
 remove_lines
 ---------
+
+
+.. figure:: /_images/skeleton_remove_lines.gif
+    :figclass: figure
+    :class: figure-img img-fluid
+
+
 remove lines from the current skeleton branches.
 
 

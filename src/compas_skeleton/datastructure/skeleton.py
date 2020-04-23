@@ -18,32 +18,31 @@ __all__ = ['Skeleton']
 
 
 class Skeleton(Mesh):
-    """Skeleton is a low poly mesh typologically generated from a group of lines.
-    *descriptions to be updated
+    """Skeleton is a mesh topologically generated from a set of lines with special attributes.
 
     Attributes
     ----------
     node_width : float
-        ...
+        mesh width at all skeleton joints
     leaf_width : float
-        ...
+        mesh width at all skeleton leaf ends
     leaf_extend : float
-        ...
+        distance value of how far the leaf vertices extend
     sub_level : int
-        ...
-    
+        subdivision level of high-poly mesh
+
     Examples
     --------
     >>> from compas_skeleton.datastructure import Skeleton
     >>> from compas_skeleton.rhino import SkeletonObject
     >>> import compas_rhino
-
+    >>>
     >>> guids = compas_rhino.select_lines()
     >>> lines = compas_rhino.get_line_coordinates(guids)
     >>> skeleton = Skeleton.from_skeleton_lines(lines)
     >>> skeletonobject = SkeletonObject(skeleton)
     >>> skeletonobject.draw()
-    >>> skeletonobject.dynamic_update_mesh()
+    >>> skeletonobject.dynamic_draw_widths()
     >>> skeletonobject.update()
     """
 
@@ -88,13 +87,39 @@ class Skeleton(Mesh):
     def leaf_extend(self, dist):
         self.attributes['leaf_extend'] = dist
 
+    @property
     def skeleton_vertices(self):
+        """ get skeleton vertices keys.
+        Return
+        ------
+        vertex keys: two lists of int
+            keys of skeleton joint vertices and skeleton leaf vertices
+
+        Example
+        -------
+        skeleton = Skeleton.from_lines(lines)
+        joint_keys, leaf_keys = skeleton.skeleton_vertices
+
+        """
         skeleton_nodes = list(self.vertices_where({'type': 'skeleton_node'}))
         skeleton_leaves = list(self.vertices_where({'type': 'skeleton_leaf'}))
 
         return skeleton_nodes, skeleton_leaves
 
+    @property
     def skeleton_branches(self):
+        """ get skeleton branches keys.
+        Return
+        ------
+        edge keys: list of tuples
+            keys of edges which are skeleton branches(identical with input lines)
+
+        Example
+        -------
+        skeleton = Skeleton.from_lines(lines)
+        print(skeleton.skeleton_branches)
+        
+        """
         return list(self.edges_where({'type': 'skeleton_branch'}))
 
     # --------------------------------------------------------------------------
@@ -104,55 +129,83 @@ class Skeleton(Mesh):
     @classmethod
     def from_skeleton_lines(cls, lines=[]):
         """ Instantiate a skeleton from lines.
-        Parameters:
-        -----------
-        lines: a list of compas lines
         
-        Return:
-        -------
-        skeleton: a skeleton object
+        Parameters
+        ----------
+        lines: compas.geometry.Line
+            a list of compas lines
+        
+        Return
+        ------
+        skeleton: Skeleton
+            a skeleton object
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton.from_skeleton_lines(lines)
+        
         """
 
         skeleton = cls()
 
         network = Network.from_lines(lines)
-        skeleton.mesh_from_network(network)
+        skeleton._mesh_from_network(network)
 
         return skeleton
 
     @classmethod
     def from_center_point(cls, point=None):
         """ Instantiate a skeleton from a single point.
-        Parameters:
-        -----------
-        point: a tuple of 3 coordinates
         
-        Return:
+        Parameters
+        ----------
+        point: compas.geometry.Point
+            a tuple of 3 coordinates
+        
+        Return
         -------
-        skeleton: a skeleton object
+        skeleton: Skeleton
+            a skeleton object
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_points()
+        >>> point = compas_rhino.get_point_coordinates(guids)[0]
+        >>> 
+        >>> skeleton = Skeleton.from_center_point(point)
         """
 
         skeleton = cls()
-        skeleton.mesh_from_center_point(point)
+        skeleton._mesh_from_center_point(point)
 
         return skeleton
 
     def update_skeleton_lines(self, lines=[]):
         """ Update skeleton by adding more skeleon lines or remove current skeleton lines.
-        Parameters:
-        -----------
-        lines: a list of compas lines.
+        
+        Parameters
+        ----------
+        lines: compas.geometry.Line
+            a list of compas lines.
+
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton.update_skeleton_lines(lines)
         """
         network = Network.from_lines(lines)
 
         self.clear()
-        self.mesh_from_network(network) 
+        self._mesh_from_network(network) 
 
     # --------------------------------------------------------------------------
     # builders
     # --------------------------------------------------------------------------
 
-    def mesh_from_network(self, network):
+    def _mesh_from_network(self, network):
         # input from network
         self._add_skeleton_vertices(network)
         self._add_skeleton_branches(network)
@@ -170,7 +223,7 @@ class Skeleton(Mesh):
         # update vertices positions accoding to current node width, leaf width
         self.update_mesh_vertices_pos()
 
-    def mesh_from_center_point(self, pt):
+    def _mesh_from_center_point(self, pt):
         # add the point as the skeleton node
         self.add_vertex(0)
         self.vertex[0].update({'x': pt[0], 'y': pt[1], 'z': pt[2], 'type': 'skeleton_node'})
@@ -178,13 +231,17 @@ class Skeleton(Mesh):
         # add 4 more vertices to compose a mesh
         for index in range(1, 5):
             self.add_vertex(index)
-            self.vertex[index].update({'type': None})
 
         from compas.utilities import pairwise
 
         keys = range(1, 5) + [1]
         for u, v in pairwise(keys):
             self.add_face([0, u, v])
+
+        if self.node_width == 0:
+            self.node_width = 2 # for default display.
+        
+        self.update_mesh_vertices_pos()
 
     def _add_skeleton_vertices(self, network):
         duality.network_sort_neighbors(network, True)
@@ -229,7 +286,7 @@ class Skeleton(Mesh):
             network.adjacency[u][v] = attr
 
         current_key = network.number_of_nodes()
-        node_vertices, leaf_vertices = self.skeleton_vertices()
+        node_vertices, leaf_vertices = self.skeleton_vertices
 
         for u in node_vertices:
             for v in network.adjacency[u]:
@@ -267,6 +324,15 @@ class Skeleton(Mesh):
     # --------------------------------------------------------------------------
 
     def update_mesh_vertices_pos(self):
+        """Update all the vertex coordiates.
+        
+        Examples
+        --------
+        >>> skeleton.node_width = 20
+        >>> skeleton.update_mesh_vertices_pos()
+        >>> skeletonobject = SkeletonObject(skeleton)
+        >>> skeletonobject.draw()
+        """
 
         def update_node_boundary_vertex(u, v):
             fkey = self.halfedge[u][v]
@@ -296,10 +362,13 @@ class Skeleton(Mesh):
             pts = self._get_dome_boundary_vertex_pos()
 
             for key in range(1, 5):
-                self.vertex[key].update({'x': pts[key-1][0], 'y': pts[key-1][1], 'z': pts[key-1][2]})
+                pt = pts[key-1]
+                vec = Vector(*self.vertex_attribute(key, 'transform'))
+                pt = add_vectors(pt, vec)
+                self.vertex[key].update({'x': pt[0], 'y': pt[1], 'z': pt[2]})
 
-        if list(self.skeleton_branches()):
-            for u, v in self.skeleton_branches():
+        if list(self.skeleton_branches):
+            for u, v in self.skeleton_branches:
                 if self.vertex[u]['type'] == 'skeleton_node':
                     update_node_boundary_vertex(u, v)
                 else:
@@ -312,7 +381,8 @@ class Skeleton(Mesh):
         else:
             update_dome_boundary_vertex()
 
-    def update_width(self, dist, flag):
+    def _update_width(self, dist, flag):
+
         if flag == 'leaf_width':
             self.leaf_width = dist
         elif flag == 'node_width':
@@ -364,18 +434,6 @@ class Skeleton(Mesh):
         ]
 
         return pts
-
-    def _find_previous_vertex(self, u, v):
-        """ Find the previous vertex of a halfedge[u][v] through sorted nbrs. """
-        nbrs = self.vertex[u]['neighbors']
-        prvs = nbrs[(nbrs.index(v) + 1) % len(nbrs)]
-        return prvs
-
-    def _find_next_vertex(self, u, v):
-        """ Find the next vertex of a halfedge[u][v] through sorted nbrs. """
-        nbrs = self.vertex[u]['neighbors']
-        next = nbrs[(nbrs.index(v) - 1) % len(nbrs)]
-        return next
 
     def _get_vec_along_branch(self, v):
         u = self.vertex_attribute(v, 'neighbors')[0]
@@ -429,16 +487,17 @@ class Skeleton(Mesh):
 
         return frame_left, frame_right
 
+    def _get_centerpt_frame(self, key):
+        pt = self.vertex_coordinates(key)
+        return Frame(pt, Frame.worldXY().xaxis, Frame.worldXY().yaxis)
+
     def _mount_leaf_transformation(self, v, f1, f2):
         #  mount the transformation of skeleton vertice to related mesh vertices
         u = self.vertex_attribute(v, 'neighbors')[0]
         descendents = self._get_descendent(u, v)[:2]
 
         for key in descendents:
-            vec = Vector(*self.vertex_attribute(key, 'transform'))
-            vec_l = f1.to_local_coords(vec)
-            vec = f2.to_world_coords(vec_l)
-            self.vertex[key].update({'transform': list(vec)})
+            self._mount_skeleton_vertex_transformation(key, f1, f2)
 
     def _mount_joint_transformation(self, u, v, f1, f2, dirct):
 
@@ -447,10 +506,26 @@ class Skeleton(Mesh):
         else:
             key = self._get_descendent(u, v)[3]
 
+        self._mount_skeleton_vertex_transformation(key, f1, f2)
+
+    def _mount_skeleton_vertex_transformation(self, key, f1, f2):
+        # mount the skeleton vertex transformation to a descendent mesh vertex transformation
         vec = Vector(*self.vertex_attribute(key, 'transform'))
         vec_l = f1.to_local_coords(vec)
         vec = f2.to_world_coords(vec_l)
         self.vertex[key].update({'transform': list(vec)})
+
+    def _find_previous_vertex(self, u, v):
+        """ Find the previous vertex of a halfedge[u][v] through sorted nbrs. """
+        nbrs = self.vertex[u]['neighbors']
+        prvs = nbrs[(nbrs.index(v) + 1) % len(nbrs)]
+        return prvs
+
+    def _find_next_vertex(self, u, v):
+        """ Find the next vertex of a halfedge[u][v] through sorted nbrs. """
+        nbrs = self.vertex[u]['neighbors']
+        next = nbrs[(nbrs.index(v) - 1) % len(nbrs)]
+        return next
 
     def _get_descendent(self, u, v):
         fkey1 = self.halfedge[u][v]
@@ -468,9 +543,25 @@ class Skeleton(Mesh):
     # --------------------------------------------------------------------------
 
     def subdivide(self, k=1):
+        """Increase the catmull-clark subdivison level of high-poly mesh
+        
+        Examples
+        --------
+        >>> skeleton.subdivide(1)
+        >>> skeletonobject = SkeletonObject(skeleton)
+        >>> skeletonobject.draw()
+        """
         self.attributes['sub_level'] += k
 
     def merge(self, k=1):
+        """Decrease the catmull-clark subdivison level of high-poly mesh
+        
+        Examples
+        --------
+        >>> skeleton.merge(1)
+        >>> skeletonobject = SkeletonObject(skeleton)
+        >>> skeletonobject.draw()
+        """
         if self.attributes['sub_level'] > 0:
             self.attributes['sub_level'] -= k
 
@@ -487,7 +578,12 @@ class Skeleton(Mesh):
     # --------------------------------------------------------------------------
 
     def to_mesh(self):
-        """ Return high poly compas mesh generated from skeleton. """
+        """Return the high-poly skeleton mesh as a compas mesh
+
+        Return
+        ------
+        mesh: compas.datastructures.Mesh           
+        """
         mesh = Mesh()
         highpoly_mesh = self._subdivide(self.attributes['sub_level'])
 

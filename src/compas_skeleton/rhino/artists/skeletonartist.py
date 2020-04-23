@@ -10,7 +10,38 @@ __all__ = ['SkeletonArtist']
 
 
 class SkeletonArtist(MeshArtist):
-    """Artist for visualizing skeleton mesh in the Rhino model space."""
+    """Artist for visualizing skeleton mesh in the Rhino.
+    
+    Parameters
+    ----------
+    mesh : :class:`compas.datastructures.Mesh`
+        A COMPAS mesh generated from Skeleton
+
+    skeleton : :class:`compas_skeleton.datastructure.Skeleton`
+        A Skeleton
+
+    Attributes
+    ----------
+    settings: dict
+        Default settings for layer, color...
+
+    Examples
+    --------
+    >>> from compas_skeleton.datastructure import Skeleton
+    >>> from compas_skeleton.rhino import SkeletonObject
+    >>> from compas_skeleton.rhino import SkeletonArtist
+    >>> import compas_rhino
+    >>>
+    >>> guids = compas_rhino.select_lines()
+    >>> lines = compas_rhino.get_line_coordinates(guids)
+    >>> skeleton = Skeleton.from_skeleton_lines(lines)
+    >>> skeletonobject = SkeletonObject(skeleton)
+    >>> artist = SkeletonArtist(self.datastructure)
+    >>> artist.draw_skeleton()
+    >>> artist.draw_coarse_mesh_vertices()
+    >>> artist.draw_mesh()
+    >>> artist.redraw()
+    """
     
     def __init__(self, skeleton, layer=None, name=None):
         mesh = skeleton.to_mesh()

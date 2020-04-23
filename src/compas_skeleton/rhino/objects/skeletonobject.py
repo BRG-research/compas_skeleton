@@ -11,11 +11,13 @@ from compas_rhino.modifiers import mesh_move_vertex
 from compas_rhino import delete_objects
 from compas_skeleton.rhino import SkeletonArtist
 
-import Rhino
-from Rhino.Geometry import Point3d
-from Rhino.Geometry import Line
-from System.Drawing.Color import FromArgb
-import rhinoscriptsyntax as rs
+try:
+    import Rhino.Input.Custom
+    from Rhino.Geometry import Point3d
+    from Rhino.Geometry import Line
+    from System.Drawing.Color import FromArgb
+except ImportError:
+    pass
 
 
 __all__ = ["SkeletonObject"]
@@ -26,26 +28,24 @@ class SkeletonObject(object):
 
     Parameters
     ----------
-    datastructure : :class:`compas_skeleton.datastructures.Skeleton`
-        The Skeleton data structure.
+    datastructure : :class:`compas_skeleton.datastructure.Skeleton`
+        A Skeleton instance as the datastructure of SkeletonObject
 
-    Attributes
-    ----------
     artist : :class:`compas_skeleton.rhino.SkeletonArtist`
-        The specialised skeleton object artist.
+        The specialised skeleton artist for Rhino.
 
     Examples
     --------
     >>> from compas_skeleton.datastructure import Skeleton
     >>> from compas_skeleton.rhino import SkeletonObject
     >>> import compas_rhino
-
+    >>>
     >>> guids = compas_rhino.select_lines()
     >>> lines = compas_rhino.get_line_coordinates(guids)
     >>> skeleton = Skeleton.from_skeleton_lines(lines)
     >>> skeletonobject = SkeletonObject(skeleton)
     >>> skeletonobject.draw()
-    >>> skeletonobject.dynamic_update_mesh()
+    >>> skeletonobject.dynamic_draw_widths()
     >>> skeletonobject.update()
     """
     
@@ -105,7 +105,18 @@ class SkeletonObject(object):
     # ==============================================================================
     
     def add_lines(self):
-        """Update skeleton by adding more skeleon lines from Rhino."""
+        """Update skeleton by adding more skeleon lines from Rhino.
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton(lines)
+        >>> skeletonobjcet = SkeletonObject(skeleton)
+        >>> skeletonobjcet.add_lines()
+        >>> skeletonobjcet.draw()
+        
+        """
         self.clear_mesh()
         guids = compas_rhino.select_lines()
         if not guids:
@@ -117,14 +128,25 @@ class SkeletonObject(object):
         self.datastructure.update_skeleton_lines(lines)
 
     def remove_lines(self):
-        """Update skeleton by removing current skeleon lines."""
+        """Update skeleton by removing current skeleon lines.
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton(lines)
+        >>> skeletonobjcet = SkeletonObject(skeleton)
+        >>> skeletonobjcet.remove_lines()
+        >>> skeletonobjcet.draw()
+        
+        """
         self.clear_mesh()
         def custom_filter(rhino_object, geometry, component_index):
             if rhino_object.Attributes.ObjectId in list(self.guid_skeleton_edges.keys()):
                 return True
             return False
 
-        guids = rs.GetObjects('select skeleton lines to remove', custom_filter=custom_filter)
+        guids = compas_rhino.rs.GetObjects('select skeleton lines to remove', custom_filter=custom_filter)
         for guid in guids:
             del self.guid_skeleton_edges[guid]
         compas_rhino.rs.DeleteObjects(guids)
@@ -132,31 +154,52 @@ class SkeletonObject(object):
         lines = compas_rhino.get_line_coordinates(list(self.guid_skeleton_edges.keys()))
         self.datastructure.update_skeleton_lines(lines)
 
-    def dynamic_update_mesh(self):
-        """Dynamic update leaf width, node width, leaf extend and draw the mesh in rhino."""
-        if self.datastructure.skeleton_vertices()[1]:
-            self.dynamic_update_width('leaf_width')
+    def dynamic_draw_widths(self):
+        """Dynamic draw leaf width, node width, leaf extend and update the mesh in rhino.
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton(lines)
+        >>> skeletonobjcet = SkeletonObject(skeleton)
+        >>> skeletonobjcet.dynamic_draw_widths()
+        
+        """
+        if self.datastructure.skeleton_vertices[1]:
+            self.dynamic_draw_width('leaf_width')
 
-        self.dynamic_update_width('node_width')
+        self.dynamic_draw_width('node_width')
 
-        if self.datastructure.skeleton_vertices()[1]:
-            self.dynamic_update_width('leaf_extend')
+        if self.datastructure.skeleton_vertices[1]:
+            self.dynamic_draw_width('leaf_extend')
 
-    def dynamic_update_width(self, param):
-        """Dynamic update param following mouse movement, and draw the mesh in rhino.
+    def dynamic_draw_width(self, param):
+        """Dynamic draw a width value, and update the mesh in rhino.
+        
         Parameters
         -----------
-        param: str: 'node_width', 'leaf_width', 'leaf_extend'
+        param: str
+            'node_width', 'leaf_width', 'leaf_extend'
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton(lines)
+        >>> skeletonobjcet = SkeletonObject(skeleton)
+        >>> skeletonobjcet.dynamic_draw_width('node_width')
+        
         """
 
         # get start point
         gp = Rhino.Input.Custom.GetPoint()
         if param == 'node_width':
-            node_vertex = self.datastructure.skeleton_vertices()[0][0]
+            node_vertex = self.datastructure.skeleton_vertices[0][0]
             sp = Point3d(*(self.datastructure.vertex_coordinates(node_vertex)))
             gp.SetCommandPrompt('select the node vertex')
         else:
-            leaf_vertex = self.datastructure.skeleton_vertices()[1][0]
+            leaf_vertex = self.datastructure.skeleton_vertices[1][0]
             sp = Point3d(*(self.datastructure.vertex_coordinates(leaf_vertex)))
             gp.SetCommandPrompt('select the leaf vertex')
 
@@ -181,7 +224,7 @@ class SkeletonObject(object):
                 direction = _get_leaf_extend_direction(cp)
                 dist *= direction
 
-            self.datastructure.update_width(dist, param)
+            self.datastructure._update_width(dist, param)
             self.datastructure.update_mesh_vertices_pos()
             lines = _get_edge_lines_in_rhino()
 
@@ -237,14 +280,18 @@ class SkeletonObject(object):
             direction = _get_leaf_extend_direction(ep)
             dist *= direction
 
-        self.datastructure.update_width(dist, param)
+        self.datastructure._update_width(dist, param)
         self.datastructure.update_mesh_vertices_pos()
 
         self.draw_mesh()
 
     def move_mesh_vertex(self):
-        """ Update the position of a mesh vertex. """
-        guid = compas_rhino.rs.GetObject(message="Select a vertex.", preselect=True, filter=rs.filter.point | rs.filter.textdot)
+        """ Move the position of a mesh vertex. """
+        guid = compas_rhino.rs.GetObject(
+            message="Select a vertex.",
+            preselect=True,
+            filter=compas_rhino.rs.filter.point | compas_rhino.rs.filter.textdot
+            )
         guid_key = self.guid_coarse_mesh_vertices
         guid_key.update(self.guid_skeleton_vertices)
         
@@ -259,11 +306,22 @@ class SkeletonObject(object):
         self.datastructure.vertex[key].update({'transform': list(vec)})
 
     def move_skeleton_vertex(self):
-        """ Change the position of a skeleton vertex and update all vertices affected by it. """
+        """ Move the position of a skeleton vertex and update all its descencent vertices.
+        
+        Examples
+        --------
+        >>> guids = compas_rhino.select_lines()
+        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> skeleton = Skeleton(lines)
+        >>> skeletonobjcet = SkeletonObject(skeleton)
+        >>> skeletonobjcet.move_skeleton_vertex()
+        >>> skeletonobjcet.draw()
+
+        """
         guid = compas_rhino.rs.GetObject(
             message="Select a vertex.",
             preselect=True,
-            filter=rs.filter.point | rs.filter.textdot
+            filter=compas_rhino.rs.filter.point | compas_rhino.rs.filter.textdot
             )
 
         if guid not in list(self.guid_skeleton_vertices.keys()):
@@ -272,10 +330,13 @@ class SkeletonObject(object):
 
         else:
             key = self.guid_skeleton_vertices[guid]
-            if self.datastructure.vertex_attribute(key, 'type') == 'skeleton_leaf':
-                self._move_skeleton_leaf(key)
+            if not self.datastructure.skeleton_vertices[1]:
+                self._move_skeleton_centerpt(key)  # this is a dome with only one skeleton vertex
             else:
-                self._move_skeleton_joint(key)
+                if self.datastructure.vertex_attribute(key, 'type') == 'skeleton_leaf':
+                    self._move_skeleton_leaf(key)
+                else:
+                    self._move_skeleton_joint(key)
 
     def _move_skeleton_joint(self, key):
 
@@ -340,22 +401,35 @@ class SkeletonObject(object):
 
         self.datastructure.update_mesh_vertices_pos()
 
+    def _move_skeleton_centerpt(self, key):
+        f_before =self.datastructure._get_centerpt_frame(key)
+
+        mesh_move_vertex(self.datastructure, key)
+        f_after = self.datastructure._get_centerpt_frame(key)
+
+        nbrs = self.datastructure.vertex_neighbors(key)
+        for nbr in nbrs:
+            self.datastructure._mount_skeleton_vertex_transformation(nbr, f_before, f_after)
+
+        self.datastructure.update_mesh_vertices_pos()
+
     def update(self):
-        """update skeleton and skeleton mesh by typing command name in rhino command line.
+        """update Skeleton by typing command name in rhino command line.
             
-        Available Commands:
-        -------------------
-            'm_skeleton'
-            'm_mesh'
-            'leaf_width'
-            'node_width'
-            'leaf_extend'
-            'subdivide'
-            'merge'
-            'add_lines'
-            'remove_lines'
-            'finish'
+        following command names are available: 
+            * 'm_skeleton'
+            * 'm_mesh'
+            * 'leaf_width'
+            * 'node_width'
+            * 'leaf_extend'
+            * 'subdivide'
+            * 'merge'
+            * 'add_lines'
+            * 'remove_lines'
+            * 'finish'
+
         """
+
         while True:            
             operation = compas_rhino.rs.GetString('next')
             if operation == 'm_skeleton':
@@ -365,14 +439,14 @@ class SkeletonObject(object):
                 self.move_mesh_vertex()
                 self.clear_coarse_mesh_vertices()
             elif operation == 'leaf_width':
-                if self.datastructure.skeleton_vertices()[1]:
-                    self.dynamic_update_width('leaf_width')
+                if self.datastructure.skeleton_vertices[1]:
+                    self.dynamic_draw_width('leaf_width')
                 else:
                     print('this skeleton doesn\'t have any leaf!')
             elif operation == 'node_width':
-                self.dynamic_update_width('node_width')
+                self.dynamic_draw_width('node_width')
             elif operation == 'leaf_extend':
-                self.dynamic_update_width('leaf_extend')
+                self.dynamic_draw_width('leaf_extend')
             elif operation == 'subdivide':
                 self.datastructure.subdivide(k=1)
             elif operation == 'merge':
@@ -396,7 +470,7 @@ class SkeletonObject(object):
     # ==============================================================================
 
     def clear(self):
-        """ Clear the skeleton and skeleton mesh visualisations in Rhino. """
+        """ Clear the skeleton and skeleton mesh in Rhino. """
         self.clear_skeleton()
         self.clear_coarse_mesh_vertices()
         self.clear_mesh()
@@ -427,8 +501,8 @@ class SkeletonObject(object):
     def draw_skeleton(self):
         self.artist.skeleton = self.datastructure
 
-        skeleton_vertices = self.datastructure.skeleton_vertices()[0] + self.datastructure.skeleton_vertices()[1]
-        skeleton_branches = self.datastructure.skeleton_branches()
+        skeleton_vertices = self.datastructure.skeleton_vertices[0] + self.datastructure.skeleton_vertices[1]
+        skeleton_branches = self.datastructure.skeleton_branches
         
         guids_vertices, guids_edges = self.artist.draw_skeleton(skeleton_vertices, skeleton_branches)
         self.guid_skeleton_vertices = zip(guids_vertices, skeleton_vertices)
@@ -438,7 +512,7 @@ class SkeletonObject(object):
         self.artist.skeleton = self.datastructure
 
         mesh_vertices_keys = list(self.datastructure.vertices())
-        skeleton_vertices = self.datastructure.skeleton_vertices()[0] + self.datastructure.skeleton_vertices()[1]
+        skeleton_vertices = self.datastructure.skeleton_vertices[0] + self.datastructure.skeleton_vertices[1]
         boundary_vertices = list(set(mesh_vertices_keys) - set(skeleton_vertices))
         guids = self.artist.draw_coarse_mesh_vertices(boundary_vertices)
 

@@ -60,8 +60,11 @@
 <h1>Create</h1>
 <p>This user manual example takes input from Rhino and makes visulisation in Rhino.
 So the codes need to be run in Rhino python editor or through CodeListener.</p>
-<div class="section" id="create-skeleton-from-lines">
-<h2>Create skeleton from lines</h2>
+<div class="section" id="create-skeleton-and-skeletonobject-from-lines">
+<h2>Create Skeleton and SkeletonObject from lines</h2>
+<div class="figure align-default">
+<img alt="../_images/skeleton_create.gif" class="figure-img img-fluid" src="../_images/skeleton_create.gif" />
+</div>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
 <span class="kn">import</span> <span class="nn">compas_rhino</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -76,10 +79,7 @@ So the codes need to be run in Rhino python editor or through CodeListener.</p>
 <span class="n">skeleton</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 </div>
-</div>
-<div class="section" id="create-skeleton-object">
-<h2>Create skeleton object</h2>
-<p>Skeleton object contains a Skeleton as its datastructre, and a customized skeleton artist.</p>
+<p>Skeleton object contains a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> as its datastructre, and a customized <code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code>.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
 
 <span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
@@ -89,7 +89,7 @@ So the codes need to be run in Rhino python editor or through CodeListener.</p>
 <span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
 </code></pre></div>
 </div>
-<p>SkeletonObject.datastructure is a Skeleton object. So the result of the two methods below are the same.
+<p><code class="docutils literal notranslate"><span class="pre">SkeletonObject.datastructure</span></code> is a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> object. So the result of the two methods below are the same.
 But after a skeleton object is created, we should always choose the second method so that all the modifications will be stored.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="c1"># method 1</span>
 <span class="n">skeleton</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
@@ -100,26 +100,36 @@ But after a skeleton object is created, we should always choose the second metho
 </code></pre></div>
 </div>
 </div>
-<div class="section" id="edit-attributes">
-<h2>Edit attributes</h2>
-<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">node_width</span> <span class="o">=</span> <span class="mf">20.0</span>
-<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">leaf_width</span> <span class="o">=</span> <span class="mf">10.0</span>
-<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">leaf_extend</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
+<div class="section" id="create-skeleton-and-skeletonobject-from-single-point">
+<h2>Create Skeleton and SkeletonObject from single point</h2>
+<div class="figure align-default">
+<img alt="../_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="../_images/skeleton_dynamic_draw.gif" />
+</div>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
+<span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
+<span class="kn">import</span> <span class="nn">compas_rhino</span>
 
+<span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_points</span><span class="p">()</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_point_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_center_point</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
 <span class="n">skeletonobject</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
-<div class="section" id="interactive-edit-attributes">
-<h2>Interactive edit attributes</h2>
-<p>There are 3 steps of <code class="docutils literal notranslate"><span class="pre">dynamic_update_mesh</span></code>:</p>
+<div class="section" id="interactive-input-width">
+<h2>Interactive input width</h2>
+<div class="figure align-default">
+<img alt="../_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="../_images/skeleton_dynamic_draw.gif" />
+</div>
+<p>There are 3 steps of <code class="docutils literal notranslate"><span class="pre">dynamic_draw_widths</span></code>:</p>
 <ul class="simple">
-<li><p>01.click on the joint node, move cursor to decide node width</p></li>
-<li><p>02.click on the leaf vertex, move cursor to decide leaf width</p></li>
-<li><p>03.click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.</p></li>
+<li><p>click on the joint node, move cursor to decide node width</p></li>
+<li><p>click on the leaf vertex, move cursor to decide leaf width</p></li>
+<li><p>click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.</p></li>
 </ul>
-<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">dynamic_update_mesh</span><span class="p">()</span>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">dynamic_draw_widths</span><span class="p">()</span>
 <span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 </div>
@@ -154,8 +164,8 @@ But after a skeleton object is created, we should always choose the second metho
 
                             <ul class="nav flex-column active">
 <li class="nav-item"><a class="nav-link reference internal" href="../intro.html">Introduction</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="../concept.html">Concept</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../gettingstarted.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../concept.html">Concept</a></li>
 <li class="nav-item active"><a class="nav-link reference internal" href="../user_manual.html">User manual</a><ul class="nav active">
 <li class="nav-item active"><a class="nav-link active current reference internal" href="#">Create</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="modify.html">Modify</a></li>
@@ -183,10 +193,9 @@ But after a skeleton object is created, we should always choose the second metho
 
                 <ul class="nav flex-column" id="compas-localnav">
 <li class="nav-item"><a class="nav-link reference internal" href="#">Create</a><ul class="nav">
-<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-from-lines">Create skeleton from lines</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-object">Create skeleton object</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#edit-attributes">Edit attributes</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#interactive-edit-attributes">Interactive edit attributes</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-and-skeletonobject-from-lines">Create Skeleton and SkeletonObject from lines</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-and-skeletonobject-from-single-point">Create Skeleton and SkeletonObject from single point</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#interactive-input-width">Interactive input width</a></li>
 </ul>
 </li>
 </ul>
@@ -200,7 +209,7 @@ But after a skeleton object is created, we should always choose the second metho
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 17, 2020.
+                Last updated on Apr 24, 2020.
             
 
             
