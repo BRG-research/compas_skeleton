@@ -97,194 +97,221 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.__init__.html#compas_skeleton.datastructure.Skeleton.__init__" title="compas_skeleton.datastructure.Skeleton.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
 <td><p>Initialize self.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.add_face.html#compas_skeleton.datastructure.Skeleton.add_face" title="compas_skeleton.datastructure.Skeleton.add_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_face</span></code></a>(vertices[, fkey, attr_dict])</p></td>
-<td><p>Add a face to the mesh object.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.add_vertex.html#compas_skeleton.datastructure.Skeleton.add_vertex" title="compas_skeleton.datastructure.Skeleton.add_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_vertex</span></code></a>([key, attr_dict])</p></td>
-<td><p>Add a vertex to the mesh object.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.area.html#compas_skeleton.datastructure.Skeleton.area" title="compas_skeleton.datastructure.Skeleton.area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">area</span></code></a>()</p></td>
-<td><p>Calculate the total mesh area.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.bounding_box.html#compas_skeleton.datastructure.Skeleton.bounding_box" title="compas_skeleton.datastructure.Skeleton.bounding_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bounding_box</span></code></a>()</p></td>
-<td><p>Compute the (axis aligned) bounding box of a mesh.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.bounding_box_xy.html#compas_skeleton.datastructure.Skeleton.bounding_box_xy" title="compas_skeleton.datastructure.Skeleton.bounding_box_xy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bounding_box_xy</span></code></a>()</p></td>
-<td><p>Compute the (axis aligned) bounding box of a projection of the mesh in the XY plane.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.centroid.html#compas_skeleton.datastructure.Skeleton.centroid" title="compas_skeleton.datastructure.Skeleton.centroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centroid</span></code></a>()</p></td>
-<td><p>Calculate the mesh centroid.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.clear.html#compas_skeleton.datastructure.Skeleton.clear" title="compas_skeleton.datastructure.Skeleton.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
-<td><p>Clear all the mesh data.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.collapse_edge.html#compas_skeleton.datastructure.Skeleton.collapse_edge" title="compas_skeleton.datastructure.Skeleton.collapse_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collapse_edge</span></code></a>(u, v[, t, allow_boundary, fixed])</p></td>
-<td><p>Collapse an edge to its first or second vertex, or to an intermediate point.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.connected_components.html#compas_skeleton.datastructure.Skeleton.connected_components" title="compas_skeleton.datastructure.Skeleton.connected_components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connected_components</span></code></a>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.copy.html#compas_skeleton.datastructure.Skeleton.copy" title="compas_skeleton.datastructure.Skeleton.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([cls])</p></td>
-<td><p>Make an independent copy of the mesh object.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.cull_vertices.html#compas_skeleton.datastructure.Skeleton.cull_vertices" title="compas_skeleton.datastructure.Skeleton.cull_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cull_vertices</span></code></a>()</p></td>
-<td><p>Remove all unused vertices from the mesh object.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.delete_face.html#compas_skeleton.datastructure.Skeleton.delete_face" title="compas_skeleton.datastructure.Skeleton.delete_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_face</span></code></a>(fkey)</p></td>
-<td><p>Delete a face from the mesh object.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.delete_vertex.html#compas_skeleton.datastructure.Skeleton.delete_vertex" title="compas_skeleton.datastructure.Skeleton.delete_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_vertex</span></code></a>(key)</p></td>
-<td><p>Delete a vertex from the mesh and everything that is attached to it.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.dual.html#compas_skeleton.datastructure.Skeleton.dual" title="compas_skeleton.datastructure.Skeleton.dual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dual</span></code></a>([cls])</p></td>
-<td><p>Construct the dual of a mesh.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_attribute.html#compas_skeleton.datastructure.Skeleton.edge_attribute" title="compas_skeleton.datastructure.Skeleton.edge_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attribute</span></code></a>(key, name[, value])</p></td>
-<td><p>Get or set an attribute of an edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_attributes.html#compas_skeleton.datastructure.Skeleton.edge_attributes" title="compas_skeleton.datastructure.Skeleton.edge_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attributes</span></code></a>(key[, names, values])</p></td>
-<td><p>Get or set multiple attributes of an edge.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_coordinates.html#compas_skeleton.datastructure.Skeleton.edge_coordinates" title="compas_skeleton.datastructure.Skeleton.edge_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_coordinates</span></code></a>(u, v[, axes])</p></td>
-<td><p>Return the coordinates of the start and end point of an edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_direction.html#compas_skeleton.datastructure.Skeleton.edge_direction" title="compas_skeleton.datastructure.Skeleton.edge_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_direction</span></code></a>(u, v)</p></td>
-<td><p>Return the direction vector of an edge.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_faces.html#compas_skeleton.datastructure.Skeleton.edge_faces" title="compas_skeleton.datastructure.Skeleton.edge_faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_faces</span></code></a>(u, v)</p></td>
-<td><p>Find the two faces adjacent to an edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_length.html#compas_skeleton.datastructure.Skeleton.edge_length" title="compas_skeleton.datastructure.Skeleton.edge_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_length</span></code></a>(u, v)</p></td>
-<td><p>Return the length of an edge.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_midpoint.html#compas_skeleton.datastructure.Skeleton.edge_midpoint" title="compas_skeleton.datastructure.Skeleton.edge_midpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_midpoint</span></code></a>(u, v)</p></td>
-<td><p>Return the location of the midpoint of an edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_point.html#compas_skeleton.datastructure.Skeleton.edge_point" title="compas_skeleton.datastructure.Skeleton.edge_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_point</span></code></a>(u, v[, t])</p></td>
-<td><p>Return the location of a point along an edge.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_vector.html#compas_skeleton.datastructure.Skeleton.edge_vector" title="compas_skeleton.datastructure.Skeleton.edge_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_vector</span></code></a>(u, v)</p></td>
-<td><p>Return the vector of an edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges.html#compas_skeleton.datastructure.Skeleton.edges" title="compas_skeleton.datastructure.Skeleton.edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges</span></code></a>([data])</p></td>
-<td><p>Iterate over the edges of the mesh.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_attribute.html#compas_skeleton.datastructure.Skeleton.edges_attribute" title="compas_skeleton.datastructure.Skeleton.edges_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_attribute</span></code></a>(name[, value, keys])</p></td>
-<td><p>Get or set an attribute of multiple edges.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_attributes.html#compas_skeleton.datastructure.Skeleton.edges_attributes" title="compas_skeleton.datastructure.Skeleton.edges_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_attributes</span></code></a>([names, values, keys])</p></td>
-<td><p>Get or set multiple attributes of multiple edges.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_on_boundaries.html#compas_skeleton.datastructure.Skeleton.edges_on_boundaries" title="compas_skeleton.datastructure.Skeleton.edges_on_boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_on_boundaries</span></code></a>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_on_boundary.html#compas_skeleton.datastructure.Skeleton.edges_on_boundary" title="compas_skeleton.datastructure.Skeleton.edges_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_on_boundary</span></code></a>([oriented])</p></td>
-<td><p>Find the edges on the boundary.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_where.html#compas_skeleton.datastructure.Skeleton.edges_where" title="compas_skeleton.datastructure.Skeleton.edges_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_where</span></code></a>(conditions[, data])</p></td>
-<td><p>Get edges for which a certain condition or set of conditions is true.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_where_predicate.html#compas_skeleton.datastructure.Skeleton.edges_where_predicate" title="compas_skeleton.datastructure.Skeleton.edges_where_predicate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_where_predicate</span></code></a>(predicate[, data])</p></td>
-<td><p>Get edges for which a certain condition or set of conditions is true using a lambda function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.euler.html#compas_skeleton.datastructure.Skeleton.euler" title="compas_skeleton.datastructure.Skeleton.euler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">euler</span></code></a>()</p></td>
-<td><p>Calculate the Euler characterisic.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency.html#compas_skeleton.datastructure.Skeleton.face_adjacency" title="compas_skeleton.datastructure.Skeleton.face_adjacency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency</span></code></a>()</p></td>
-<td><p>Build a face adjacency dict.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge.html#compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge" title="compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency_halfedge</span></code></a>(f1, f2)</p></td>
-<td><p>Find one half-edge over which two faces are adjacent.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency_vertices.html#compas_skeleton.datastructure.Skeleton.face_adjacency_vertices" title="compas_skeleton.datastructure.Skeleton.face_adjacency_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency_vertices</span></code></a>(f1, f2)</p></td>
-<td><p>Find all vertices over which two faces are adjacent.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_area.html#compas_skeleton.datastructure.Skeleton.face_area" title="compas_skeleton.datastructure.Skeleton.face_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_area</span></code></a>(fkey)</p></td>
-<td><p>Compute the area of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_aspect_ratio.html#compas_skeleton.datastructure.Skeleton.face_aspect_ratio" title="compas_skeleton.datastructure.Skeleton.face_aspect_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_aspect_ratio</span></code></a>(fkey)</p></td>
-<td><p>Face aspect ratio as the ratio between the lengths of the maximum and minimum face edges.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_attribute.html#compas_skeleton.datastructure.Skeleton.face_attribute" title="compas_skeleton.datastructure.Skeleton.face_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_attribute</span></code></a>(key, name[, value])</p></td>
-<td><p>Get or set an attribute of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_attributes.html#compas_skeleton.datastructure.Skeleton.face_attributes" title="compas_skeleton.datastructure.Skeleton.face_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_attributes</span></code></a>(key[, names, values])</p></td>
-<td><p>Get or set multiple attributes of a face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_center.html#compas_skeleton.datastructure.Skeleton.face_center" title="compas_skeleton.datastructure.Skeleton.face_center"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_center</span></code></a>(fkey)</p></td>
-<td><p>Compute the location of the center of mass of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_centroid.html#compas_skeleton.datastructure.Skeleton.face_centroid" title="compas_skeleton.datastructure.Skeleton.face_centroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_centroid</span></code></a>(fkey)</p></td>
-<td><p>Compute the location of the centroid of a face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_coordinates.html#compas_skeleton.datastructure.Skeleton.face_coordinates" title="compas_skeleton.datastructure.Skeleton.face_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_coordinates</span></code></a>(fkey[, axes])</p></td>
-<td><p>Compute the coordinates of the vertices of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_corners.html#compas_skeleton.datastructure.Skeleton.face_corners" title="compas_skeleton.datastructure.Skeleton.face_corners"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_corners</span></code></a>(fkey)</p></td>
-<td><p>Return triplets of face vertices forming the corners of the face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_curvature.html#compas_skeleton.datastructure.Skeleton.face_curvature" title="compas_skeleton.datastructure.Skeleton.face_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_curvature</span></code></a>(fkey)</p></td>
-<td><p>Dimensionless face curvature as the maximum face vertex deviation from the best-fit plane of the face vertices divided by the average lengths of the face vertices to the face centroid.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_degree.html#compas_skeleton.datastructure.Skeleton.face_degree" title="compas_skeleton.datastructure.Skeleton.face_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_degree</span></code></a>(fkey)</p></td>
-<td><p>Count the neighbors of a face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_flatness.html#compas_skeleton.datastructure.Skeleton.face_flatness" title="compas_skeleton.datastructure.Skeleton.face_flatness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_flatness</span></code></a>(fkey)</p></td>
-<td><p>Compute the flatness of the mesh face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_halfedges.html#compas_skeleton.datastructure.Skeleton.face_halfedges" title="compas_skeleton.datastructure.Skeleton.face_halfedges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_halfedges</span></code></a>(fkey)</p></td>
-<td><p>The halfedges of a face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_max_degree.html#compas_skeleton.datastructure.Skeleton.face_max_degree" title="compas_skeleton.datastructure.Skeleton.face_max_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_max_degree</span></code></a>()</p></td>
-<td><p>Compute the maximum degree of all faces.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_min_degree.html#compas_skeleton.datastructure.Skeleton.face_min_degree" title="compas_skeleton.datastructure.Skeleton.face_min_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_min_degree</span></code></a>()</p></td>
-<td><p>Compute the minimum degree of all faces.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_neighborhood.html#compas_skeleton.datastructure.Skeleton.face_neighborhood" title="compas_skeleton.datastructure.Skeleton.face_neighborhood"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_neighborhood</span></code></a>(key[, ring])</p></td>
-<td><p>Return the faces in the neighborhood of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_neighbors.html#compas_skeleton.datastructure.Skeleton.face_neighbors" title="compas_skeleton.datastructure.Skeleton.face_neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_neighbors</span></code></a>(fkey)</p></td>
-<td><p>Return the neighbors of a face across its edges.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_normal.html#compas_skeleton.datastructure.Skeleton.face_normal" title="compas_skeleton.datastructure.Skeleton.face_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_normal</span></code></a>(fkey[, unitized])</p></td>
-<td><p>Compute the normal of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_skewness.html#compas_skeleton.datastructure.Skeleton.face_skewness" title="compas_skeleton.datastructure.Skeleton.face_skewness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_skewness</span></code></a>(fkey)</p></td>
-<td><p>Face skewness as the maximum absolute angular deviation from the ideal polygon angle.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertex_ancestor.html#compas_skeleton.datastructure.Skeleton.face_vertex_ancestor" title="compas_skeleton.datastructure.Skeleton.face_vertex_ancestor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertex_ancestor</span></code></a>(fkey, key[, n])</p></td>
-<td><p>Return the n-th vertex before the specified vertex in a specific face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertex_descendant.html#compas_skeleton.datastructure.Skeleton.face_vertex_descendant" title="compas_skeleton.datastructure.Skeleton.face_vertex_descendant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertex_descendant</span></code></a>(fkey, key[, n])</p></td>
-<td><p>Return the n-th vertex after the specified vertex in a specific face.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertices.html#compas_skeleton.datastructure.Skeleton.face_vertices" title="compas_skeleton.datastructure.Skeleton.face_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertices</span></code></a>(fkey)</p></td>
-<td><p>The vertices of a face.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces.html#compas_skeleton.datastructure.Skeleton.faces" title="compas_skeleton.datastructure.Skeleton.faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces</span></code></a>([data])</p></td>
-<td><p>Iterate over the faces of the mesh.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_attribute.html#compas_skeleton.datastructure.Skeleton.faces_attribute" title="compas_skeleton.datastructure.Skeleton.faces_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_attribute</span></code></a>(name[, value, keys])</p></td>
-<td><p>Get or set an attribute of multiple faces.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_attributes.html#compas_skeleton.datastructure.Skeleton.faces_attributes" title="compas_skeleton.datastructure.Skeleton.faces_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_attributes</span></code></a>([names, values, keys])</p></td>
-<td><p>Get or set multiple attributes of multiple faces.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_on_boundary.html#compas_skeleton.datastructure.Skeleton.faces_on_boundary" title="compas_skeleton.datastructure.Skeleton.faces_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_on_boundary</span></code></a>()</p></td>
-<td><p>Find the faces on the boundary.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_where.html#compas_skeleton.datastructure.Skeleton.faces_where" title="compas_skeleton.datastructure.Skeleton.faces_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_where</span></code></a>(conditions[, data])</p></td>
-<td><p>Get faces for which a certain condition or set of conditions is true.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_where_predicate.html#compas_skeleton.datastructure.Skeleton.faces_where_predicate" title="compas_skeleton.datastructure.Skeleton.faces_where_predicate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_where_predicate</span></code></a>(predicate[, data])</p></td>
-<td><p>Get faces for which a certain condition or set of conditions is true using a lambda function.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.flip_cycles.html#compas_skeleton.datastructure.Skeleton.flip_cycles" title="compas_skeleton.datastructure.Skeleton.flip_cycles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flip_cycles</span></code></a>()</p></td>
-<td><p>Flip the cycle directions of all faces.</p></td>
-</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_center_point.html#compas_skeleton.datastructure.Skeleton.from_center_point" title="compas_skeleton.datastructure.Skeleton.from_center_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_center_point</span></code></a>([point])</p></td>
 <td><p>Instantiate a skeleton from a single point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.from_skeleton_lines" title="compas_skeleton.datastructure.Skeleton.from_skeleton_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_skeleton_lines</span></code></a>([lines])</p></td>
+<td><p>Instantiate a skeleton from lines.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.merge.html#compas_skeleton.datastructure.Skeleton.merge" title="compas_skeleton.datastructure.Skeleton.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>([k])</p></td>
+<td><p>Decrease the catmull-clark subdivison level of high-poly mesh</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.subdivide.html#compas_skeleton.datastructure.Skeleton.subdivide" title="compas_skeleton.datastructure.Skeleton.subdivide"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subdivide</span></code></a>([k])</p></td>
+<td><p>Increase the catmull-clark subdivison level of high-poly mesh</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_mesh.html#compas_skeleton.datastructure.Skeleton.to_mesh" title="compas_skeleton.datastructure.Skeleton.to_mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mesh</span></code></a>()</p></td>
+<td><p>Return the high-poly skeleton mesh as a compas mesh</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos.html#compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos" title="compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_mesh_vertices_pos</span></code></a>()</p></td>
+<td><p>Update all the vertex coordiates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.update_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.update_skeleton_lines" title="compas_skeleton.datastructure.Skeleton.update_skeleton_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_skeleton_lines</span></code></a>([lines])</p></td>
+<td><p>Update skeleton by adding more skeleon lines or remove current skeleton lines.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.add_face.html#compas_skeleton.datastructure.Skeleton.add_face" title="compas_skeleton.datastructure.Skeleton.add_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_face</span></code></a>(vertices[, fkey, attr_dict])</p></td>
+<td><p>Add a face to the mesh object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.add_vertex.html#compas_skeleton.datastructure.Skeleton.add_vertex" title="compas_skeleton.datastructure.Skeleton.add_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_vertex</span></code></a>([key, attr_dict])</p></td>
+<td><p>Add a vertex to the mesh object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.area.html#compas_skeleton.datastructure.Skeleton.area" title="compas_skeleton.datastructure.Skeleton.area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">area</span></code></a>()</p></td>
+<td><p>Calculate the total mesh area.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.bounding_box.html#compas_skeleton.datastructure.Skeleton.bounding_box" title="compas_skeleton.datastructure.Skeleton.bounding_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bounding_box</span></code></a>()</p></td>
+<td><p>Compute the (axis aligned) bounding box of a mesh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.bounding_box_xy.html#compas_skeleton.datastructure.Skeleton.bounding_box_xy" title="compas_skeleton.datastructure.Skeleton.bounding_box_xy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bounding_box_xy</span></code></a>()</p></td>
+<td><p>Compute the (axis aligned) bounding box of a projection of the mesh in the XY plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.centroid.html#compas_skeleton.datastructure.Skeleton.centroid" title="compas_skeleton.datastructure.Skeleton.centroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centroid</span></code></a>()</p></td>
+<td><p>Calculate the mesh centroid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.clear.html#compas_skeleton.datastructure.Skeleton.clear" title="compas_skeleton.datastructure.Skeleton.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
+<td><p>Clear all the mesh data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.collapse_edge.html#compas_skeleton.datastructure.Skeleton.collapse_edge" title="compas_skeleton.datastructure.Skeleton.collapse_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collapse_edge</span></code></a>(u, v[, t, allow_boundary, fixed])</p></td>
+<td><p>Collapse an edge to its first or second vertex, or to an intermediate point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.connected_components.html#compas_skeleton.datastructure.Skeleton.connected_components" title="compas_skeleton.datastructure.Skeleton.connected_components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connected_components</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.copy.html#compas_skeleton.datastructure.Skeleton.copy" title="compas_skeleton.datastructure.Skeleton.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([cls])</p></td>
+<td><p>Make an independent copy of the mesh object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.cull_vertices.html#compas_skeleton.datastructure.Skeleton.cull_vertices" title="compas_skeleton.datastructure.Skeleton.cull_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cull_vertices</span></code></a>()</p></td>
+<td><p>Remove all unused vertices from the mesh object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.delete_face.html#compas_skeleton.datastructure.Skeleton.delete_face" title="compas_skeleton.datastructure.Skeleton.delete_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_face</span></code></a>(fkey)</p></td>
+<td><p>Delete a face from the mesh object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.delete_vertex.html#compas_skeleton.datastructure.Skeleton.delete_vertex" title="compas_skeleton.datastructure.Skeleton.delete_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_vertex</span></code></a>(key)</p></td>
+<td><p>Delete a vertex from the mesh and everything that is attached to it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.dual.html#compas_skeleton.datastructure.Skeleton.dual" title="compas_skeleton.datastructure.Skeleton.dual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dual</span></code></a>([cls])</p></td>
+<td><p>Construct the dual of a mesh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_attribute.html#compas_skeleton.datastructure.Skeleton.edge_attribute" title="compas_skeleton.datastructure.Skeleton.edge_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attribute</span></code></a>(key, name[, value])</p></td>
+<td><p>Get or set an attribute of an edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_attributes.html#compas_skeleton.datastructure.Skeleton.edge_attributes" title="compas_skeleton.datastructure.Skeleton.edge_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_attributes</span></code></a>(key[, names, values])</p></td>
+<td><p>Get or set multiple attributes of an edge.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_coordinates.html#compas_skeleton.datastructure.Skeleton.edge_coordinates" title="compas_skeleton.datastructure.Skeleton.edge_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_coordinates</span></code></a>(u, v[, axes])</p></td>
+<td><p>Return the coordinates of the start and end point of an edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_direction.html#compas_skeleton.datastructure.Skeleton.edge_direction" title="compas_skeleton.datastructure.Skeleton.edge_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_direction</span></code></a>(u, v)</p></td>
+<td><p>Return the direction vector of an edge.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_faces.html#compas_skeleton.datastructure.Skeleton.edge_faces" title="compas_skeleton.datastructure.Skeleton.edge_faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_faces</span></code></a>(u, v)</p></td>
+<td><p>Find the two faces adjacent to an edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_length.html#compas_skeleton.datastructure.Skeleton.edge_length" title="compas_skeleton.datastructure.Skeleton.edge_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_length</span></code></a>(u, v)</p></td>
+<td><p>Return the length of an edge.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_midpoint.html#compas_skeleton.datastructure.Skeleton.edge_midpoint" title="compas_skeleton.datastructure.Skeleton.edge_midpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_midpoint</span></code></a>(u, v)</p></td>
+<td><p>Return the location of the midpoint of an edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_point.html#compas_skeleton.datastructure.Skeleton.edge_point" title="compas_skeleton.datastructure.Skeleton.edge_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_point</span></code></a>(u, v[, t])</p></td>
+<td><p>Return the location of a point along an edge.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edge_vector.html#compas_skeleton.datastructure.Skeleton.edge_vector" title="compas_skeleton.datastructure.Skeleton.edge_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edge_vector</span></code></a>(u, v)</p></td>
+<td><p>Return the vector of an edge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges.html#compas_skeleton.datastructure.Skeleton.edges" title="compas_skeleton.datastructure.Skeleton.edges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges</span></code></a>([data])</p></td>
+<td><p>Iterate over the edges of the mesh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_attribute.html#compas_skeleton.datastructure.Skeleton.edges_attribute" title="compas_skeleton.datastructure.Skeleton.edges_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_attribute</span></code></a>(name[, value, keys])</p></td>
+<td><p>Get or set an attribute of multiple edges.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_attributes.html#compas_skeleton.datastructure.Skeleton.edges_attributes" title="compas_skeleton.datastructure.Skeleton.edges_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_attributes</span></code></a>([names, values, keys])</p></td>
+<td><p>Get or set multiple attributes of multiple edges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_on_boundaries.html#compas_skeleton.datastructure.Skeleton.edges_on_boundaries" title="compas_skeleton.datastructure.Skeleton.edges_on_boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_on_boundaries</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_on_boundary.html#compas_skeleton.datastructure.Skeleton.edges_on_boundary" title="compas_skeleton.datastructure.Skeleton.edges_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_on_boundary</span></code></a>([oriented])</p></td>
+<td><p>Find the edges on the boundary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_where.html#compas_skeleton.datastructure.Skeleton.edges_where" title="compas_skeleton.datastructure.Skeleton.edges_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_where</span></code></a>(conditions[, data])</p></td>
+<td><p>Get edges for which a certain condition or set of conditions is true.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.edges_where_predicate.html#compas_skeleton.datastructure.Skeleton.edges_where_predicate" title="compas_skeleton.datastructure.Skeleton.edges_where_predicate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_where_predicate</span></code></a>(predicate[, data])</p></td>
+<td><p>Get edges for which a certain condition or set of conditions is true using a lambda function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.euler.html#compas_skeleton.datastructure.Skeleton.euler" title="compas_skeleton.datastructure.Skeleton.euler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">euler</span></code></a>()</p></td>
+<td><p>Calculate the Euler characterisic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency.html#compas_skeleton.datastructure.Skeleton.face_adjacency" title="compas_skeleton.datastructure.Skeleton.face_adjacency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency</span></code></a>()</p></td>
+<td><p>Build a face adjacency dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge.html#compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge" title="compas_skeleton.datastructure.Skeleton.face_adjacency_halfedge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency_halfedge</span></code></a>(f1, f2)</p></td>
+<td><p>Find one half-edge over which two faces are adjacent.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_adjacency_vertices.html#compas_skeleton.datastructure.Skeleton.face_adjacency_vertices" title="compas_skeleton.datastructure.Skeleton.face_adjacency_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_adjacency_vertices</span></code></a>(f1, f2)</p></td>
+<td><p>Find all vertices over which two faces are adjacent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_area.html#compas_skeleton.datastructure.Skeleton.face_area" title="compas_skeleton.datastructure.Skeleton.face_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_area</span></code></a>(fkey)</p></td>
+<td><p>Compute the area of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_aspect_ratio.html#compas_skeleton.datastructure.Skeleton.face_aspect_ratio" title="compas_skeleton.datastructure.Skeleton.face_aspect_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_aspect_ratio</span></code></a>(fkey)</p></td>
+<td><p>Face aspect ratio as the ratio between the lengths of the maximum and minimum face edges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_attribute.html#compas_skeleton.datastructure.Skeleton.face_attribute" title="compas_skeleton.datastructure.Skeleton.face_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_attribute</span></code></a>(key, name[, value])</p></td>
+<td><p>Get or set an attribute of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_attributes.html#compas_skeleton.datastructure.Skeleton.face_attributes" title="compas_skeleton.datastructure.Skeleton.face_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_attributes</span></code></a>(key[, names, values])</p></td>
+<td><p>Get or set multiple attributes of a face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_center.html#compas_skeleton.datastructure.Skeleton.face_center" title="compas_skeleton.datastructure.Skeleton.face_center"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_center</span></code></a>(fkey)</p></td>
+<td><p>Compute the location of the center of mass of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_centroid.html#compas_skeleton.datastructure.Skeleton.face_centroid" title="compas_skeleton.datastructure.Skeleton.face_centroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_centroid</span></code></a>(fkey)</p></td>
+<td><p>Compute the location of the centroid of a face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_coordinates.html#compas_skeleton.datastructure.Skeleton.face_coordinates" title="compas_skeleton.datastructure.Skeleton.face_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_coordinates</span></code></a>(fkey[, axes])</p></td>
+<td><p>Compute the coordinates of the vertices of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_corners.html#compas_skeleton.datastructure.Skeleton.face_corners" title="compas_skeleton.datastructure.Skeleton.face_corners"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_corners</span></code></a>(fkey)</p></td>
+<td><p>Return triplets of face vertices forming the corners of the face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_curvature.html#compas_skeleton.datastructure.Skeleton.face_curvature" title="compas_skeleton.datastructure.Skeleton.face_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_curvature</span></code></a>(fkey)</p></td>
+<td><p>Dimensionless face curvature as the maximum face vertex deviation from the best-fit plane of the face vertices divided by the average lengths of the face vertices to the face centroid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_degree.html#compas_skeleton.datastructure.Skeleton.face_degree" title="compas_skeleton.datastructure.Skeleton.face_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_degree</span></code></a>(fkey)</p></td>
+<td><p>Count the neighbors of a face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_flatness.html#compas_skeleton.datastructure.Skeleton.face_flatness" title="compas_skeleton.datastructure.Skeleton.face_flatness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_flatness</span></code></a>(fkey)</p></td>
+<td><p>Compute the flatness of the mesh face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_halfedges.html#compas_skeleton.datastructure.Skeleton.face_halfedges" title="compas_skeleton.datastructure.Skeleton.face_halfedges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_halfedges</span></code></a>(fkey)</p></td>
+<td><p>The halfedges of a face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_max_degree.html#compas_skeleton.datastructure.Skeleton.face_max_degree" title="compas_skeleton.datastructure.Skeleton.face_max_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_max_degree</span></code></a>()</p></td>
+<td><p>Compute the maximum degree of all faces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_min_degree.html#compas_skeleton.datastructure.Skeleton.face_min_degree" title="compas_skeleton.datastructure.Skeleton.face_min_degree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_min_degree</span></code></a>()</p></td>
+<td><p>Compute the minimum degree of all faces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_neighborhood.html#compas_skeleton.datastructure.Skeleton.face_neighborhood" title="compas_skeleton.datastructure.Skeleton.face_neighborhood"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_neighborhood</span></code></a>(key[, ring])</p></td>
+<td><p>Return the faces in the neighborhood of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_neighbors.html#compas_skeleton.datastructure.Skeleton.face_neighbors" title="compas_skeleton.datastructure.Skeleton.face_neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_neighbors</span></code></a>(fkey)</p></td>
+<td><p>Return the neighbors of a face across its edges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_normal.html#compas_skeleton.datastructure.Skeleton.face_normal" title="compas_skeleton.datastructure.Skeleton.face_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_normal</span></code></a>(fkey[, unitized])</p></td>
+<td><p>Compute the normal of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_skewness.html#compas_skeleton.datastructure.Skeleton.face_skewness" title="compas_skeleton.datastructure.Skeleton.face_skewness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_skewness</span></code></a>(fkey)</p></td>
+<td><p>Face skewness as the maximum absolute angular deviation from the ideal polygon angle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertex_ancestor.html#compas_skeleton.datastructure.Skeleton.face_vertex_ancestor" title="compas_skeleton.datastructure.Skeleton.face_vertex_ancestor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertex_ancestor</span></code></a>(fkey, key[, n])</p></td>
+<td><p>Return the n-th vertex before the specified vertex in a specific face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertex_descendant.html#compas_skeleton.datastructure.Skeleton.face_vertex_descendant" title="compas_skeleton.datastructure.Skeleton.face_vertex_descendant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertex_descendant</span></code></a>(fkey, key[, n])</p></td>
+<td><p>Return the n-th vertex after the specified vertex in a specific face.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.face_vertices.html#compas_skeleton.datastructure.Skeleton.face_vertices" title="compas_skeleton.datastructure.Skeleton.face_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">face_vertices</span></code></a>(fkey)</p></td>
+<td><p>The vertices of a face.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces.html#compas_skeleton.datastructure.Skeleton.faces" title="compas_skeleton.datastructure.Skeleton.faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces</span></code></a>([data])</p></td>
+<td><p>Iterate over the faces of the mesh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_attribute.html#compas_skeleton.datastructure.Skeleton.faces_attribute" title="compas_skeleton.datastructure.Skeleton.faces_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_attribute</span></code></a>(name[, value, keys])</p></td>
+<td><p>Get or set an attribute of multiple faces.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_attributes.html#compas_skeleton.datastructure.Skeleton.faces_attributes" title="compas_skeleton.datastructure.Skeleton.faces_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_attributes</span></code></a>([names, values, keys])</p></td>
+<td><p>Get or set multiple attributes of multiple faces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_on_boundary.html#compas_skeleton.datastructure.Skeleton.faces_on_boundary" title="compas_skeleton.datastructure.Skeleton.faces_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_on_boundary</span></code></a>()</p></td>
+<td><p>Find the faces on the boundary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_where.html#compas_skeleton.datastructure.Skeleton.faces_where" title="compas_skeleton.datastructure.Skeleton.faces_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_where</span></code></a>(conditions[, data])</p></td>
+<td><p>Get faces for which a certain condition or set of conditions is true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.faces_where_predicate.html#compas_skeleton.datastructure.Skeleton.faces_where_predicate" title="compas_skeleton.datastructure.Skeleton.faces_where_predicate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faces_where_predicate</span></code></a>(predicate[, data])</p></td>
+<td><p>Get faces for which a certain condition or set of conditions is true using a lambda function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.flip_cycles.html#compas_skeleton.datastructure.Skeleton.flip_cycles" title="compas_skeleton.datastructure.Skeleton.flip_cycles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flip_cycles</span></code></a>()</p></td>
+<td><p>Flip the cycle directions of all faces.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_data.html#compas_skeleton.datastructure.Skeleton.from_data" title="compas_skeleton.datastructure.Skeleton.from_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_data</span></code></a>(data)</p></td>
 <td><p>Construct a mesh from structured data.</p></td>
@@ -322,98 +349,92 @@
 <tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_shape.html#compas_skeleton.datastructure.Skeleton.from_shape" title="compas_skeleton.datastructure.Skeleton.from_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_shape</span></code></a>(shape, **kwargs)</p></td>
 <td><p>Construct a mesh from a primitive shape.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.from_skeleton_lines" title="compas_skeleton.datastructure.Skeleton.from_skeleton_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_skeleton_lines</span></code></a>([lines])</p></td>
-<td><p>Instantiate a skeleton from lines.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_stl.html#compas_skeleton.datastructure.Skeleton.from_stl" title="compas_skeleton.datastructure.Skeleton.from_stl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_stl</span></code></a>(filepath[, precision])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_stl.html#compas_skeleton.datastructure.Skeleton.from_stl" title="compas_skeleton.datastructure.Skeleton.from_stl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_stl</span></code></a>(filepath[, precision])</p></td>
 <td><p>Construct a mesh object from the data described in a STL file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_vertices_and_faces.html#compas_skeleton.datastructure.Skeleton.from_vertices_and_faces" title="compas_skeleton.datastructure.Skeleton.from_vertices_and_faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_vertices_and_faces</span></code></a>(vertices, faces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.from_vertices_and_faces.html#compas_skeleton.datastructure.Skeleton.from_vertices_and_faces" title="compas_skeleton.datastructure.Skeleton.from_vertices_and_faces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_vertices_and_faces</span></code></a>(vertices, faces)</p></td>
 <td><p>Construct a mesh object from a list of vertices and faces.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.genus.html#compas_skeleton.datastructure.Skeleton.genus" title="compas_skeleton.datastructure.Skeleton.genus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genus</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.genus.html#compas_skeleton.datastructure.Skeleton.genus" title="compas_skeleton.datastructure.Skeleton.genus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genus</span></code></a>()</p></td>
 <td><p>Calculate the genus.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_face.html#compas_skeleton.datastructure.Skeleton.get_any_face" title="compas_skeleton.datastructure.Skeleton.get_any_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_face</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_face.html#compas_skeleton.datastructure.Skeleton.get_any_face" title="compas_skeleton.datastructure.Skeleton.get_any_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_face</span></code></a>()</p></td>
 <td><p>Get the identifier of a random face.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_face_vertex.html#compas_skeleton.datastructure.Skeleton.get_any_face_vertex" title="compas_skeleton.datastructure.Skeleton.get_any_face_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_face_vertex</span></code></a>(fkey)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_face_vertex.html#compas_skeleton.datastructure.Skeleton.get_any_face_vertex" title="compas_skeleton.datastructure.Skeleton.get_any_face_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_face_vertex</span></code></a>(fkey)</p></td>
 <td><p>Get the identifier of a random vertex of a specific face.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_vertex.html#compas_skeleton.datastructure.Skeleton.get_any_vertex" title="compas_skeleton.datastructure.Skeleton.get_any_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_vertex</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_vertex.html#compas_skeleton.datastructure.Skeleton.get_any_vertex" title="compas_skeleton.datastructure.Skeleton.get_any_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_vertex</span></code></a>()</p></td>
 <td><p>Get the identifier of a random vertex.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_vertices.html#compas_skeleton.datastructure.Skeleton.get_any_vertices" title="compas_skeleton.datastructure.Skeleton.get_any_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_vertices</span></code></a>(n[, exclude_leaves])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.get_any_vertices.html#compas_skeleton.datastructure.Skeleton.get_any_vertices" title="compas_skeleton.datastructure.Skeleton.get_any_vertices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_any_vertices</span></code></a>(n[, exclude_leaves])</p></td>
 <td><p>Get a list of identifiers of a random set of n vertices.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.gkey_key.html#compas_skeleton.datastructure.Skeleton.gkey_key" title="compas_skeleton.datastructure.Skeleton.gkey_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gkey_key</span></code></a>([precision])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.gkey_key.html#compas_skeleton.datastructure.Skeleton.gkey_key" title="compas_skeleton.datastructure.Skeleton.gkey_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gkey_key</span></code></a>([precision])</p></td>
 <td><p>Returns a dictionary that maps <em>geometric keys</em> of a certain precision to the keys of the corresponding vertices.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.halfedge_face.html#compas_skeleton.datastructure.Skeleton.halfedge_face" title="compas_skeleton.datastructure.Skeleton.halfedge_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">halfedge_face</span></code></a>(u, v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.halfedge_face.html#compas_skeleton.datastructure.Skeleton.halfedge_face" title="compas_skeleton.datastructure.Skeleton.halfedge_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">halfedge_face</span></code></a>(u, v)</p></td>
 <td><p>Find the face corresponding to a halfedge.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_edge.html#compas_skeleton.datastructure.Skeleton.has_edge" title="compas_skeleton.datastructure.Skeleton.has_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_edge</span></code></a>(key)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_edge.html#compas_skeleton.datastructure.Skeleton.has_edge" title="compas_skeleton.datastructure.Skeleton.has_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_edge</span></code></a>(key)</p></td>
 <td><p>Verify that the mesh contains a specific edge.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_face.html#compas_skeleton.datastructure.Skeleton.has_face" title="compas_skeleton.datastructure.Skeleton.has_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_face</span></code></a>(fkey)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_face.html#compas_skeleton.datastructure.Skeleton.has_face" title="compas_skeleton.datastructure.Skeleton.has_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_face</span></code></a>(fkey)</p></td>
 <td><p>Verify that a face is part of the mesh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_halfedge.html#compas_skeleton.datastructure.Skeleton.has_halfedge" title="compas_skeleton.datastructure.Skeleton.has_halfedge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_halfedge</span></code></a>(key)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_halfedge.html#compas_skeleton.datastructure.Skeleton.has_halfedge" title="compas_skeleton.datastructure.Skeleton.has_halfedge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_halfedge</span></code></a>(key)</p></td>
 <td><p>Verify that a halfedge is part of the mesh.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_vertex.html#compas_skeleton.datastructure.Skeleton.has_vertex" title="compas_skeleton.datastructure.Skeleton.has_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_vertex</span></code></a>(key)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.has_vertex.html#compas_skeleton.datastructure.Skeleton.has_vertex" title="compas_skeleton.datastructure.Skeleton.has_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_vertex</span></code></a>(key)</p></td>
 <td><p>Verify that a vertex is in the mesh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.index_key.html#compas_skeleton.datastructure.Skeleton.index_key" title="compas_skeleton.datastructure.Skeleton.index_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_key</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.index_key.html#compas_skeleton.datastructure.Skeleton.index_key" title="compas_skeleton.datastructure.Skeleton.index_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_key</span></code></a>()</p></td>
 <td><p>Returns a dictionary that maps the indices of a vertex list to keys in a vertex dictionary.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.insert_vertex.html#compas_skeleton.datastructure.Skeleton.insert_vertex" title="compas_skeleton.datastructure.Skeleton.insert_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_vertex</span></code></a>(fkey[, key, xyz, return_fkeys])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.insert_vertex.html#compas_skeleton.datastructure.Skeleton.insert_vertex" title="compas_skeleton.datastructure.Skeleton.insert_vertex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_vertex</span></code></a>(fkey[, key, xyz, return_fkeys])</p></td>
 <td><p>Insert a vertex in the specified face.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_connected.html#compas_skeleton.datastructure.Skeleton.is_connected" title="compas_skeleton.datastructure.Skeleton.is_connected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_connected</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_connected.html#compas_skeleton.datastructure.Skeleton.is_connected" title="compas_skeleton.datastructure.Skeleton.is_connected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_connected</span></code></a>()</p></td>
 <td><p>Verify that the mesh is connected.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_edge_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_edge_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_edge_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_edge_on_boundary</span></code></a>(u, v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_edge_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_edge_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_edge_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_edge_on_boundary</span></code></a>(u, v)</p></td>
 <td><p>Verify that an edge is on the boundary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_empty.html#compas_skeleton.datastructure.Skeleton.is_empty" title="compas_skeleton.datastructure.Skeleton.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_empty.html#compas_skeleton.datastructure.Skeleton.is_empty" title="compas_skeleton.datastructure.Skeleton.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_empty</span></code></a>()</p></td>
 <td><p>Boolean whether the mesh is empty.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_face_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_face_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_face_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_face_on_boundary</span></code></a>(key)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_face_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_face_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_face_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_face_on_boundary</span></code></a>(key)</p></td>
 <td><p>Verify that a face is on a boundary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_manifold.html#compas_skeleton.datastructure.Skeleton.is_manifold" title="compas_skeleton.datastructure.Skeleton.is_manifold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_manifold</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_manifold.html#compas_skeleton.datastructure.Skeleton.is_manifold" title="compas_skeleton.datastructure.Skeleton.is_manifold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_manifold</span></code></a>()</p></td>
 <td><p>Verify that the mesh is manifold.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_orientable.html#compas_skeleton.datastructure.Skeleton.is_orientable" title="compas_skeleton.datastructure.Skeleton.is_orientable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_orientable</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_orientable.html#compas_skeleton.datastructure.Skeleton.is_orientable" title="compas_skeleton.datastructure.Skeleton.is_orientable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_orientable</span></code></a>()</p></td>
 <td><p>Verify that the mesh is orientable.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_quadmesh.html#compas_skeleton.datastructure.Skeleton.is_quadmesh" title="compas_skeleton.datastructure.Skeleton.is_quadmesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quadmesh</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_quadmesh.html#compas_skeleton.datastructure.Skeleton.is_quadmesh" title="compas_skeleton.datastructure.Skeleton.is_quadmesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quadmesh</span></code></a>()</p></td>
 <td><p>Verify that the mesh consists of only quads.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_regular.html#compas_skeleton.datastructure.Skeleton.is_regular" title="compas_skeleton.datastructure.Skeleton.is_regular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_regular</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_regular.html#compas_skeleton.datastructure.Skeleton.is_regular" title="compas_skeleton.datastructure.Skeleton.is_regular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_regular</span></code></a>()</p></td>
 <td><p>Verify that the mesh is regular.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_trimesh.html#compas_skeleton.datastructure.Skeleton.is_trimesh" title="compas_skeleton.datastructure.Skeleton.is_trimesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_trimesh</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_trimesh.html#compas_skeleton.datastructure.Skeleton.is_trimesh" title="compas_skeleton.datastructure.Skeleton.is_trimesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_trimesh</span></code></a>()</p></td>
 <td><p>Verify that the mesh consists of only triangles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_valid.html#compas_skeleton.datastructure.Skeleton.is_valid" title="compas_skeleton.datastructure.Skeleton.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_valid.html#compas_skeleton.datastructure.Skeleton.is_valid" title="compas_skeleton.datastructure.Skeleton.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></a>()</p></td>
 <td><p>Verify that the mesh is valid.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_vertex_connected.html#compas_skeleton.datastructure.Skeleton.is_vertex_connected" title="compas_skeleton.datastructure.Skeleton.is_vertex_connected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vertex_connected</span></code></a>(key)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_vertex_connected.html#compas_skeleton.datastructure.Skeleton.is_vertex_connected" title="compas_skeleton.datastructure.Skeleton.is_vertex_connected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vertex_connected</span></code></a>(key)</p></td>
 <td><p>Verify that a vertex is connected.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vertex_on_boundary</span></code></a>(key)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary.html#compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary" title="compas_skeleton.datastructure.Skeleton.is_vertex_on_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vertex_on_boundary</span></code></a>(key)</p></td>
 <td><p>Verify that a vertex is on a boundary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.key_gkey.html#compas_skeleton.datastructure.Skeleton.key_gkey" title="compas_skeleton.datastructure.Skeleton.key_gkey"><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_gkey</span></code></a>([precision])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.key_gkey.html#compas_skeleton.datastructure.Skeleton.key_gkey" title="compas_skeleton.datastructure.Skeleton.key_gkey"><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_gkey</span></code></a>([precision])</p></td>
 <td><p>Returns a dictionary that maps vertex dictionary keys to the corresponding <em>geometric key</em> up to a certain precision.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.key_index.html#compas_skeleton.datastructure.Skeleton.key_index" title="compas_skeleton.datastructure.Skeleton.key_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_index</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.key_index.html#compas_skeleton.datastructure.Skeleton.key_index" title="compas_skeleton.datastructure.Skeleton.key_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_index</span></code></a>()</p></td>
 <td><p>Returns a dictionary that maps vertex dictionary keys to the corresponding index in a vertex list or array.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.merge.html#compas_skeleton.datastructure.Skeleton.merge" title="compas_skeleton.datastructure.Skeleton.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>([k])</p></td>
-<td><p>Decrease the catmull-clark subdivison level of high-poly mesh</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.normal.html#compas_skeleton.datastructure.Skeleton.normal" title="compas_skeleton.datastructure.Skeleton.normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normal</span></code></a>()</p></td>
 <td><p>Calculate the average mesh normal.</p></td>
@@ -439,23 +460,17 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.split_face.html#compas_skeleton.datastructure.Skeleton.split_face" title="compas_skeleton.datastructure.Skeleton.split_face"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_face</span></code></a>(fkey, u, v)</p></td>
 <td><p>Split a face by inserting an edge between two specified vertices.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.subdivide.html#compas_skeleton.datastructure.Skeleton.subdivide" title="compas_skeleton.datastructure.Skeleton.subdivide"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subdivide</span></code></a>([k])</p></td>
-<td><p>Increase the catmull-clark subdivison level of high-poly mesh</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.summary.html#compas_skeleton.datastructure.Skeleton.summary" title="compas_skeleton.datastructure.Skeleton.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.summary.html#compas_skeleton.datastructure.Skeleton.summary" title="compas_skeleton.datastructure.Skeleton.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>()</p></td>
 <td><p>Print a summary of the mesh.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_data.html#compas_skeleton.datastructure.Skeleton.to_data" title="compas_skeleton.datastructure.Skeleton.to_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_data</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_data.html#compas_skeleton.datastructure.Skeleton.to_data" title="compas_skeleton.datastructure.Skeleton.to_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_data</span></code></a>()</p></td>
 <td><p>Returns a dictionary of structured data representing the mesh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_json.html#compas_skeleton.datastructure.Skeleton.to_json" title="compas_skeleton.datastructure.Skeleton.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>(filepath[, pretty])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_json.html#compas_skeleton.datastructure.Skeleton.to_json" title="compas_skeleton.datastructure.Skeleton.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>(filepath[, pretty])</p></td>
 <td><p>Serialise the structured data representing the data structure to json.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_lines.html#compas_skeleton.datastructure.Skeleton.to_lines" title="compas_skeleton.datastructure.Skeleton.to_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_lines</span></code></a>(filepath)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_lines.html#compas_skeleton.datastructure.Skeleton.to_lines" title="compas_skeleton.datastructure.Skeleton.to_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_lines</span></code></a>(filepath)</p></td>
 <td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_mesh.html#compas_skeleton.datastructure.Skeleton.to_mesh" title="compas_skeleton.datastructure.Skeleton.to_mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mesh</span></code></a>()</p></td>
-<td><p>Return the high-poly skeleton mesh as a compas mesh</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.to_obj.html#compas_skeleton.datastructure.Skeleton.to_obj" title="compas_skeleton.datastructure.Skeleton.to_obj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_obj</span></code></a>(filepath[, precision])</p></td>
 <td><p>Write the mesh to an OBJ file.</p></td>
@@ -516,12 +531,6 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.update_default_vertex_attributes.html#compas_skeleton.datastructure.Skeleton.update_default_vertex_attributes" title="compas_skeleton.datastructure.Skeleton.update_default_vertex_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_default_vertex_attributes</span></code></a>([attr_dict])</p></td>
 <td><p>Update the default vertex attributes.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos.html#compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos" title="compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_mesh_vertices_pos</span></code></a>()</p></td>
-<td><p>Update all the vertex coordiates.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.update_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.update_skeleton_lines" title="compas_skeleton.datastructure.Skeleton.update_skeleton_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_skeleton_lines</span></code></a>([lines])</p></td>
-<td><p>Update skeleton by adding more skeleon lines or remove current skeleton lines.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="compas_skeleton.datastructure.Skeleton.vertex_area.html#compas_skeleton.datastructure.Skeleton.vertex_area" title="compas_skeleton.datastructure.Skeleton.vertex_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vertex_area</span></code></a>(key)</p></td>
 <td><p>Compute the tributary area of a vertex.</p></td>
@@ -651,7 +660,9 @@
                 
 
                 <ul class="nav flex-column" id="compas-localnav">
-<li class="nav-item"><a class="nav-link reference internal" href="#">Skeleton</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#">Skeleton</a><ul class="nav">
+</ul>
+</li>
 </ul>
 
 
