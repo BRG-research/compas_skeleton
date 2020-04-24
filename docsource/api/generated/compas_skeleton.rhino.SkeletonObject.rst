@@ -9,28 +9,6 @@ SkeletonObject
 
     
     
-
-    .. rubric:: Attributes
-
-    .. autosummary::
-    
-        ~SkeletonObject.guid_coarse_mesh_vertices
-        ~SkeletonObject.guid_mesh
-        ~SkeletonObject.guid_skeleton_edges
-        ~SkeletonObject.guid_skeleton_vertices
-        ~SkeletonObject.settings
-
-    .. rubric:: Inherited Attributes
-
-    .. autosummary::
-    
-
-    
-    
-
-    
-    
-
     .. rubric:: Methods
 
     .. autosummary::
@@ -53,13 +31,5 @@ SkeletonObject
         ~SkeletonObject.move_skeleton_vertex
         ~SkeletonObject.remove_lines
         ~SkeletonObject.update
-
-    .. rubric:: Inherited Methods
-
-    .. autosummary::
-        :toctree:
-
-    
-
     
     

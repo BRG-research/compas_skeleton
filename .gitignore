@@ -114,3 +114,4 @@ temp/**
 .DS_Store
 *.json
 test.py
+/.vscode/settings.json

@@ -13,7 +13,7 @@ Skeleton object provides interactive editing methods for the resulting mesh, by 
     skeleton = Skeleton.from_json(FILE)
     skeletonobject = SkeletonObject(skeleton)
     skeletonobject.draw()
-    
+
     skeletonobject.update()
     skeletonobject.datastructure.to_json(FILE, pretty=True)
 
@@ -56,7 +56,7 @@ change how far or to which direction to extend the leaf ends.
 
 
 m_skeleton
--------
+-----------
 move a skeleton vertex. all the relative descendent vertices will be updated.
 
 
@@ -88,7 +88,7 @@ add more lines to the current skeleton branches.
 
 
 remove_lines
----------
+------------
 
 
 .. figure:: /_images/skeleton_remove_lines.gif

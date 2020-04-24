@@ -9,11 +9,6 @@ SkeletonArtist
 
     
     
-    
-
-    
-    
-
     .. rubric:: Methods
 
     .. autosummary::
@@ -21,15 +16,6 @@ SkeletonArtist
 
     
         ~SkeletonArtist.__init__
-        ~SkeletonArtist.draw_coarse_mesh_vertices
-        ~SkeletonArtist.draw_skeleton
-
-    .. rubric:: Inherited Methods
-
-    .. autosummary::
-        :toctree:
-
-    
         ~SkeletonArtist.build
         ~SkeletonArtist.clear
         ~SkeletonArtist.clear_edgelabels
@@ -43,12 +29,14 @@ SkeletonArtist
         ~SkeletonArtist.clear_vertexnormals
         ~SkeletonArtist.clear_vertices
         ~SkeletonArtist.draw
+        ~SkeletonArtist.draw_coarse_mesh_vertices
         ~SkeletonArtist.draw_edgelabels
         ~SkeletonArtist.draw_edges
         ~SkeletonArtist.draw_facelabels
         ~SkeletonArtist.draw_facenormals
         ~SkeletonArtist.draw_faces
         ~SkeletonArtist.draw_mesh
+        ~SkeletonArtist.draw_skeleton
         ~SkeletonArtist.draw_vertexlabels
         ~SkeletonArtist.draw_vertexnormals
         ~SkeletonArtist.draw_vertices
@@ -56,6 +44,5 @@ SkeletonArtist
         ~SkeletonArtist.redraw
         ~SkeletonArtist.register
         ~SkeletonArtist.to_data
-
     
     

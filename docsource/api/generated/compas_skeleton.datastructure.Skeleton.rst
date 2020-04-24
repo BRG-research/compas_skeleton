@@ -9,31 +9,6 @@ Skeleton
 
     
     
-
-    .. rubric:: Attributes
-
-    .. autosummary::
-    
-        ~Skeleton.leaf_extend
-        ~Skeleton.leaf_width
-        ~Skeleton.node_width
-        ~Skeleton.skeleton_branches
-        ~Skeleton.skeleton_vertices
-
-    .. rubric:: Inherited Attributes
-
-    .. autosummary::
-    
-        ~Skeleton.adjacency
-        ~Skeleton.data
-        ~Skeleton.name
-
-    
-    
-
-    
-    
-
     .. rubric:: Methods
 
     .. autosummary::
@@ -41,20 +16,6 @@ Skeleton
 
     
         ~Skeleton.__init__
-        ~Skeleton.from_center_point
-        ~Skeleton.from_skeleton_lines
-        ~Skeleton.merge
-        ~Skeleton.subdivide
-        ~Skeleton.to_mesh
-        ~Skeleton.update_mesh_vertices_pos
-        ~Skeleton.update_skeleton_lines
-
-    .. rubric:: Inherited Methods
-
-    .. autosummary::
-        :toctree:
-
-    
         ~Skeleton.add_face
         ~Skeleton.add_vertex
         ~Skeleton.area
@@ -117,6 +78,7 @@ Skeleton
         ~Skeleton.faces_where
         ~Skeleton.faces_where_predicate
         ~Skeleton.flip_cycles
+        ~Skeleton.from_center_point
         ~Skeleton.from_data
         ~Skeleton.from_json
         ~Skeleton.from_lines
@@ -129,6 +91,7 @@ Skeleton
         ~Skeleton.from_polyhedron
         ~Skeleton.from_polylines
         ~Skeleton.from_shape
+        ~Skeleton.from_skeleton_lines
         ~Skeleton.from_stl
         ~Skeleton.from_vertices_and_faces
         ~Skeleton.genus
@@ -158,6 +121,7 @@ Skeleton
         ~Skeleton.is_vertex_on_boundary
         ~Skeleton.key_gkey
         ~Skeleton.key_index
+        ~Skeleton.merge
         ~Skeleton.normal
         ~Skeleton.number_of_edges
         ~Skeleton.number_of_faces
@@ -166,10 +130,12 @@ Skeleton
         ~Skeleton.smooth_centroid
         ~Skeleton.split_edge
         ~Skeleton.split_face
+        ~Skeleton.subdivide
         ~Skeleton.summary
         ~Skeleton.to_data
         ~Skeleton.to_json
         ~Skeleton.to_lines
+        ~Skeleton.to_mesh
         ~Skeleton.to_obj
         ~Skeleton.to_off
         ~Skeleton.to_pickle
@@ -190,6 +156,8 @@ Skeleton
         ~Skeleton.update_default_edge_attributes
         ~Skeleton.update_default_face_attributes
         ~Skeleton.update_default_vertex_attributes
+        ~Skeleton.update_mesh_vertices_pos
+        ~Skeleton.update_skeleton_lines
         ~Skeleton.vertex_area
         ~Skeleton.vertex_attribute
         ~Skeleton.vertex_attributes
@@ -211,6 +179,5 @@ Skeleton
         ~Skeleton.vertices_on_boundary
         ~Skeleton.vertices_where
         ~Skeleton.vertices_where_predicate
-
     
     
