@@ -28,15 +28,15 @@ class SkeletonArtist(MeshArtist):
     Examples
     --------
     >>> from compas_skeleton.datastructure import Skeleton
-    >>> from compas_skeleton.rhino import SkeletonObject
     >>> from compas_skeleton.rhino import SkeletonArtist
-    >>> import compas_rhino
     >>>
-    >>> guids = compas_rhino.select_lines()
-    >>> lines = compas_rhino.get_line_coordinates(guids)
+    >>> lines = [
+    >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+    >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+    >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+    >>> ]
     >>> skeleton = Skeleton.from_skeleton_lines(lines)
-    >>> skeletonobject = SkeletonObject(skeleton)
-    >>> artist = SkeletonArtist(self.datastructure)
+    >>> artist = SkeletonArtist(skeleton)
     >>> artist.draw_skeleton()
     >>> artist.draw_coarse_mesh_vertices()
     >>> artist.draw_mesh()

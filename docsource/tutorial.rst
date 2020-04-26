@@ -240,7 +240,7 @@ add more lines to the current skeleton branches.
 
 
 remove_lines
-------------
+============
 remove lines from the current skeleton branches.
 
 
@@ -251,7 +251,7 @@ remove lines from the current skeleton branches.
 
 
 finish
----------
+======
 end this round of editing and draw the resulting high-poly mesh in Rhino.
 
 

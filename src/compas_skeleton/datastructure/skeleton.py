@@ -34,16 +34,13 @@ class Skeleton(Mesh):
     Examples
     --------
     >>> from compas_skeleton.datastructure import Skeleton
-    >>> from compas_skeleton.rhino import SkeletonObject
-    >>> import compas_rhino
     >>>
-    >>> guids = compas_rhino.select_lines()
-    >>> lines = compas_rhino.get_line_coordinates(guids)
+    >>> lines = [
+    >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+    >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+    >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+    >>> ]
     >>> skeleton = Skeleton.from_skeleton_lines(lines)
-    >>> skeletonobject = SkeletonObject(skeleton)
-    >>> skeletonobject.draw()
-    >>> skeletonobject.dynamic_draw_widths()
-    >>> skeletonobject.update()
     """
 
     def __init__(self):
@@ -129,23 +126,25 @@ class Skeleton(Mesh):
     @classmethod
     def from_skeleton_lines(cls, lines=[]):
         """ Instantiate a skeleton from lines.
-        
+
         Parameters
         ----------
-        lines: compas.geometry.Line
+        lines: :class:`compas.geometry.Line`
             a list of compas lines
-        
+
         Return
         ------
-        skeleton: Skeleton
+        skeleton: :class:`compas_skeleton.datastructure.Skeleton`
             a skeleton object
-        
+
         Examples
         --------
-        >>> guids = compas_rhino.select_lines()
-        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> lines = [
+        >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+        >>> ]
         >>> skeleton = Skeleton.from_skeleton_lines(lines)
-        
         """
 
         skeleton = cls()
@@ -158,22 +157,20 @@ class Skeleton(Mesh):
     @classmethod
     def from_center_point(cls, point=None):
         """ Instantiate a skeleton from a single point.
-        
+
         Parameters
         ----------
-        point: compas.geometry.Point
+        point: :class:`compas.geometry.Point`
             a tuple of 3 coordinates
-        
+
         Return
         -------
-        skeleton: Skeleton
+        skeleton: :class:`compas_skeleton.datastructure.Skeleton`
             a skeleton object
-        
+
         Examples
         --------
-        >>> guids = compas_rhino.select_points()
-        >>> point = compas_rhino.get_point_coordinates(guids)[0]
-        >>> 
+        >>> point = [0, 0, 0]
         >>> skeleton = Skeleton.from_center_point(point)
         """
 
@@ -184,16 +181,22 @@ class Skeleton(Mesh):
 
     def update_skeleton_lines(self, lines=[]):
         """ Update skeleton by adding more skeleon lines or remove current skeleton lines.
-        
+
         Parameters
         ----------
-        lines: compas.geometry.Line
+        lines: :class:`compas.geometry.Line`
             a list of compas lines.
 
         Examples
         --------
-        >>> guids = compas_rhino.select_lines()
-        >>> lines = compas_rhino.get_line_coordinates(guids)
+        >>> lines = [
+        >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+        >>> ]
+        >>> skeleton = Skeleton.from_skeleton_lines(lines)
+        >>>
+        >>> lines.append(([0.0, 10.0, 0.0], [5.0, 10.0, 0.0]))
         >>> skeleton = Skeleton.update_skeleton_lines(lines)
         """
         network = Network.from_lines(lines)
@@ -325,13 +328,11 @@ class Skeleton(Mesh):
 
     def update_mesh_vertices_pos(self):
         """Update all the vertex coordiates.
-        
+
         Examples
         --------
         >>> skeleton.node_width = 20
         >>> skeleton.update_mesh_vertices_pos()
-        >>> skeletonobject = SkeletonObject(skeleton)
-        >>> skeletonobject.draw()
         """
 
         def update_node_boundary_vertex(u, v):
@@ -544,23 +545,19 @@ class Skeleton(Mesh):
 
     def subdivide(self, k=1):
         """Increase the catmull-clark subdivison level of high-poly mesh
-        
+
         Examples
         --------
-        >>> skeleton.subdivide(1)
-        >>> skeletonobject = SkeletonObject(skeleton)
-        >>> skeletonobject.draw()
+        >>> skeleton.subdivide(2)
         """
         self.attributes['sub_level'] += k
 
     def merge(self, k=1):
         """Decrease the catmull-clark subdivison level of high-poly mesh
-        
+
         Examples
         --------
         >>> skeleton.merge(1)
-        >>> skeletonobject = SkeletonObject(skeleton)
-        >>> skeletonobject.draw()
         """
         if self.attributes['sub_level'] > 0:
             self.attributes['sub_level'] -= k
@@ -574,7 +571,7 @@ class Skeleton(Mesh):
         return mesh_subdivide_catmullclark(self, k, fixed=corners)
 
     # --------------------------------------------------------------------------
-    # exporting 
+    # exporting
     # --------------------------------------------------------------------------
 
     def to_mesh(self):
@@ -582,7 +579,7 @@ class Skeleton(Mesh):
 
         Return
         ------
-        mesh: compas.datastructures.Mesh           
+        mesh: :class:`compas.datastructures.Mesh`
         """
         mesh = Mesh()
         highpoly_mesh = self._subdivide(self.attributes['sub_level'])

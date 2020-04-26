@@ -64,16 +64,14 @@
 <dd><p>Instantiate a skeleton from a single point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>point</strong> (<em>compas.geometry.Point</em>) – a tuple of 3 coordinates</p>
+<dd class="field-odd"><p><strong>point</strong> (<a class="reference external" href="https://compas-dev.github.io/main/api/generated/compas.geometry.Point.html#compas.geometry.Point" title="(in COMPAS v0.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas.geometry.Point</span></code></a>) – a tuple of 3 coordinates</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>skeleton</strong> (<em>Skeleton</em>) – a skeleton object</p>
+<dd class="field-even"><p><strong>skeleton</strong> (<a class="reference internal" href="compas_skeleton.datastructure.Skeleton.html#compas_skeleton.datastructure.Skeleton" title="compas_skeleton.datastructure.Skeleton"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas_skeleton.datastructure.Skeleton</span></code></a>) – a skeleton object</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_points</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">point</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_point_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">point</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_center_point</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
 </code></pre></div>
 </div>
@@ -151,7 +149,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 26, 2020.
+                Last updated on Apr 27, 2020.
             
 
             

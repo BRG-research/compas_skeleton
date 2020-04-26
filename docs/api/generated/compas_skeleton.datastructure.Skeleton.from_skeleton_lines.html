@@ -64,15 +64,18 @@
 <dd><p>Instantiate a skeleton from lines.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lines</strong> (<em>compas.geometry.Line</em>) – a list of compas lines</p>
+<dd class="field-odd"><p><strong>lines</strong> (<a class="reference external" href="https://compas-dev.github.io/main/api/generated/compas.geometry.Line.html#compas.geometry.Line" title="(in COMPAS v0.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas.geometry.Line</span></code></a>) – a list of compas lines</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>skeleton</strong> (<em>Skeleton</em>) – a skeleton object</p>
+<dd class="field-even"><p><strong>skeleton</strong> (<a class="reference internal" href="compas_skeleton.datastructure.Skeleton.html#compas_skeleton.datastructure.Skeleton" title="compas_skeleton.datastructure.Skeleton"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas_skeleton.datastructure.Skeleton</span></code></a>) – a skeleton object</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_lines</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_line_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)</span>
+<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">8.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">8.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_skeleton_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 </code></pre></div>
 </div>
@@ -150,7 +153,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 26, 2020.
+                Last updated on Apr 27, 2020.
             
 
             

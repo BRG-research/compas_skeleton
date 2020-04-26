@@ -60,7 +60,6 @@
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Vector</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">dot_vectors</span>
 <span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">add_vectors</span>
-<span class="kn">from</span> <span class="nn">compas.geometry</span> <span class="kn">import</span> <span class="n">Frame</span>
 <span class="kn">import</span> <span class="nn">compas_rhino</span>
 <span class="kn">from</span> <span class="nn">compas_rhino.modifiers</span> <span class="kn">import</span> <span class="n">mesh_move_vertex</span>
 <span class="kn">from</span> <span class="nn">compas_rhino</span> <span class="kn">import</span> <span class="n">delete_objects</span>
@@ -93,17 +92,19 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; from compas_skeleton.datastructure import Skeleton</span>
 <span class="sd">    &gt;&gt;&gt; from compas_skeleton.rhino import SkeletonObject</span>
-<span class="sd">    &gt;&gt;&gt; import compas_rhino</span>
 <span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">    &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
+<span class="sd">    &gt;&gt;&gt; lines = [</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">    &gt;&gt;&gt; ]</span>
 <span class="sd">    &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
 <span class="sd">    &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
 <span class="sd">    &gt;&gt;&gt; skeletonobject.draw()</span>
 <span class="sd">    &gt;&gt;&gt; skeletonobject.dynamic_draw_widths()</span>
 <span class="sd">    &gt;&gt;&gt; skeletonobject.update()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;skeleton.layer&#39;</span><span class="p">:</span> <span class="s2">&quot;Skeleton::skeleton&quot;</span><span class="p">,</span>
         <span class="s1">&#39;mesh.layer&#39;</span><span class="p">:</span> <span class="s2">&quot;Skeleton::mesh&quot;</span><span class="p">,</span>
@@ -130,7 +131,7 @@
     <span class="nd">@guid_skeleton_vertices</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">guid_skeleton_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_guid_skeleton_vertices</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">guid_skeleton_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_guid_skeleton_edges</span>
@@ -138,7 +139,7 @@
     <span class="nd">@guid_skeleton_edges</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">guid_skeleton_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_guid_skeleton_edges</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">guid_coarse_mesh_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_guid_coarse_mesh_vertices</span>
@@ -146,7 +147,7 @@
     <span class="nd">@guid_coarse_mesh_vertices</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">guid_coarse_mesh_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_guid_coarse_mesh_vertices</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">guid_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_guid_mesh</span>
@@ -158,25 +159,21 @@
     <span class="c1"># ==============================================================================</span>
     <span class="c1"># modify datastructure with rhino input</span>
     <span class="c1"># ==============================================================================</span>
-    
+
 <div class="viewcode-block" id="SkeletonObject.add_lines"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.add_lines.html#compas_skeleton.rhino.SkeletonObject.add_lines">[docs]</a>    <span class="k">def</span> <span class="nf">add_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update skeleton by adding more skeleon lines from Rhino.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
-<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton(lines)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobjcet = SkeletonObject(skeleton)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.add_lines()</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.draw()</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_mesh</span><span class="p">()</span>
         <span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_lines</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">guids</span><span class="p">:</span>
             <span class="k">return</span>
-        
+
         <span class="n">guids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guid_skeleton_edges</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="n">guids</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_line_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)</span>
         <span class="n">compas_rhino</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">HideObjects</span><span class="p">(</span><span class="n">guids</span><span class="p">)</span>
@@ -184,18 +181,15 @@
 
 <div class="viewcode-block" id="SkeletonObject.remove_lines"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.remove_lines.html#compas_skeleton.rhino.SkeletonObject.remove_lines">[docs]</a>    <span class="k">def</span> <span class="nf">remove_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update skeleton by removing current skeleon lines.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
-<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton(lines)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobjcet = SkeletonObject(skeleton)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.remove_lines()</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.draw()</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_mesh</span><span class="p">()</span>
+
         <span class="k">def</span> <span class="nf">custom_filter</span><span class="p">(</span><span class="n">rhino_object</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">component_index</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">rhino_object</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">ObjectId</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guid_skeleton_edges</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
                 <span class="k">return</span> <span class="kc">True</span>
@@ -205,21 +199,24 @@
         <span class="k">for</span> <span class="n">guid</span> <span class="ow">in</span> <span class="n">guids</span><span class="p">:</span>
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">guid_skeleton_edges</span><span class="p">[</span><span class="n">guid</span><span class="p">]</span>
         <span class="n">compas_rhino</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">DeleteObjects</span><span class="p">(</span><span class="n">guids</span><span class="p">)</span>
-        
+
         <span class="n">lines</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_line_coordinates</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guid_skeleton_edges</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">update_skeleton_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SkeletonObject.dynamic_draw_widths"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.dynamic_draw_widths.html#compas_skeleton.rhino.SkeletonObject.dynamic_draw_widths">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_draw_widths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Dynamic draw leaf width, node width, leaf extend and update the mesh in rhino.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
-<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton(lines)</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
+<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet = SkeletonObject(skeleton)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.dynamic_draw_widths()</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">skeleton_vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_draw_width</span><span class="p">(</span><span class="s1">&#39;leaf_width&#39;</span><span class="p">)</span>
@@ -231,20 +228,22 @@
 
 <div class="viewcode-block" id="SkeletonObject.dynamic_draw_width"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.dynamic_draw_width.html#compas_skeleton.rhino.SkeletonObject.dynamic_draw_width">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_draw_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Dynamic draw a width value, and update the mesh in rhino.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        -----------</span>
 <span class="sd">        param: str</span>
 <span class="sd">            &#39;node_width&#39;, &#39;leaf_width&#39;, &#39;leaf_extend&#39;</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
-<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton(lines)</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
+<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet = SkeletonObject(skeleton)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.dynamic_draw_width(&#39;node_width&#39;)</span>
-<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># get start point</span>
@@ -362,12 +361,15 @@
 
 <div class="viewcode-block" id="SkeletonObject.move_skeleton_vertex"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.move_skeleton_vertex.html#compas_skeleton.rhino.SkeletonObject.move_skeleton_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">move_skeleton_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Move the position of a skeleton vertex and update all its descencent vertices.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
-<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton(lines)</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
+<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet = SkeletonObject(skeleton)</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.move_skeleton_vertex()</span>
 <span class="sd">        &gt;&gt;&gt; skeletonobjcet.draw()</span>
@@ -469,9 +471,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">update_mesh_vertices_pos</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SkeletonObject.update"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.update.html#compas_skeleton.rhino.SkeletonObject.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;update Skeleton by typing command name in rhino command line.</span>
-<span class="sd">            </span>
-<span class="sd">        following command names are available: </span>
+        <span class="sd">&quot;&quot;&quot;update Skeleton by directly typing command name in Rhino command window.</span>
+
+<span class="sd">        following command names are available:</span>
 <span class="sd">            * &#39;m_skeleton&#39;</span>
 <span class="sd">            * &#39;m_mesh&#39;</span>
 <span class="sd">            * &#39;leaf_width&#39;</span>
@@ -482,10 +484,9 @@
 <span class="sd">            * &#39;add_lines&#39;</span>
 <span class="sd">            * &#39;remove_lines&#39;</span>
 <span class="sd">            * &#39;finish&#39;</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>            
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">operation</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">rs</span><span class="o">.</span><span class="n">GetString</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s1">&#39;m_skeleton&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">move_skeleton_vertex</span><span class="p">()</span>
@@ -648,7 +649,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 26, 2020.
+                Last updated on Apr 27, 2020.
             
 
             

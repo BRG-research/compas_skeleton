@@ -83,15 +83,15 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; from compas_skeleton.datastructure import Skeleton</span>
-<span class="sd">    &gt;&gt;&gt; from compas_skeleton.rhino import SkeletonObject</span>
 <span class="sd">    &gt;&gt;&gt; from compas_skeleton.rhino import SkeletonArtist</span>
-<span class="sd">    &gt;&gt;&gt; import compas_rhino</span>
 <span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">    &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
+<span class="sd">    &gt;&gt;&gt; lines = [</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">    &gt;&gt;&gt; ]</span>
 <span class="sd">    &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
-<span class="sd">    &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
-<span class="sd">    &gt;&gt;&gt; artist = SkeletonArtist(self.datastructure)</span>
+<span class="sd">    &gt;&gt;&gt; artist = SkeletonArtist(skeleton)</span>
 <span class="sd">    &gt;&gt;&gt; artist.draw_skeleton()</span>
 <span class="sd">    &gt;&gt;&gt; artist.draw_coarse_mesh_vertices()</span>
 <span class="sd">    &gt;&gt;&gt; artist.draw_mesh()</span>
@@ -219,7 +219,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 26, 2020.
+                Last updated on Apr 27, 2020.
             
 
             

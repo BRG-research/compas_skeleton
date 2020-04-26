@@ -89,16 +89,13 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; from compas_skeleton.datastructure import Skeleton</span>
-<span class="sd">    &gt;&gt;&gt; from compas_skeleton.rhino import SkeletonObject</span>
-<span class="sd">    &gt;&gt;&gt; import compas_rhino</span>
 <span class="sd">    &gt;&gt;&gt;</span>
-<span class="sd">    &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">    &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
+<span class="sd">    &gt;&gt;&gt; lines = [</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">    &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">    &gt;&gt;&gt; ]</span>
 <span class="sd">    &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
-<span class="sd">    &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
-<span class="sd">    &gt;&gt;&gt; skeletonobject.draw()</span>
-<span class="sd">    &gt;&gt;&gt; skeletonobject.dynamic_draw_widths()</span>
-<span class="sd">    &gt;&gt;&gt; skeletonobject.update()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Skeleton.__init__"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.__init__.html#compas_skeleton.datastructure.Skeleton.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -184,23 +181,25 @@
 <div class="viewcode-block" id="Skeleton.from_skeleton_lines"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.from_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.from_skeleton_lines">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_skeleton_lines</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&quot;&quot;&quot; Instantiate a skeleton from lines.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        lines: compas.geometry.Line</span>
+<span class="sd">        lines: :class:`compas.geometry.Line`</span>
 <span class="sd">            a list of compas lines</span>
-<span class="sd">        </span>
+
 <span class="sd">        Return</span>
 <span class="sd">        ------</span>
-<span class="sd">        skeleton: Skeleton</span>
+<span class="sd">        skeleton: :class:`compas_skeleton.datastructure.Skeleton`</span>
 <span class="sd">            a skeleton object</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
 <span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
-<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">skeleton</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
@@ -213,22 +212,20 @@
 <div class="viewcode-block" id="Skeleton.from_center_point"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.from_center_point.html#compas_skeleton.datastructure.Skeleton.from_center_point">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_center_point</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Instantiate a skeleton from a single point.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        point: compas.geometry.Point</span>
+<span class="sd">        point: :class:`compas.geometry.Point`</span>
 <span class="sd">            a tuple of 3 coordinates</span>
-<span class="sd">        </span>
+
 <span class="sd">        Return</span>
 <span class="sd">        -------</span>
-<span class="sd">        skeleton: Skeleton</span>
+<span class="sd">        skeleton: :class:`compas_skeleton.datastructure.Skeleton`</span>
 <span class="sd">            a skeleton object</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_points()</span>
-<span class="sd">        &gt;&gt;&gt; point = compas_rhino.get_point_coordinates(guids)[0]</span>
-<span class="sd">        &gt;&gt;&gt; </span>
+<span class="sd">        &gt;&gt;&gt; point = [0, 0, 0]</span>
 <span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_center_point(point)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -239,16 +236,22 @@
 
 <div class="viewcode-block" id="Skeleton.update_skeleton_lines"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.update_skeleton_lines.html#compas_skeleton.datastructure.Skeleton.update_skeleton_lines">[docs]</a>    <span class="k">def</span> <span class="nf">update_skeleton_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&quot;&quot;&quot; Update skeleton by adding more skeleon lines or remove current skeleton lines.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        lines: compas.geometry.Line</span>
+<span class="sd">        lines: :class:`compas.geometry.Line`</span>
 <span class="sd">            a list of compas lines.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; guids = compas_rhino.select_lines()</span>
-<span class="sd">        &gt;&gt;&gt; lines = compas_rhino.get_line_coordinates(guids)</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
+<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; lines.append(([0.0, 10.0, 0.0], [5.0, 10.0, 0.0]))</span>
 <span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.update_skeleton_lines(lines)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">network</span> <span class="o">=</span> <span class="n">Network</span><span class="o">.</span><span class="n">from_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
@@ -380,13 +383,11 @@
 
 <div class="viewcode-block" id="Skeleton.update_mesh_vertices_pos"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos.html#compas_skeleton.datastructure.Skeleton.update_mesh_vertices_pos">[docs]</a>    <span class="k">def</span> <span class="nf">update_mesh_vertices_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update all the vertex coordiates.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; skeleton.node_width = 20</span>
 <span class="sd">        &gt;&gt;&gt; skeleton.update_mesh_vertices_pos()</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject.draw()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">update_node_boundary_vertex</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
@@ -599,23 +600,19 @@
 
 <div class="viewcode-block" id="Skeleton.subdivide"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.subdivide.html#compas_skeleton.datastructure.Skeleton.subdivide">[docs]</a>    <span class="k">def</span> <span class="nf">subdivide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Increase the catmull-clark subdivison level of high-poly mesh</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; skeleton.subdivide(1)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject.draw()</span>
+<span class="sd">        &gt;&gt;&gt; skeleton.subdivide(2)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s1">&#39;sub_level&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">k</span></div>
 
 <div class="viewcode-block" id="Skeleton.merge"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.merge.html#compas_skeleton.datastructure.Skeleton.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decrease the catmull-clark subdivison level of high-poly mesh</span>
-<span class="sd">        </span>
+
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; skeleton.merge(1)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
-<span class="sd">        &gt;&gt;&gt; skeletonobject.draw()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s1">&#39;sub_level&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s1">&#39;sub_level&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">k</span></div>
@@ -629,7 +626,7 @@
         <span class="k">return</span> <span class="n">mesh_subdivide_catmullclark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">fixed</span><span class="o">=</span><span class="n">corners</span><span class="p">)</span>
 
     <span class="c1"># --------------------------------------------------------------------------</span>
-    <span class="c1"># exporting </span>
+    <span class="c1"># exporting</span>
     <span class="c1"># --------------------------------------------------------------------------</span>
 
 <div class="viewcode-block" id="Skeleton.to_mesh"><a class="viewcode-back" href="../../../api/generated/compas_skeleton.datastructure.Skeleton.to_mesh.html#compas_skeleton.datastructure.Skeleton.to_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">to_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -637,7 +634,7 @@
 
 <span class="sd">        Return</span>
 <span class="sd">        ------</span>
-<span class="sd">        mesh: compas.datastructures.Mesh           </span>
+<span class="sd">        mesh: :class:`compas.datastructures.Mesh`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">()</span>
         <span class="n">highpoly_mesh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subdivide</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">[</span><span class="s1">&#39;sub_level&#39;</span><span class="p">])</span>
@@ -715,7 +712,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 26, 2020.
+                Last updated on Apr 27, 2020.
             
 
             
