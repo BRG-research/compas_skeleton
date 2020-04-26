@@ -59,7 +59,7 @@ class SkeletonArtist(MeshArtist):
         self.layer = self.settings['mesh.layer']
 
     def draw_skeleton(self, vertices_keys, edges_keys):
-        """Draw skeleton branches in the Rhino model space."""
+        """Draw skeleton branches."""
         points = []
         for key in vertices_keys:
             points.append({

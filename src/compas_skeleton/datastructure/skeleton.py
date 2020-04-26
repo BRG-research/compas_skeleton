@@ -118,7 +118,7 @@ class Skeleton(Mesh):
         -------
         skeleton = Skeleton.from_lines(lines)
         print(skeleton.skeleton_branches)
-        
+
         """
         return list(self.edges_where({'type': 'skeleton_branch'}))
 
@@ -209,9 +209,9 @@ class Skeleton(Mesh):
         # input from network
         self._add_skeleton_vertices(network)
         self._add_skeleton_branches(network)
-        
+
         # assign default mesh width, because with 0 width the mesh cannot be visualised.
-        if self.node_width == 0 and self.leaf_width == 0:  
+        if self.node_width == 0 and self.leaf_width == 0:
             average_edge_length = sum([self.edge_length(u, v) for u, v in self.edges()])/self.number_of_edges()
             self.leaf_width = average_edge_length * 0.2
             self.node_width = average_edge_length * 0.2 * 2

@@ -8,8 +8,7 @@ compas_skeleton
 
    intro
    gettingstarted
-   concept
-   user_manual
+   tutorial
    examples
    api
    license

@@ -1,4 +1,7 @@
 {
     "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\rv2\\python.exe",
-    "restructuredtext.confPath": "${workspaceFolder}/docsource/conf.py"
+    "restructuredtext.confPath": "${workspaceFolder}/docsource/conf.py",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }

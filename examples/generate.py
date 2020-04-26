@@ -15,9 +15,20 @@ FILE = os.path.join(DATA, 'skeleton.json')
 # input from Rhino
 # ==============================================================================
 
-guids = compas_rhino.select_lines()
-lines = compas_rhino.get_line_coordinates(guids)
-compas_rhino.rs.HideObjects(guids)
+# guids = compas_rhino.select_lines()
+# lines = compas_rhino.get_line_coordinates(guids)
+# print(lines)
+
+# lines = [
+#     ([0, 0, 0], [0, 10, 0]), ([0, 0, 0], [8.6, -5, 0]), ([0, 0, 0], [-8.6, -5, 0])
+#     ]
+
+lines = [
+    ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+    ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+    ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+    ]
+# compas_rhino.rs.HideObjects(guids)
 
 skeleton = Skeleton.from_skeleton_lines(lines)
 skeletonobject = SkeletonObject(skeleton)
@@ -29,3 +40,4 @@ skeletonobject.dynamic_draw_widths()
 # ==============================================================================
 
 skeletonobject.datastructure.to_json(FILE, pretty=True)
+

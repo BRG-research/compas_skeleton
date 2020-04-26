@@ -56,42 +56,33 @@
 
                     
 
-                    <div class="section" id="concept">
-<h1>Concept</h1>
+                    <div class="section" id="tutorial">
+<h1>Tutorial</h1>
 <div class="section" id="skeleton">
 <h2>Skeleton</h2>
 <p>Skeleton is an extention of COMPAS Mesh with special attributes which can be serialized and loaded for modification.</p>
-<div class="section" id="skeleton-branches-and-skeleton-vertices">
-<h3>skeleton branches and skeleton vertices</h3>
 <div class="figure align-default">
-<img alt="_images/skeleton_branches_vertices.png" class="figure-img img-fluid" src="_images/skeleton_branches_vertices.png" />
+<img alt="_images/skeleton_concept_diagram.png" class="figure-img img-fluid" src="_images/skeleton_concept_diagram.png" />
 </div>
+<ul class="simple">
+<li><p>skeleton branches and skeleton vertices</p></li>
+</ul>
 <p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>. The start and end points are stored as <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>.
 There are two typs of <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>: <code class="docutils literal notranslate"><span class="pre">skeleton_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">skeleton_leaf</span></code>.</p>
-</div>
-<div class="section" id="skeleton-coarse-mesh">
-<h3>skeleton coarse mesh</h3>
-<div class="figure align-default">
-<img alt="_images/skeleton_coarse_mesh.png" class="figure-img img-fluid" src="_images/skeleton_coarse_mesh.png" />
-</div>
+<ul class="simple">
+<li><p>skeleton coarse mesh</p></li>
+</ul>
 <p>Each skeleton branch halfedge generates two new vertices as <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code>. Together with the two <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>, they compose a mesh face.
 Descendent vertices and face are then added to the skeleton coarse mesh.</p>
-</div>
-<div class="section" id="special-attributes">
-<h3>special attributes</h3>
-<div class="figure align-default">
-<img alt="_images/skeleton_spacial_attributes.png" class="figure-img img-fluid" src="_images/skeleton_spacial_attributes.png" />
-</div>
+<ul class="simple">
+<li><p>special attributes</p></li>
+</ul>
 <p>Parameters <code class="docutils literal notranslate"><span class="pre">node_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_extend</span></code> represent the features of skeleton coarse mesh, respectively.</p>
-</div>
-<div class="section" id="skeleton-hight-poly-mesh">
-<h3>skeleton hight-poly mesh</h3>
-<div class="figure align-default">
-<img alt="_images/skeleton_highpoly_mesh.png" class="figure-img img-fluid" src="_images/skeleton_highpoly_mesh.png" />
-</div>
+<ul class="simple">
+<li><p>skeleton hight-poly mesh</p></li>
+</ul>
 <p>Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code>.
 <code class="docutils literal notranslate"><span class="pre">sub_leve</span></code> can be increased or decreased during any step of modification, for a preferred visualisation.</p>
-</div>
 </div>
 <div class="section" id="skeleton-object">
 <h2>Skeleton object</h2>
@@ -143,7 +134,7 @@ For example, it can be used to create force patterns for <a class="reference ext
                             <ul class="nav flex-column active">
 <li class="nav-item"><a class="nav-link reference internal" href="intro.html">Introduction</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="gettingstarted.html">Getting Started</a></li>
-<li class="nav-item active"><a class="nav-link active current reference internal" href="#">Concept</a></li>
+<li class="nav-item active"><a class="nav-link active current reference internal" href="#">Tutorial</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="user_manual.html">User manual</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="examples.html">Examples</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="api.html">API Reference</a></li>
@@ -166,14 +157,8 @@ For example, it can be used to create force patterns for <a class="reference ext
                 
 
                 <ul class="nav flex-column" id="compas-localnav">
-<li class="nav-item"><a class="nav-link reference internal" href="#">Concept</a><ul class="nav">
-<li class="nav-item"><a class="nav-link reference internal" href="#skeleton">Skeleton</a><ul class="nav">
-<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-branches-and-skeleton-vertices">skeleton branches and skeleton vertices</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-coarse-mesh">skeleton coarse mesh</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#special-attributes">special attributes</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#skeleton-hight-poly-mesh">skeleton hight-poly mesh</a></li>
-</ul>
-</li>
+<li class="nav-item"><a class="nav-link reference internal" href="#">Tutorial</a><ul class="nav">
+<li class="nav-item"><a class="nav-link reference internal" href="#skeleton">Skeleton</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#skeleton-object">Skeleton object</a><ul class="nav">
 <li class="nav-item"><a class="nav-link reference internal" href="#interactive-editing">interactive editing</a></li>
 </ul>

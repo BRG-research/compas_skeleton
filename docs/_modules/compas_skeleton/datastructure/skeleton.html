@@ -173,7 +173,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        skeleton = Skeleton.from_lines(lines)</span>
 <span class="sd">        print(skeleton.skeleton_branches)</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges_where</span><span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;skeleton_branch&#39;</span><span class="p">}))</span>
 
@@ -264,9 +264,9 @@
         <span class="c1"># input from network</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_skeleton_vertices</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_skeleton_branches</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
-        
+
         <span class="c1"># assign default mesh width, because with 0 width the mesh cannot be visualised.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">leaf_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_width</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">leaf_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">average_edge_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_length</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">()])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">leaf_width</span> <span class="o">=</span> <span class="n">average_edge_length</span> <span class="o">*</span> <span class="mf">0.2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">node_width</span> <span class="o">=</span> <span class="n">average_edge_length</span> <span class="o">*</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="mi">2</span>
@@ -684,8 +684,7 @@
                             <ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link reference internal" href="../../../intro.html">Introduction</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../../gettingstarted.html">Getting Started</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="../../../concept.html">Concept</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="../../../user_manual.html">User manual</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../../tutorial.html">Tutorial</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../../examples.html">Examples</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../../api.html">API Reference</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../../license.html">License</a></li>
@@ -716,7 +715,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 24, 2020.
+                Last updated on Apr 26, 2020.
             
 
             
