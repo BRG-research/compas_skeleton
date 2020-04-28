@@ -418,7 +418,22 @@ class SkeletonObject(object):
     def update(self):
         """update Skeleton by directly typing command name in Rhino command window.
 
-        following command names are available:
+        Examples
+        --------
+        >>> lines = [
+        >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
+        >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
+        >>> ]
+        >>> skeleton = Skeleton.from_skeleton_lines(lines)
+        >>> skeletonobject = SkeletonObject(skeleton)
+        >>> skeletonobject.draw()
+        >>> skeletonobject.update()
+
+        Notes
+        -----
+        This method requests user to input operation names in Rhino command window once update mode is activated.
+        The following operations are supported:
             * 'm_skeleton'
             * 'm_mesh'
             * 'leaf_width'

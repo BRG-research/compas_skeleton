@@ -63,11 +63,24 @@ Create Skeleton from a single point:
     skeleton = Skeleton.from_center_point(point)
 
 
+Skeleton Artist
+---------------
+``SkeletonArtist`` is a customized `MeshArtist <https://compas-dev.github.io/main/api/generated/compas_rhino.artists.MeshArtist.html#compas_rhino.artists.MeshArtist>`_ 
+for displaying Skeleton vertices, branches and mesh in Rhino.
+
+
+.. code-block:: python
+
+    from compas_skeleton.rhino import SkeletonArtist
+    
+    artist = SkeletonArtist(skeleton)
+    artist.draw()
+
+
 Skeleton object
 ---------------
-``SkeletonObject`` is the implementation of ``Skeleton`` in Rhino. 
-Each ``SkeletonObject`` contains a ``Skeleton`` as its datastructure and a customized ``SkeletonArtist``. It can be added as a scene object.
-Skeleton object provides interactive editing methods and visulisation in Rhino.
+While ``Skeleton`` is a datastructure independed from third party software, ``SkeletonObject`` is the implementation of ``Skeleton`` in Rhino. 
+Each ``SkeletonObject`` contains a ``Skeleton`` as its datastructure and a ``SkeletonArtist``. It provides interactive editing methods and visulisation in Rhino.
 
 
 Create Skeleton Object
@@ -77,6 +90,7 @@ Create Skeleton Object
 .. figure:: /_images/skeleton_create.gif
     :figclass: figure
     :class: figure-img img-fluid
+    :width: 80%
 
 
 .. code-block:: python
@@ -99,10 +113,12 @@ Interactive input width
 .. figure:: /_images/skeleton_dynamic_draw.gif
     :figclass: figure
     :class: figure-img img-fluid
+    :width: 80%
 
 
 .. code-block:: python
 
+    skeletonobject = SkeletonObject(skeleton)
     skeletonobject.dynamic_draw_widths()
 
 
@@ -132,6 +148,10 @@ Serilize the datastructure for further editing.
 
     # method 2
     skeletonobject.datastructure.to_json(FILE, pretty=True)
+
+    # reload
+    skeleton = Skeleton.from_json(FILE)
+    skeletonobject = SkeletonObject(skeleton)
 
 
 ``SkeletonObject.datastructure`` is a ``Skeleton`` object. So the result of the two methods above are the same. 

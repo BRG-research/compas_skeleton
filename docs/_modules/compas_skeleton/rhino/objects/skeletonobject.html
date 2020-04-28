@@ -473,7 +473,22 @@
 <div class="viewcode-block" id="SkeletonObject.update"><a class="viewcode-back" href="../../../../api/generated/compas_skeleton.rhino.SkeletonObject.update.html#compas_skeleton.rhino.SkeletonObject.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;update Skeleton by directly typing command name in Rhino command window.</span>
 
-<span class="sd">        following command names are available:</span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; lines = [</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),</span>
+<span class="sd">        &gt;&gt;&gt; ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])</span>
+<span class="sd">        &gt;&gt;&gt; ]</span>
+<span class="sd">        &gt;&gt;&gt; skeleton = Skeleton.from_skeleton_lines(lines)</span>
+<span class="sd">        &gt;&gt;&gt; skeletonobject = SkeletonObject(skeleton)</span>
+<span class="sd">        &gt;&gt;&gt; skeletonobject.draw()</span>
+<span class="sd">        &gt;&gt;&gt; skeletonobject.update()</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This method requests user to input operation names in Rhino command window once update mode is activated.</span>
+<span class="sd">        The following operations are supported:</span>
 <span class="sd">            * &#39;m_skeleton&#39;</span>
 <span class="sd">            * &#39;m_mesh&#39;</span>
 <span class="sd">            * &#39;leaf_width&#39;</span>
@@ -649,7 +664,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 27, 2020.
+                Last updated on Apr 29, 2020.
             
 
             

@@ -11,7 +11,7 @@ __all__ = ['SkeletonArtist']
 
 class SkeletonArtist(MeshArtist):
     """Artist for visualizing skeleton mesh in the Rhino.
-    
+
     Parameters
     ----------
     mesh : :class:`compas.datastructures.Mesh`
@@ -42,7 +42,7 @@ class SkeletonArtist(MeshArtist):
     >>> artist.draw_mesh()
     >>> artist.redraw()
     """
-    
+
     def __init__(self, skeleton, layer=None, name=None):
         mesh = skeleton.to_mesh()
         super(SkeletonArtist, self).__init__(mesh)

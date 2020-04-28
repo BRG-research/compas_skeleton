@@ -62,8 +62,23 @@
 <dt id="compas_skeleton.rhino.SkeletonObject.update">
 <code class="sig-prename descclassname">SkeletonObject.</code><code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/compas_skeleton/rhino/objects/skeletonobject.html#SkeletonObject.update"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>update Skeleton by directly typing command name in Rhino command window.</p>
-<dl class="simple">
-<dt>following command names are available:</dt><dd><ul class="simple">
+<p class="rubric">Examples</p>
+<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">8.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">8.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_skeleton_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>This method requests user to input operation names in Rhino command window once update mode is activated.
+The following operations are supported:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>‘m_skeleton’</p></li>
 <li><p>‘m_mesh’</p></li>
 <li><p>‘leaf_width’</p></li>
@@ -75,8 +90,7 @@
 <li><p>‘remove_lines’</p></li>
 <li><p>‘finish’</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -151,7 +165,7 @@
     <footer class="bg-dark pb-5">
         <div class="container text-center pt-5 pb-5 text-muted">
             
-                Last updated on Apr 27, 2020.
+                Last updated on Apr 29, 2020.
             
 
             
