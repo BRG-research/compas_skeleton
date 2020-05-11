@@ -17,11 +17,6 @@ FILE = os.path.join(DATA, 'skeleton.json')
 
 guids = compas_rhino.select_lines()
 lines = compas_rhino.get_line_coordinates(guids)
-# print(lines)
-
-# lines = [
-#     ([0, 0, 0], [0, 10, 0]), ([0, 0, 0], [8.6, -5, 0]), ([0, 0, 0], [-8.6, -5, 0])
-#     ]
 
 # lines = [
 #     ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),

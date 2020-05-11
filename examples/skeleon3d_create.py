@@ -17,6 +17,7 @@ sk3.section_seg = 5
 sk3.branch_radius = 3
 sk3.node_radius_fac = 2
 sk3.generate_mesh()
+sk3.merge_triangles()
 
 mesh = mesh_subdivide_catmullclark(sk3, 1)
 

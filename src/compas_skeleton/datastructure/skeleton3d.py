@@ -22,8 +22,8 @@ class Skeleton3D(Mesh):
         self.node = {}
         self.halfbranch = {}
         self.branch_radius = 1.0
-        self.node_radius_fac = 1.0
         self.section_seg = 4
+        self.node_radius_fac = 1.0
 
     @classmethod
     def from_skeleton_lines(cls, lines=[]):
@@ -45,6 +45,10 @@ class Skeleton3D(Mesh):
                 nodes_joint.append(key)
 
         return nodes_joint
+
+    # --------------------------------------------------------------------------
+    # builders
+    # --------------------------------------------------------------------------
 
     def generate_mesh(self):
         self._get_pts_for_branches()
@@ -153,6 +157,10 @@ class Skeleton3D(Mesh):
 
         return self.branch_radius/math.tan(ang_min * .5)
 
+    # --------------------------------------------------------------------------
+    # info
+    # --------------------------------------------------------------------------
+
     def is_node_leaf(self, key):
         return len(list(self.halfbranch[key])) == 1
 
@@ -168,6 +176,55 @@ class Skeleton3D(Mesh):
                 seen.add(ikey)
 
                 yield key
+
+    # --------------------------------------------------------------------------
+    # modifiers
+    # --------------------------------------------------------------------------
+
+    def merge_triangles(self):
+        faces_to_merge = []
+        seen = []
+        for u, v in self.edges():
+            f1 = self.halfedge[u][v]
+            f2 = self.halfedge[v][u]
+            if not f1 or not f2:
+                continue
+
+            if f1 in seen or f2 in seen:
+                continue
+
+            if len(self.face[f1]) == len(self.face[f2]) == 3:
+                faces_to_merge.append([f1, f2])
+                seen.extend([f1, f2])
+
+        for f1, f2 in faces_to_merge:
+            self.merge_triangle(f1, f2)
+
+    def merge_triangle(self, f1, f2):
+        face1, face2 = self.face[f1], self.face[f2]
+        if len(face1) == len(face2) == 3:
+            keys_shared = set(face1) & set(face2)
+            if len(keys_shared) == 2:
+                u, v = keys_shared
+                if (u, v) in self.face_halfedges(f1):
+                    add_face = [
+                        u,
+                        face2[(face2.index(u) + 1) % 3],
+                        v,
+                        face1[(face1.index(v) + 1) % 3]
+                        ]
+                else:
+                    add_face = [
+                        u,
+                        face1[(face1.index(u) + 1) % 3],
+                        v,
+                        face2[(face2.index(v) + 1) % 3]
+                        ]
+
+                self.delete_face(f1)
+                self.delete_face(f2)
+
+                self.add_face(add_face)
 
 
 if __name__ == '__main__':
