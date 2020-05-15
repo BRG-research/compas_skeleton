@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>compas_skeleton</title>
+  <title>COMPAS Skeleton</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-  <meta name="author" content="" />
+  <meta name="author" content="Wenqian Yang" />
   <meta name="description" content="" />
 
   <link rel="shortcut icon" href="_static/images/compas.ico" type="image/x-icon">
@@ -44,18 +44,18 @@
     <nav class="navbar navbar-expand navbar-dark col flex-column flex-md-row text-center">
       <!-- brand -->
       <a class="navbar-brand" href="/index.html">
-        <img src="_static/images/compas_icon_white.png" alt="compas_skeleton" width="48px" height="48px" />
+        <img src="_static/images/compas_icon_white.png" alt="COMPAS Skeleton" width="48px" height="48px" />
       </a>
       <!-- brand -->
       <!-- primary -->
       <ul class="navbar-nav">
-        <li class="nav-item active"><a class="nav-link" href="">compas_skeleton</a></li>
+        <li class="nav-item active"><a class="nav-link" href="https://blockresearchgroup.github.io/compas_skeleton">COMPAS Skeleton</a></li>
       </ul>
       <!-- primary -->
       <!-- social -->
       <ul class="navbar-nav d-none d-md-flex ml-md-auto">
         <li class="nav-item">
-          <a class="nav-link" href="" target="_blank">
+          <a class="nav-link" href="https://github.com/blockresearchgroup/compas_skeleton" target="_blank">
             <span class="fab fa-github fa-1x"></span>
           </a>
         </li>
@@ -84,23 +84,17 @@
 <div class="figure align-default">
 <a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_concept_diagram.png"><img alt="_images/skeleton_concept_diagram.png" class="figure-img img-fluid" src="_images/skeleton_concept_diagram.png" style="width: 100%;" /></a>
 </div>
-<ul class="simple">
-<li><p>skeleton branches and skeleton vertices</p></li>
-</ul>
-<p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>. The start and end points are stored as <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>.
+<p><strong>skeleton branches and skeleton vertices</strong></p>
+<p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>.
+The start and end points are stored as <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>.
 There are two typs of <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>: <code class="docutils literal notranslate"><span class="pre">skeleton_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">skeleton_leaf</span></code>.</p>
-<ul class="simple">
-<li><p>skeleton coarse mesh</p></li>
-</ul>
-<p>Each skeleton branch halfedge generates two new vertices as <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code>. Together with the two <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>, they compose a mesh face.
+<p><strong>skeleton coarse mesh</strong></p>
+<p>Each skeleton branch halfedge generates two new vertices as <code class="docutils literal notranslate"><span class="pre">descendent_vertices</span></code>.
+Together with the two <code class="docutils literal notranslate"><span class="pre">skeleton_vertices</span></code>, they compose a mesh face.
 Descendent vertices and face are then added to the skeleton coarse mesh.</p>
-<ul class="simple">
-<li><p>special attributes</p></li>
-</ul>
+<p><strong>special attributes</strong></p>
 <p>Parameters <code class="docutils literal notranslate"><span class="pre">node_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_width</span></code>, <code class="docutils literal notranslate"><span class="pre">leaf_extend</span></code> represent the features of skeleton coarse mesh, respectively.</p>
-<ul class="simple">
-<li><p>skeleton hight-poly mesh</p></li>
-</ul>
+<p><strong>skeleton hight-poly mesh</strong></p>
 <p>Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code>.
 <code class="docutils literal notranslate"><span class="pre">sub_leve</span></code> can be increased or decreased during any step of modification, for a preferred visualisation.</p>
 <div class="section" id="create-skeleton">
@@ -302,7 +296,7 @@ For example, it can be used to create force patterns for <a class="reference ext
         
           <div id="compas-navigation" class="collapse compas-navigation">
           <ul class="nav flex-column active">
-<li class="nav-item"><a class="nav-link reference internal" href="intro.html">Introduction</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="index.html">Introduction</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="gettingstarted.html">Getting Started</a></li>
 <li class="nav-item active"><a class="nav-link active current reference internal" href="#">Tutorial</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="examples.html">Examples</a></li>

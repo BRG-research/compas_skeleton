@@ -5,8 +5,8 @@ Tutorial
 
 Skeleton
 --------
-A Skeleton contains below attributes.
 
+A Skeleton contains below attributes.
 
 .. figure:: /_images/skeleton_concept_diagram.png
     :width: 100%
@@ -14,28 +14,30 @@ A Skeleton contains below attributes.
     :class: figure-img img-fluid
 
 
-* skeleton branches and skeleton vertices
-Skeleton contains a set of lines as ``skeleton_branches``. The start and end points are stored as ``skeleton_vertices``. 
+**skeleton branches and skeleton vertices**
+
+Skeleton contains a set of lines as ``skeleton_branches``.
+The start and end points are stored as ``skeleton_vertices``.
 There are two typs of ``skeleton_vertices``: ``skeleton_joint`` and ``skeleton_leaf``.
 
+**skeleton coarse mesh**
 
-* skeleton coarse mesh
-Each skeleton branch halfedge generates two new vertices as ``descendent_vertices``. Together with the two ``skeleton_vertices``, they compose a mesh face.
+Each skeleton branch halfedge generates two new vertices as ``descendent_vertices``.
+Together with the two ``skeleton_vertices``, they compose a mesh face.
 Descendent vertices and face are then added to the skeleton coarse mesh.
 
+**special attributes**
 
-* special attributes
 Parameters ``node_width``, ``leaf_width``, ``leaf_extend`` represent the features of skeleton coarse mesh, respectively.
 
+**skeleton hight-poly mesh**
 
-* skeleton hight-poly mesh
-Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute ``sub_level``. 
-``sub_leve`` can be increased or decreased during any step of modification, for a preferred visualisation. 
+Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute ``sub_level``.
+``sub_leve`` can be increased or decreased during any step of modification, for a preferred visualisation.
 
 
 Create Skeleton
 ===============
-
 
 Create Skeleton from lines:
 
@@ -65,21 +67,23 @@ Create Skeleton from a single point:
 
 Skeleton Artist
 ---------------
-``SkeletonArtist`` is a customized `MeshArtist <https://compas-dev.github.io/main/api/generated/compas_rhino.artists.MeshArtist.html#compas_rhino.artists.MeshArtist>`_ 
+
+``SkeletonArtist`` is a customized `MeshArtist <https://compas-dev.github.io/main/api/generated/compas_rhino.artists.MeshArtist.html#compas_rhino.artists.MeshArtist>`_
 for displaying Skeleton vertices, branches and mesh in Rhino.
 
 
 .. code-block:: python
 
     from compas_skeleton.rhino import SkeletonArtist
-    
+
     artist = SkeletonArtist(skeleton)
     artist.draw()
 
 
 Skeleton object
 ---------------
-While ``Skeleton`` is a datastructure independed from third party software, ``SkeletonObject`` is the implementation of ``Skeleton`` in Rhino. 
+
+While ``Skeleton`` is a datastructure independed from third party software, ``SkeletonObject`` is the implementation of ``Skeleton`` in Rhino.
 Each ``SkeletonObject`` contains a ``Skeleton`` as its datastructure and a ``SkeletonArtist``. It provides interactive editing methods and visulisation in Rhino.
 
 
@@ -122,7 +126,7 @@ Interactive input width
     skeletonobject.dynamic_draw_widths()
 
 
-There are 3 steps of ``dynamic_draw_widths``: 
+There are 3 steps of ``dynamic_draw_widths``:
 
 * click on the joint node, move cursor to decide node width
 * click on the leaf vertex, move cursor to decide leaf width
@@ -133,7 +137,7 @@ There are 3 steps of ``dynamic_draw_widths``:
 Serilization and reloading
 ==========================
 
-Serilize the datastructure for further editing. 
+Serilize the datastructure for further editing.
 
 
 .. code-block:: python
@@ -154,7 +158,7 @@ Serilize the datastructure for further editing.
     skeletonobject = SkeletonObject(skeleton)
 
 
-``SkeletonObject.datastructure`` is a ``Skeleton`` object. So the result of the two methods above are the same. 
+``SkeletonObject.datastructure`` is a ``Skeleton`` object. So the result of the two methods above are the same.
 But after a skeleton object is created, we should always choose the second method so that all the modifications will be stored.
 
 
@@ -166,10 +170,10 @@ Editing skeleton branches or changing width parameters will update related desce
 
 .. code-block:: python
 
-    # load skeleton from previous step 
+    # load skeleton from previous step
     skeleton = Skeleton.from_json(FILE)
     skeletonobject = SkeletonObject(skeleton)
-    
+
     skeletonobject.update()
 
     skeletonobject.datastructure.to_json(FILE, pretty=True)
@@ -277,5 +281,5 @@ end this round of editing and draw the resulting high-poly mesh in Rhino.
 
 Application
 -----------
-Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs. 
+Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs.
 For example, it can be used to create force patterns for `RhinoVault <https://blockresearchgroup.github.io/compas-RV2>`_ and `TNA <https://blockresearchgroup.github.io/compas_tna>`_.
