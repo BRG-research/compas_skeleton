@@ -9,7 +9,6 @@ Skeleton
 A Skeleton contains below attributes.
 
 .. figure:: /_images/skeleton_concept_diagram.png
-    :width: 100%
     :figclass: figure
     :class: figure-img img-fluid
 
@@ -90,11 +89,9 @@ Each ``SkeletonObject`` contains a ``Skeleton`` as its datastructure and a ``Ske
 Create Skeleton Object
 =======================
 
-
 .. figure:: /_images/skeleton_create.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 .. code-block:: python
@@ -117,7 +114,6 @@ Interactive input width
 .. figure:: /_images/skeleton_dynamic_draw.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 .. code-block:: python
@@ -134,8 +130,8 @@ There are 3 steps of ``dynamic_draw_widths``:
 
 
 
-Serilization and reloading
-==========================
+Serialization and reloading
+===========================
 
 Serilize the datastructure for further editing.
 
@@ -183,103 +179,102 @@ Once update mode is activated, editing methods can be called by typing command n
 
 node_width
 **********
-change the skeleton mesh width at all joint nodes.
+
+Change the skeleton mesh width at all joint nodes.
 
 
 .. figure:: /_images/skeleton_node_width.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 leaf_width
 **********
-change the skeleton mesh width at all leaf ends.
+
+Change the skeleton mesh width at all leaf ends.
 
 
 .. figure:: /_images/skeleton_leaf_width.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 leaf_extend
 ***********
-change how far or to which direction to extend the leaf ends.
+
+Change how far or to which direction to extend the leaf ends.
 
 
 .. figure:: /_images/skeleton_leaf_extend.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 m_skeleton
 **********
-move a skeleton vertex. all related descendent vertices will be updated accordingly.
+
+Move a skeleton vertex.
+All related descendent vertices will be updated accordingly.
 
 
 .. figure:: /_images/skeleton_m_skeleton.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 m_mesh
-**********
-move a mesh vertex. local transformation will be stored in the datastructure. when this vertex moves following skeleton vertex, the local movement will be transformed accordingly.
+******
+
+Move a mesh vertex.
+Local transformation will be stored in the datastructure.
+When this vertex moves following skeleton vertex, the local movement will be transformed accordingly.
 
 
 .. figure:: /_images/skeleton_m_mesh.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 subdivide
 **********
-increase the high poly mesh subdivision level by increasing attribute ``sub_level``
+
+Increase the high poly mesh subdivision level by increasing attribute ``sub_level``
 
 
 .. figure:: /_images/skeleton_merge.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 merge
-**********
-decrease the high poly mesh subdivision level by decreasing attribute ``sub_level``
+*****
+
+Decrease the high poly mesh subdivision level by decreasing attribute ``sub_level``
 
 
 add_lines
-**********
-add more lines to the current skeleton branches.
+*********
+
+Add more lines to the current skeleton branches.
 
 
 .. figure:: /_images/skeleton_add_lines.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 remove_lines
-============
-remove lines from the current skeleton branches.
+************
+
+Remove lines from the current skeleton branches.
 
 
 .. figure:: /_images/skeleton_remove_lines.gif
     :figclass: figure
     :class: figure-img img-fluid
-    :width: 80%
 
 
 finish
-======
-end this round of editing and draw the resulting high-poly mesh in Rhino.
+******
 
-
-Application
------------
-Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs.
-For example, it can be used to create force patterns for `RhinoVault <https://blockresearchgroup.github.io/compas-RV2>`_ and `TNA <https://blockresearchgroup.github.io/compas_tna>`_.
+End this round of editing and draw the resulting high-poly mesh in Rhino.

@@ -43,7 +43,7 @@
   <header id="header" class="compas-header d-flex align-items-center">
     <nav class="navbar navbar-expand navbar-dark col flex-column flex-md-row text-center">
       <!-- brand -->
-      <a class="navbar-brand" href="/index.html">
+      <a class="navbar-brand" href="https://blockresearchgroup.github.io/compas_skeleton">
         <img src="_static/images/compas_icon_white.png" alt="COMPAS Skeleton" width="48px" height="48px" />
       </a>
       <!-- brand -->
@@ -82,7 +82,7 @@
 <h2>Skeleton</h2>
 <p>A Skeleton contains below attributes.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_concept_diagram.png"><img alt="_images/skeleton_concept_diagram.png" class="figure-img img-fluid" src="_images/skeleton_concept_diagram.png" style="width: 100%;" /></a>
+<img alt="_images/skeleton_concept_diagram.png" class="figure-img img-fluid" src="_images/skeleton_concept_diagram.png" />
 </div>
 <p><strong>skeleton branches and skeleton vertices</strong></p>
 <p>Skeleton contains a set of lines as <code class="docutils literal notranslate"><span class="pre">skeleton_branches</span></code>.
@@ -139,7 +139,7 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 <div class="section" id="create-skeleton-object">
 <h3>Create Skeleton Object</h3>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_create.gif"><img alt="_images/skeleton_create.gif" class="figure-img img-fluid" src="_images/skeleton_create.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_create.gif" class="figure-img img-fluid" src="_images/skeleton_create.gif" />
 </div>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
 <span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
@@ -157,7 +157,7 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 <div class="section" id="interactive-input-width">
 <h3>Interactive input width</h3>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_dynamic_draw.gif"><img alt="_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="_images/skeleton_dynamic_draw.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="_images/skeleton_dynamic_draw.gif" />
 </div>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
 <span class="n">skeletonobject</span><span class="o">.</span><span class="n">dynamic_draw_widths</span><span class="p">()</span>
@@ -170,8 +170,8 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 <li><p>click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.</p></li>
 </ul>
 </div>
-<div class="section" id="serilization-and-reloading">
-<h3>Serilization and reloading</h3>
+<div class="section" id="serialization-and-reloading">
+<h3>Serialization and reloading</h3>
 <p>Serilize the datastructure for further editing.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">import</span> <span class="nn">os</span>
 
@@ -208,74 +208,72 @@ Editing skeleton branches or changing width parameters will update related desce
 <p>Once update mode is activated, editing methods can be called by typing command name directly in Rhino command window. Following commands are available:</p>
 <div class="section" id="node-width">
 <h4>node_width</h4>
-<p>change the skeleton mesh width at all joint nodes.</p>
+<p>Change the skeleton mesh width at all joint nodes.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_node_width.gif"><img alt="_images/skeleton_node_width.gif" class="figure-img img-fluid" src="_images/skeleton_node_width.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_node_width.gif" class="figure-img img-fluid" src="_images/skeleton_node_width.gif" />
 </div>
 </div>
 <div class="section" id="leaf-width">
 <h4>leaf_width</h4>
-<p>change the skeleton mesh width at all leaf ends.</p>
+<p>Change the skeleton mesh width at all leaf ends.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_leaf_width.gif"><img alt="_images/skeleton_leaf_width.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_width.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_leaf_width.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_width.gif" />
 </div>
 </div>
 <div class="section" id="leaf-extend">
 <h4>leaf_extend</h4>
-<p>change how far or to which direction to extend the leaf ends.</p>
+<p>Change how far or to which direction to extend the leaf ends.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_leaf_extend.gif"><img alt="_images/skeleton_leaf_extend.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_extend.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_leaf_extend.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_extend.gif" />
 </div>
 </div>
 <div class="section" id="m-skeleton">
 <h4>m_skeleton</h4>
-<p>move a skeleton vertex. all related descendent vertices will be updated accordingly.</p>
+<p>Move a skeleton vertex.
+All related descendent vertices will be updated accordingly.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_m_skeleton.gif"><img alt="_images/skeleton_m_skeleton.gif" class="figure-img img-fluid" src="_images/skeleton_m_skeleton.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_m_skeleton.gif" class="figure-img img-fluid" src="_images/skeleton_m_skeleton.gif" />
 </div>
 </div>
 <div class="section" id="m-mesh">
 <h4>m_mesh</h4>
-<p>move a mesh vertex. local transformation will be stored in the datastructure. when this vertex moves following skeleton vertex, the local movement will be transformed accordingly.</p>
+<p>Move a mesh vertex.
+Local transformation will be stored in the datastructure.
+When this vertex moves following skeleton vertex, the local movement will be transformed accordingly.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_m_mesh.gif"><img alt="_images/skeleton_m_mesh.gif" class="figure-img img-fluid" src="_images/skeleton_m_mesh.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_m_mesh.gif" class="figure-img img-fluid" src="_images/skeleton_m_mesh.gif" />
 </div>
 </div>
 <div class="section" id="subdivide">
 <h4>subdivide</h4>
-<p>increase the high poly mesh subdivision level by increasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
+<p>Increase the high poly mesh subdivision level by increasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_merge.gif"><img alt="_images/skeleton_merge.gif" class="figure-img img-fluid" src="_images/skeleton_merge.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_merge.gif" class="figure-img img-fluid" src="_images/skeleton_merge.gif" />
 </div>
 </div>
 <div class="section" id="merge">
 <h4>merge</h4>
-<p>decrease the high poly mesh subdivision level by decreasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
+<p>Decrease the high poly mesh subdivision level by decreasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
 </div>
 <div class="section" id="add-lines">
 <h4>add_lines</h4>
-<p>add more lines to the current skeleton branches.</p>
+<p>Add more lines to the current skeleton branches.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_add_lines.gif"><img alt="_images/skeleton_add_lines.gif" class="figure-img img-fluid" src="_images/skeleton_add_lines.gif" style="width: 80%;" /></a>
-</div>
+<img alt="_images/skeleton_add_lines.gif" class="figure-img img-fluid" src="_images/skeleton_add_lines.gif" />
 </div>
 </div>
 <div class="section" id="remove-lines">
-<h3>remove_lines</h3>
-<p>remove lines from the current skeleton branches.</p>
+<h4>remove_lines</h4>
+<p>Remove lines from the current skeleton branches.</p>
 <div class="figure align-default">
-<a class="figure-img img-fluid reference internal image-reference" href="_images/skeleton_remove_lines.gif"><img alt="_images/skeleton_remove_lines.gif" class="figure-img img-fluid" src="_images/skeleton_remove_lines.gif" style="width: 80%;" /></a>
+<img alt="_images/skeleton_remove_lines.gif" class="figure-img img-fluid" src="_images/skeleton_remove_lines.gif" />
 </div>
 </div>
 <div class="section" id="finish">
-<h3>finish</h3>
-<p>end this round of editing and draw the resulting high-poly mesh in Rhino.</p>
+<h4>finish</h4>
+<p>End this round of editing and draw the resulting high-poly mesh in Rhino.</p>
 </div>
 </div>
-<div class="section" id="application">
-<h2>Application</h2>
-<p>Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs.
-For example, it can be used to create force patterns for <a class="reference external" href="https://blockresearchgroup.github.io/compas-RV2">RhinoVault</a> and <a class="reference external" href="https://blockresearchgroup.github.io/compas_tna">TNA</a>.</p>
 </div>
 </div>
 
@@ -321,7 +319,7 @@ For example, it can be used to create force patterns for <a class="reference ext
 <li class="nav-item"><a class="nav-link reference internal" href="#skeleton-object">Skeleton object</a><ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-object">Create Skeleton Object</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#interactive-input-width">Interactive input width</a></li>
-<li class="nav-item"><a class="nav-link reference internal" href="#serilization-and-reloading">Serilization and reloading</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#serialization-and-reloading">Serialization and reloading</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#interactive-editing">Interactive editing</a><ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link reference internal" href="#node-width">node_width</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#leaf-width">leaf_width</a></li>
@@ -331,13 +329,12 @@ For example, it can be used to create force patterns for <a class="reference ext
 <li class="nav-item"><a class="nav-link reference internal" href="#subdivide">subdivide</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#merge">merge</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#add-lines">add_lines</a></li>
-</ul>
-</li>
 <li class="nav-item"><a class="nav-link reference internal" href="#remove-lines">remove_lines</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="#finish">finish</a></li>
 </ul>
 </li>
-<li class="nav-item"><a class="nav-link reference internal" href="#application">Application</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
