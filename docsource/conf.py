@@ -14,7 +14,7 @@ import sphinx_compas_theme
 
 # -- General configuration ------------------------------------------------
 
-project = "compas_skeleton"
+project = "COMPAS Skeleton"
 copyright = "Block Research Group - ETH Zurich"
 author = "Wenqian Yang"
 release = "0.1.0"
@@ -132,8 +132,12 @@ html_theme_path = sphinx_compas_theme.get_html_theme_path()
 
 html_theme_options = {
     "package_name"    : "compas_skeleton",
-    "package_title"   : project,
-    "package_version" : release,
+    'package_title' : project,
+    'package_version' : release,
+    'package_author' : author,
+    'package_description' : '',
+    'package_docs' : 'https://blockresearchgroup.github.io/compas_skeleton',
+    'package_repo' : 'https://github.com/blockresearchgroup/compas_skeleton',
 }
 
 html_context = {}
