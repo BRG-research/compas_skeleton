@@ -237,7 +237,7 @@ class Skeleton(Mesh):
 
         from compas.utilities import pairwise
 
-        keys = range(1, 5) + [1]
+        keys = list(range(1, 5) + [1])
         for u, v in pairwise(keys):
             self.add_face([0, u, v])
 
