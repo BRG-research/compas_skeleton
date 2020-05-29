@@ -302,7 +302,7 @@ class Skeleton(Mesh):
                 current_key += 1
 
         for u in leaf_vertices:
-            v = network.adjacency[u].items()[0][0]
+            v = list(network.adjacency[u].items())[0][0]
 
             get_boundary_vertex_keys(network, u, v, sp=current_key)
             get_boundary_vertex_keys(network, v, u, ep=current_key+1)
