@@ -7,12 +7,14 @@
 import sys
 import os
 
+from sphinx.ext.napoleon.docstring import NumpyDocstring
+
 import sphinx_compas_theme
 
 
 # -- General configuration ------------------------------------------------
 
-project = "compas_skeleton"
+project = "COMPAS Skeleton"
 copyright = "Block Research Group - ETH Zurich"
 author = "Wenqian Yang"
 release = "0.1.0"
@@ -39,13 +41,16 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "matplotlib.sphinxext.plot_directive",
+    'm2r',
+    'nbsphinx',
+    'sphinx.ext.viewcode'
 ]
 
 # autodoc options
 
 autodoc_default_flags = [
     "undoc-members",
-    "show-inheritance",
+    'show-inheritance',
 ]
 
 autodoc_member_order = "alphabetical"
@@ -69,6 +74,34 @@ napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
 napoleon_use_param = False
 napoleon_use_rtype = False
+
+
+# first, we define new methods for any new sections and add them to the class
+def parse_keys_section(self, section):
+    return self._format_fields('Keys', self._consume_fields())
+NumpyDocstring._parse_keys_section = parse_keys_section
+
+
+def parse_attributes_section(self, section):
+    return self._format_fields('Attributes', self._consume_fields())
+NumpyDocstring._parse_attributes_section = parse_attributes_section
+
+
+def parse_class_attributes_section(self, section):
+    return self._format_fields('Class Attributes', self._consume_fields())
+NumpyDocstring._parse_class_attributes_section = parse_class_attributes_section
+
+
+# we now patch the parse method to guarantee that the the above methods are
+# assigned to the _section dict
+def patched_parse(self):
+    self._sections['keys'] = self._parse_keys_section
+    self._sections['attributes'] = self._parse_attributes_section
+    self._sections['class attributes'] = self._parse_class_attributes_section
+    self._unpatched_parse()
+NumpyDocstring._unpatched_parse = NumpyDocstring._parse
+NumpyDocstring._parse = patched_parse
+
 
 # plot options
 
@@ -99,8 +132,12 @@ html_theme_path = sphinx_compas_theme.get_html_theme_path()
 
 html_theme_options = {
     "package_name"    : "compas_skeleton",
-    "package_title"   : project,
-    "package_version" : release,
+    'package_title' : project,
+    'package_version' : release,
+    'package_author' : author,
+    'package_description' : '',
+    'package_docs' : 'https://blockresearchgroup.github.io/compas_skeleton',
+    'package_repo' : 'https://github.com/blockresearchgroup/compas_skeleton',
 }
 
 html_context = {}

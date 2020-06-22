@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>compas_skeleton</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="../_static/images/compas.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../_static/css/prism.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../_static/css/compas.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/compas-reference.css" />
+
+    
+    
+    
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</head>
+
+<body data-spy="scroll" data-target="#compas-localnav">
+
+    <nav class="navbar navbar-expand compas-navbar">
+        <a class="navbar-brand" href="/">
+            <img src="../_static/images/compas_icon_white.png" width="36px" height="36px" alt="compas" />
+        </a>
+
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="../index.html">compas_skeleton</a></li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" target="_blank" href="">Github</a></li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://compas-dev.github.io">COMPAS framework</a></li>
+        </ul>
+    </nav>    
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+
+            <main class="col-12 col-md-9 col-xl-8 compas-content" role="main">
+                <div class="container">
+                
+
+                    
+
+                    <div class="section" id="create">
+<h1>Create</h1>
+<p>This user manual example takes input from Rhino and makes visulisation in Rhino.
+So the codes need to be run in Rhino python editor or through CodeListener.</p>
+<div class="section" id="create-skeleton-and-skeletonobject-from-lines">
+<h2>Create Skeleton and SkeletonObject from lines</h2>
+<div class="figure align-default">
+<img alt="../_images/skeleton_create.gif" class="figure-img img-fluid" src="../_images/skeleton_create.gif" />
+</div>
+<p>Create Skeleton from lines:</p>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
+<span class="kn">import</span> <span class="nn">compas_rhino</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">HERE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">HERE</span><span class="p">,</span> <span class="s1">&#39;skeleton.json&#39;</span><span class="p">)</span>
+
+<span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_lines</span><span class="p">()</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_line_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)</span>
+
+<span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_skeleton_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="n">skeleton</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Create SkeletonObject:
+Skeleton object contains a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> as its datastructre, and a customized <code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code>.</p>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
+
+<span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+<span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
+<span class="n">skeletonobject</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">SkeletonObject.datastructure</span></code> is a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> object. So the result of the two methods below are the same.
+But after a skeleton object is created, we should always choose the second method so that all the modifications will be stored.</p>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="c1"># method 1</span>
+<span class="n">skeleton</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+
+<span class="c1"># method 2</span>
+<span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
+<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="section" id="create-skeleton-and-skeletonobject-from-single-point">
+<h2>Create Skeleton and SkeletonObject from single point</h2>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
+<span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonObject</span>
+<span class="kn">import</span> <span class="nn">compas_rhino</span>
+
+<span class="n">guids</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">select_points</span><span class="p">()</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">compas_rhino</span><span class="o">.</span><span class="n">get_point_coordinates</span><span class="p">(</span><span class="n">guids</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">skeleton</span> <span class="o">=</span> <span class="n">Skeleton</span><span class="o">.</span><span class="n">from_center_point</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="n">skeletonobject</span> <span class="o">=</span> <span class="n">SkeletonObject</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span>
+<span class="n">skeletonobject</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="section" id="interactive-input-width">
+<h2>Interactive input width</h2>
+<div class="figure align-default">
+<img alt="../_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="../_images/skeleton_dynamic_draw.gif" />
+</div>
+<p>There are 3 steps of <code class="docutils literal notranslate"><span class="pre">dynamic_draw_widths</span></code>:</p>
+<ul class="simple">
+<li><p>click on the joint node, move cursor to decide node width</p></li>
+<li><p>click on the leaf vertex, move cursor to decide leaf width</p></li>
+<li><p>click on the leaf vertex again, move cursor to decide how far or to which direction to extend the leaf ends.</p></li>
+</ul>
+<div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="n">skeletonobject</span><span class="o">.</span><span class="n">dynamic_draw_widths</span><span class="p">()</span>
+<span class="n">skeletonobject</span><span class="o">.</span><span class="n">datastructure</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+
+                    
+                
+                </div>
+            </main>
+
+            <!-- site navigation sidebar -->
+
+            <div class="col-12 col-md-3 col-xl-2 compas-sidebar" role="navigation"> 
+                <div class="navbar-light">
+
+                    <form id="" class="d-flex compas-searchbox" action="../search.html" method="get">
+                        <input class="form-control" type="text" name="q" placeholder="Search docs" />
+                        <input type="hidden" name="check_keywords" value="yes" />
+                        <input type="hidden" name="area" value="default" />
+
+                        <button class="navbar-toggler d-md-none compas-navigation-toggler" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </form>
+
+                    
+                    
+
+                        <div class="navbar-expand-md">
+                            <div id="compas-navigation" class="collapse navbar-collapse compas-navigation">
+
+                            <ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link reference internal" href="../intro.html">Introduction</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../gettingstarted.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../examples.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../api.html">API Reference</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../license.html">License</a></li>
+</ul>
+
+
+                            </div>
+                        </div>
+
+                    
+
+                </div>
+            </div>
+
+            <!-- table of contents of main content -->
+            
+            <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+
+                
+
+                <ul class="nav flex-column" id="compas-localnav">
+<li class="nav-item"><a class="nav-link reference internal" href="#">Create</a><ul class="nav">
+<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-and-skeletonobject-from-lines">Create Skeleton and SkeletonObject from lines</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#create-skeleton-and-skeletonobject-from-single-point">Create Skeleton and SkeletonObject from single point</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="#interactive-input-width">Interactive input width</a></li>
+</ul>
+</li>
+</ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="bg-dark pb-5">
+        <div class="container text-center pt-5 pb-5 text-muted">
+            
+                Last updated on Apr 27, 2020.
+            
+
+            
+                Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+            
+        </div>
+    </footer>
+
+    
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+            URL_ROOT          : '',
+            VERSION           : '0.1.0',
+            COLLAPSE_INDEX    : false,
+            FILE_SUFFIX       : '.html',
+            HAS_SOURCE        : 'false',
+            SOURCELINK_SUFFIX : '.txt'
+            };
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/searchtools_.js"></script>
+        <!-- <script src="../_static/js/prism.js"></script> -->
+
+        <script>
+        $(document).ready(function() {
+        $(".language-default code").addClass("python");
+        $(".language-python code").addClass("python");
+        $(".language-bash code").addClass("bash");
+        $(".language-cpp code").addClass("cpp");
+        $(".language-json code").addClass("json");
+        $(".language-none code").addClass("plaintext");
+
+        hljs.initHighlighting();
+        anchors.add();
+        });
+        </script>
+    
+</body>
+</html>
