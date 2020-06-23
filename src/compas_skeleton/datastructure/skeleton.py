@@ -512,7 +512,7 @@ class Skeleton(Mesh):
     def _mount_skeleton_vertex_transformation(self, key, f1, f2):
         # mount the skeleton vertex transformation to a descendent mesh vertex transformation
         vec = Vector(*self.vertex_attribute(key, 'transform'))
-        vec_l = f1.to_local_coords(vec)
+        vec_l = f1.to_local_coordinates(vec)
         vec = f2.to_world_coords(vec_l)
         self.vertex[key].update({'transform': list(vec)})
 
