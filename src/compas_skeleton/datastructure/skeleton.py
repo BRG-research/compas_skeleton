@@ -513,7 +513,7 @@ class Skeleton(Mesh):
         # mount the skeleton vertex transformation to a descendent mesh vertex transformation
         vec = Vector(*self.vertex_attribute(key, 'transform'))
         vec_l = f1.to_local_coordinates(vec)
-        vec = f2.to_world_coords(vec_l)
+        vec = f2.to_world_coordinates(vec_l)
         self.vertex[key].update({'transform': list(vec)})
 
     def _find_previous_vertex(self, u, v):
