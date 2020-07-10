@@ -141,6 +141,10 @@ class SkeletonObject(object):
             return False
 
         guids = compas_rhino.rs.GetObjects('select skeleton lines to remove', custom_filter=custom_filter)
+
+        if not guids:
+            return
+
         for guid in guids:
             del self.guid_skeleton_edges[guid]
         compas_rhino.rs.DeleteObjects(guids)
@@ -291,9 +295,13 @@ class SkeletonObject(object):
             preselect=True,
             filter=compas_rhino.rs.filter.point | compas_rhino.rs.filter.textdot
             )
+
+        if not guid:
+            return
+
         guid_key = self.guid_coarse_mesh_vertices
         guid_key.update(self.guid_skeleton_vertices)
-        
+
         key = guid_key[guid]
         sp = self.datastructure.vertex_coordinates(key)
         mesh_move_vertex(self.datastructure, key)
