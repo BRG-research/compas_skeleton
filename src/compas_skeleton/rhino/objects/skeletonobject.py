@@ -6,7 +6,7 @@ from compas.geometry import Vector
 from compas.geometry import dot_vectors
 from compas.geometry import add_vectors
 import compas_rhino
-from compas_rhino.modifiers import mesh_move_vertex
+from compas_rhino.objects.modifiers import mesh_move_vertex
 from compas_rhino import delete_objects
 from compas_skeleton.rhino import SkeletonArtist
 
@@ -233,15 +233,15 @@ class SkeletonObject(object):
 
             for line in lines:
                 e.Display.DrawLine(line, FromArgb(0, 0, 0), 2)
-        
+
         def _get_constrain(param):
             u = leaf_vertex
             vec_along_edge = self.datastructure._get_vec_along_branch(u)
-            
-            if param == 'leaf_width':                
+
+            if param == 'leaf_width':
                 vec_offset = vec_along_edge.cross(Vector.Zaxis())
                 vec_rhino = Rhino.Geometry.Vector3d(vec_offset[0], vec_offset[1], vec_offset[2])
-            
+
             if param == 'leaf_extend':
                 vec_rhino = Rhino.Geometry.Vector3d(vec_along_edge[0], vec_along_edge[1], vec_along_edge[2])
 
@@ -254,7 +254,7 @@ class SkeletonObject(object):
             vec_along_edge = self.datastructure._get_vec_along_branch(u)
             vec_sp_np = Vector.from_start_end(sp, cp)
             dot_vec = dot_vectors(vec_along_edge, vec_sp_np)
-            
+
             if dot_vec == 0:
                 return 0
 
@@ -270,8 +270,8 @@ class SkeletonObject(object):
 
             return edge_lines
 
-        if param == 'leaf_width' or param == 'leaf_extend':           
-            gp.Constrain(_get_constrain(param))        
+        if param == 'leaf_width' or param == 'leaf_extend':
+            gp.Constrain(_get_constrain(param))
         gp.DynamicDraw += OnDynamicDraw
 
         # get end point
@@ -396,7 +396,7 @@ class SkeletonObject(object):
     def _move_skeleton_leaf(self, key):
         v = key
         u = self.datastructure.vertex_attribute(v, 'neighbors')[0]
-        
+
         leaf_f_before = self.datastructure._get_leaf_vertex_frame(v)
         joints_f_before = self.datastructure._get_joint_vertex_frame(u, v)
 
@@ -527,7 +527,7 @@ class SkeletonObject(object):
 
         skeleton_vertices = self.datastructure.skeleton_vertices[0] + self.datastructure.skeleton_vertices[1]
         skeleton_branches = self.datastructure.skeleton_branches
-        
+
         guids_vertices, guids_edges = self.artist.draw_skeleton(skeleton_vertices, skeleton_branches)
         self.guid_skeleton_vertices = zip(guids_vertices, skeleton_vertices)
         self.guid_skeleton_edges = zip(guids_edges, skeleton_branches)
