@@ -150,6 +150,9 @@ class SkeletonObject(object):
         compas_rhino.rs.DeleteObjects(guids)
 
         lines = compas_rhino.get_line_coordinates(list(self.guid_skeleton_edges.keys()))
+        if not lines:
+            return
+
         self.datastructure.update_skeleton_lines(lines)
 
     def dynamic_draw_widths(self):
@@ -170,7 +173,8 @@ class SkeletonObject(object):
         if self.datastructure.skeleton_vertices[1]:
             self.dynamic_draw_width('leaf_width')
 
-        self.dynamic_draw_width('node_width')
+        if self.datastructure.skeleton_vertices[0]:
+            self.dynamic_draw_width('node_width')
 
         if self.datastructure.skeleton_vertices[1]:
             self.dynamic_draw_width('leaf_extend')
