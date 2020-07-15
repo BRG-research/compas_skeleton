@@ -546,8 +546,8 @@ class SkeletonObject(object):
         self.artist.mesh = self.datastructure.to_mesh()
 
         key = None
-        guid = self.artist.draw_mesh()
-        self.guid_mesh = zip([guid], [key])
+        guids = self.artist.draw_mesh()
+        self.guid_mesh = zip(guids, [key])
 
 
 # ============================================================================
