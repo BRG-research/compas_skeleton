@@ -51,6 +51,7 @@ class SkeletonObject(object):
     """
 
     settings = {
+        'layer': "Skeleton",
         'skeleton.layer': "Skeleton::skeleton",
         'mesh.layer': "Skeleton::mesh",
         'color.skeleton.vertices': [255, 0, 0],
@@ -171,13 +172,21 @@ class SkeletonObject(object):
 
         """
         if self.datastructure.skeleton_vertices[1]:
-            self.dynamic_draw_width('leaf_width')
+            result = self.dynamic_draw_width('leaf_width')
+            if result == Rhino.Commands.Result.Cancel:
+                return False
 
         if self.datastructure.skeleton_vertices[0]:
-            self.dynamic_draw_width('node_width')
+            result = self.dynamic_draw_width('node_width')
+            if result == Rhino.Commands.Result.Cancel:
+                return False
 
         if self.datastructure.skeleton_vertices[1]:
-            self.dynamic_draw_width('leaf_extend')
+            result = self.dynamic_draw_width('leaf_extend')
+            if result == Rhino.Commands.Result.Cancel:
+                return False
+
+        return True
 
     def dynamic_draw_width(self, param):
         """Dynamic draw a width value, and update the mesh in rhino.
@@ -213,7 +222,12 @@ class SkeletonObject(object):
         gp.SetBasePoint(sp, False)
         gp.ConstrainDistanceFromBasePoint(0.01)
         gp.Get()
+        print(gp.CommandResult())
+        if gp.CommandResult() != Rhino.Commands.Result.Success:
+            return gp.CommandResult()
+
         sp = gp.Point()
+
         gp.SetCommandPrompt('confirm the distance')
         self.clear_mesh()
 
@@ -281,6 +295,7 @@ class SkeletonObject(object):
         # get end point
         gp.Get()
         ep = gp.Point()
+
         dist = ep.DistanceTo(sp)
 
         if param == 'leaf_extend':
@@ -291,6 +306,7 @@ class SkeletonObject(object):
         self.datastructure.update_mesh_vertices_pos()
 
         self.draw_mesh()
+        return gp.CommandResult()
 
     def move_mesh_vertex(self):
         """ Move the position of a mesh vertex. """

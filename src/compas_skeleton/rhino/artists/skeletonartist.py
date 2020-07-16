@@ -48,6 +48,7 @@ class SkeletonArtist(MeshArtist):
         super(SkeletonArtist, self).__init__(mesh)
         self.skeleton = skeleton
         self.settings.update({
+            'layer': "Skeleton",
             'skeleton.layer': "Skeleton::skeleton",
             'mesh.layer': "Skeleton::mesh",
             'color.skeleton.vertices': [255, 0, 0],
