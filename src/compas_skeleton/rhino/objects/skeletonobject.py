@@ -6,7 +6,7 @@ from compas.geometry import Vector
 from compas.geometry import dot_vectors
 from compas.geometry import add_vectors
 import compas_rhino
-from compas_rhino.objects.modifiers import mesh_move_vertex
+from compas_rhino.objects import mesh_move_vertex
 from compas_rhino import delete_objects
 from compas_skeleton.rhino import SkeletonArtist
 
