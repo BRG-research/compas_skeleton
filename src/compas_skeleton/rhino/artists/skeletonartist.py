@@ -2,105 +2,178 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
+from functools import partial
+
 import compas_rhino
-from compas_rhino.artists import MeshArtist
+from compas_rhino.artists._artist import BaseArtist
+
+from compas.utilities import color_to_colordict
+from compas.geometry import centroid_polygon
+from compas.utilities import pairwise
 
 
-__all__ = ['SkeletonArtist']
+colordict = partial(color_to_colordict, colorformat='rgb', normalize=False)
 
 
-class SkeletonArtist(MeshArtist):
-    """Artist for visualizing skeleton mesh in the Rhino.
+__all__ = ["SkeletonArtist"]
 
-    Parameters
-    ----------
-    mesh : :class:`compas.datastructures.Mesh`
-        A COMPAS mesh generated from Skeleton
 
-    skeleton : :class:`compas_skeleton.datastructure.Skeleton`
-        A Skeleton
+class SkeletonArtist(BaseArtist):
+    """Artist for the visualisation of Skeleton data structures."""
 
-    Attributes
-    ----------
-    settings: dict
-        Default settings for layer, color...
-
-    Examples
-    --------
-    >>> from compas_skeleton.datastructure import Skeleton
-    >>> from compas_skeleton.rhino import SkeletonArtist
-    >>>
-    >>> lines = [
-    >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
-    >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
-    >>> ([0.0, 0.0, 0.0], [8.6, -5.0, 0.0])
-    >>> ]
-    >>> skeleton = Skeleton.from_skeleton_lines(lines)
-    >>> artist = SkeletonArtist(skeleton)
-    >>> artist.draw_skeleton()
-    >>> artist.draw_coarse_mesh_vertices()
-    >>> artist.draw_mesh()
-    >>> artist.redraw()
-    """
-
-    def __init__(self, skeleton, layer=None, name=None):
-        mesh = skeleton.to_mesh()
-        super(SkeletonArtist, self).__init__(mesh)
+    def __init__(self, skeleton, layer=None):
+        super(SkeletonArtist, self).__init__()
+        self._skeleton = None
+        self._subd = None
+        self._vertex_xyz = None
+        self._subd_vertex_xyz = None
         self.skeleton = skeleton
-        self.settings.update({
-            'layer': "Skeleton",
-            'skeleton.layer': "Skeleton::skeleton",
-            'mesh.layer': "Skeleton::mesh",
-            'color.skeleton.vertices': [255, 0, 0],
-            'color.skeleton.edges': [0, 0, 255],
-            'color.mesh.vertices': [0, 0, 0],
-            'color.mesh.edges': [0, 0, 0],
-            'color.mesh.faces': [0, 0, 0]
-            })
-        self.layer = self.settings['mesh.layer']
+        self.subd = skeleton.to_mesh()
+        self.layer = layer
+        self.color_vertices = (255, 0, 0)
+        self.color_edges = (0, 0, 255)
+        self.color_mesh_vertices = (0, 0, 0)
+        self.color_mesh_edges = (0, 0, 0)
 
-    def draw_skeleton(self, vertices_keys, edges_keys):
-        """Draw skeleton branches."""
+    @property
+    def skeleton(self):
+        return self._skeleton
+
+    @skeleton.setter
+    def skeleton(self, skeleton):
+        self._skeleton = skeleton
+        self._vertex_xyz = None
+
+    @property
+    def subd(self):
+        return self._subd
+
+    @subd.setter
+    def subd(self, subd):
+        self._subd = subd
+        self._subd_vertex_xyz = None
+
+    @property
+    def vertex_xyz(self):
+        if not self._vertex_xyz:
+            self._vertex_xyz = {vertex: self.skeleton.vertex_attributes(vertex, 'xyz') for vertex in self.skeleton.vertices()}
+        return self._vertex_xyz
+
+    @vertex_xyz.setter
+    def vertex_xyz(self, vertex_xyz):
+        self._vertex_xyz = vertex_xyz
+
+    @property
+    def subd_vertex_xyz(self):
+        if not self._subd_vertex_xyz:
+            self._subd_vertex_xyz = {vertex: self.subd.vertex_attributes(vertex, 'xyz') for vertex in self.subd.vertices()}
+        return self._subd_vertex_xyz
+
+    @subd_vertex_xyz.setter
+    def subd_vertex_xyz(self, subd_vertex_xyz):
+        self._subd_vertex_xyz = subd_vertex_xyz
+
+    # ==========================================================================
+    # clear
+    # ==========================================================================
+
+    def clear_by_name(self):
+        """Clear all objects in the "namespace" of the associated skeleton."""
+        guids = compas_rhino.get_objects(name="{}.*".format(self.skeleton.name))
+        compas_rhino.delete_objects(guids, purge=True)
+
+    def clear_layer(self):
+        """Clear the main layer of the artist."""
+        if self.layer:
+            compas_rhino.clear_layer(self.layer)
+
+    # ==========================================================================
+    # draw
+    # ==========================================================================
+
+    def draw(self):
+        """Draw the skeleton vertices and branches and the resulting (dense) mesh."""
+        pass
+
+    # ==========================================================================
+    # The skeleton
+    # ==========================================================================
+
+    def draw_skeleton_vertices(self, vertices=None, color=None):
+        """Draw the skeleton vertices."""
+        vertices = vertices or list(self.skeleton.skeleton_vertices[0] + self.skeleton.skeleton_vertices[1])
+        vertex_xyz = self.vertex_xyz
+        vertex_color = colordict(color, vertices, default=self.color_vertices)
         points = []
-        for key in vertices_keys:
+        for vertex in vertices:
             points.append({
-                'pos': self.skeleton.vertex_coordinates(key),
-                'name': "{}.vertex.{}".format(self.mesh.name, key),
-                'color': self.settings['color.skeleton.vertices']
-                })
-        guids_vertices = compas_rhino.draw_points(points, layer=self.settings['skeleton.layer'], clear=False, redraw=False)
+                'pos': vertex_xyz[vertex],
+                'name': "{}.vertex.{}".format(self.skeleton.name, vertex),
+                'color': vertex_color[vertex]})
+        return compas_rhino.draw_points(points, layer=self.layer, clear=False, redraw=True)
 
-        guids_edges = []
-        if edges_keys:
-            lines = []
-            for u, v in edges_keys:
-                start = self.skeleton.vertex_coordinates(u)
-                end = self.skeleton.vertex_coordinates(v)
-                lines.append({
-                    'start': start,
-                    'end': end,
-                    'name': "{}.branch.({}-{})".format(self.mesh.name, u, v),
-                    'color': self.settings['color.skeleton.edges']
-                    })
-            guids_edges = compas_rhino.draw_lines(lines, layer=self.settings['skeleton.layer'], clear=False, redraw=False)
+    def draw_skeleton_edges(self, edges=None, color=None):
+        """Draw the skeleton edges."""
+        edges = edges or list(self.skeleton.skeleton_branches)
+        vertex_xyz = self.vertex_xyz
+        edge_color = colordict(color, edges, default=self.color_edges)
+        lines = []
+        for edge in edges:
+            lines.append({
+                'start': vertex_xyz[edge[0]],
+                'end': vertex_xyz[edge[1]],
+                'color': edge_color[edge],
+                'name': "{}.edge.{}-{}".format(self.skeleton.name, *edge)})
+        return compas_rhino.draw_lines(lines, layer=self.layer, clear=False, redraw=True)
 
-        return guids_vertices, guids_edges
+    # ==========================================================================
+    # The coarse mesh
+    # ==========================================================================
 
-    def draw_coarse_mesh_vertices(self, keys):
-        """Draw skeleton coarse mesh vertices."""
+    def draw_mesh_vertices(self, vertices=None, color=None):
+        """Draw the vertices of the coarse mesh."""
+        mesh_vertices = set(self.skeleton.vertices())
+        skeleton_vertices = set(self.skeleton.skeleton_vertices[0] + self.skeleton.skeleton_vertices[1])
+        vertex_xyz = self.vertex_xyz
+        vertices = vertices or list(mesh_vertices - skeleton_vertices)
+        vertex_color = colordict(color, vertices, default=self.color_mesh_vertices)
         points = []
-        for key in keys:
+        for vertex in vertices:
             points.append({
-                'pos': self.skeleton.vertex_coordinates(key),
-                'name': "{}.vertex.{}".format('mesh', key),
-                'color': self.settings['color.mesh.vertices']
-            })
-        return compas_rhino.draw_points(points, layer=self.settings['mesh.layer'], clear=False, redraw=True)
+                'pos': vertex_xyz[vertex],
+                'name': "{}.vertex.{}".format(self.skeleton.name, vertex),
+                'color': vertex_color[vertex]})
+        return compas_rhino.draw_points(points, layer=self.layer, clear=False, redraw=True)
 
+    def draw_mesh_edges(self, edges=None, color=None):
+        """Draw the edges of the coarse mesh."""
+        pass
 
-# ==============================================================================
-# Main
-# ==============================================================================
+    # ==========================================================================
+    # The subd mesh
+    # ==========================================================================
 
-if __name__ == "__main__":
-    pass
+    def draw_subd(self, color=(0, 0, 0)):
+
+        subd_vertex_index = self.subd.key_index()
+        subd_vertex_xyz = self.subd_vertex_xyz
+        vertices = [subd_vertex_xyz[vertex] for vertex in self.subd.vertices()]
+        faces = [[subd_vertex_index[vertex] for vertex in self.subd.face_vertices(face)] for face in self.subd.faces()]
+        new_faces = []
+        for face in faces:
+            f = len(face)
+            if f == 3:
+                new_faces.append(face + face[-1:])
+            elif f == 4:
+                new_faces.append(face)
+            elif f > 4:
+                centroid = len(vertices)
+                vertices.append(centroid_polygon([vertices[index] for index in face]))
+                for a, b in pairwise(face + face[0:1]):
+                    new_faces.append([centroid, a, b, b])
+            else:
+                continue
+        layer = self.layer
+        name = "{}".format(self.subd.name)
+        guid = compas_rhino.draw_mesh(vertices, new_faces, layer=layer, name=name, color=color, disjoint=False)
+        return [guid]

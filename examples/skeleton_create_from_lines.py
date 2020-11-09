@@ -1,5 +1,6 @@
 from compas_skeleton.datastructure import Skeleton
 from compas_skeleton.rhino import SkeletonObject
+from compas_skeleton.rhino import SkeletonArtist
 import compas_rhino
 import os
 
@@ -29,11 +30,11 @@ skeleton = Skeleton.from_skeleton_lines(lines)
 skeletonobject = SkeletonObject(skeleton)
 skeletonobject.draw()
 skeletonobject.dynamic_draw_widths()
-# skeletonobject.update()
+skeletonobject.update()
 
 # ==============================================================================
 # Export
 # ==============================================================================
 
-skeletonobject.datastructure.to_json(FILE, pretty=True)
+skeletonobject.skeleton.to_json(FILE, pretty=True)
 
