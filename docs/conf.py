@@ -136,8 +136,9 @@ html_theme_options = {
     'package_version' : release,
     'package_author' : author,
     'package_description' : '',
-    'package_docs' : 'https://blockresearchgroup.github.io/compas_skeleton',
-    'package_repo' : 'https://github.com/blockresearchgroup/compas_skeleton',
+    'package_docs' : 'https://blockresearchgroup.github.io/compas_skeleton/',
+    'package_repo' : 'https://github.com/blockresearchgroup/compas_skeleton/',
+    "package_old_versions_txt" : "https://blockresearchgroup.github.io/compas_skeleton/doc_versions.txt"
 }
 
 html_context = {}
