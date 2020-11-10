@@ -17,7 +17,7 @@ import sphinx_compas_theme
 project = "COMPAS Skeleton"
 copyright = "Block Research Group - ETH Zurich"
 author = "Wenqian Yang"
-release = "0.1.0"
+release = "1.0.0"
 version = ".".join(release.split(".")[0:2])
 
 master_doc = "index"
