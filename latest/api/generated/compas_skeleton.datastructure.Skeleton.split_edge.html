@@ -17,11 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/compas-reference.css" />
 
   
-    <link rel="next" title="Skeleton.split_face" href="compas_skeleton.datastructure.Skeleton.split_face.html" />
   
-  
-  
-    <link rel="prev" title="Skeleton.smooth_centroid" href="compas_skeleton.datastructure.Skeleton.smooth_centroid.html" />
   
 
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -58,7 +54,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Version
+            1.0.0
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -89,30 +85,6 @@
         
         <div class="detail section" id="skeleton-split-edge">
 <h1 class="display-4 p-0 mb-5">Skeleton.split_edge</h1>
-<dl class="method">
-<dt id="compas_skeleton.datastructure.Skeleton.split_edge">
-<code class="sig-prename descclassname">Skeleton.</code><code class="sig-name descname">split_edge</code><span class="sig-paren">(</span><em class="sig-param">u</em>, <em class="sig-param">v</em>, <em class="sig-param">t=0.5</em>, <em class="sig-param">allow_boundary=False</em><span class="sig-paren">)</span></dt>
-<dd><p>Split and edge by inserting a vertex along its length.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mesh</strong> (<em>compas.datastructures.Mesh</em>) – Instance of a mesh.</p></li>
-<li><p><strong>u</strong> (<em>str</em>) – The key of the first vertex of the edge.</p></li>
-<li><p><strong>v</strong> (<em>str</em>) – The key of the second vertex of the edge.</p></li>
-<li><p><strong>t</strong> (<em>float (0.5)</em>) – The position of the inserted vertex.
-The value should be between 0.0 and 1.0</p></li>
-<li><p><strong>allow_boundary</strong> (<em>bool (False)</em>) – Split edges on the boundary.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><em>int</em> – The key of the inserted vertex.</p>
-</dd>
-<dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If u and v are not neighbors.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
         
@@ -131,18 +103,12 @@ The value should be between 0.0 and 1.0</p></li>
         
         
           <div id="compas-navigation" class="collapse compas-navigation">
-          <ul class="nav flex-column active">
+          <ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link reference internal" href="../../index.html">Introduction</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../gettingstarted.html">Getting Started</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../tutorial.html">Tutorial</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../examples.html">Examples</a></li>
-<li class="nav-item active"><a class="nav-link reference internal" href="../../api.html">API Reference</a><ul class="nav flex-column active">
-<li class="nav-item active"><a class="nav-link reference internal" href="../compas_skeleton.html">compas_skeleton</a><ul class="nav flex-column active">
-<li class="nav-item active"><a class="nav-link reference internal" href="../compas_skeleton.datastructure.html">compas_skeleton.datastructure</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../api.html">API Reference</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../license.html">License</a></li>
 </ul>
 

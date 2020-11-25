@@ -17,11 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../../_static/css/compas-reference.css" />
 
   
-    <link rel="next" title="Skeleton.flip_cycles" href="compas_skeleton.datastructure.Skeleton.flip_cycles.html" />
   
-  
-  
-    <link rel="prev" title="Skeleton.faces_where" href="compas_skeleton.datastructure.Skeleton.faces_where.html" />
   
 
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -58,7 +54,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Version
+            1.0.0
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -89,31 +85,6 @@
         
         <div class="detail section" id="skeleton-faces-where-predicate">
 <h1 class="display-4 p-0 mb-5">Skeleton.faces_where_predicate</h1>
-<dl class="method">
-<dt id="compas_skeleton.datastructure.Skeleton.faces_where_predicate">
-<code class="sig-prename descclassname">Skeleton.</code><code class="sig-name descname">faces_where_predicate</code><span class="sig-paren">(</span><em class="sig-param">predicate</em>, <em class="sig-param">data=False</em><span class="sig-paren">)</span></dt>
-<dd><p>Get faces for which a certain condition or set of conditions is true using a lambda function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>predicate</strong> (<em>callable</em>) – The condition you want to evaluate. The callable takes 2 parameters: <code class="docutils literal notranslate"><span class="pre">key</span></code>, <code class="docutils literal notranslate"><span class="pre">attr</span></code> and should return <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><strong>data</strong> (<em>bool, optional</em>) – Yield the faces and their data attributes.
-Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Yields</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>key</strong> (<em>hashable</em>) – The next face that matches the condition.</p></li>
-<li><p><em>2-tuple</em> – The next face and its attributes, if <code class="docutils literal notranslate"><span class="pre">data=True</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest language-python notranslate"><div class="highlight"><pre><code><span></span><span class="go">&gt;&gt;&gt;</span>
-</code></pre></div>
-</div>
-</dd></dl>
-
 </div>
 
         
@@ -132,18 +103,12 @@ Default is <code class="docutils literal notranslate"><span class="pre">False</s
         
         
           <div id="compas-navigation" class="collapse compas-navigation">
-          <ul class="nav flex-column active">
+          <ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link reference internal" href="../../index.html">Introduction</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../gettingstarted.html">Getting Started</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../tutorial.html">Tutorial</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../examples.html">Examples</a></li>
-<li class="nav-item active"><a class="nav-link reference internal" href="../../api.html">API Reference</a><ul class="nav flex-column active">
-<li class="nav-item active"><a class="nav-link reference internal" href="../compas_skeleton.html">compas_skeleton</a><ul class="nav flex-column active">
-<li class="nav-item active"><a class="nav-link reference internal" href="../compas_skeleton.datastructure.html">compas_skeleton.datastructure</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../api.html">API Reference</a></li>
 <li class="nav-item"><a class="nav-link reference internal" href="../../license.html">License</a></li>
 </ul>
 
