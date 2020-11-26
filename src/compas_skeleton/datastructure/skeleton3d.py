@@ -134,7 +134,7 @@ class Skeleton3D(Mesh):
     def _calculate_nodes_radius(self):
 
         node_radius_all = [self._calculate_node_radius(key) for key in self.nodes_joint]
-        return min(node_radius_all)
+        return max(node_radius_all)
 
     def _calculate_node_radius(self, key):
         nbrs = list(self.halfbranch[key])
