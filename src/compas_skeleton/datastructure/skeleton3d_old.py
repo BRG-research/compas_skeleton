@@ -9,67 +9,10 @@ from compas.geometry import add_vectors
 from compas.geometry import orient_points
 from compas.geometry.hull import convex_hull
 from compas.utilities import pairwise
-from compas.utilities import flatten
-from compas.geometry import distance_point_point
 
 import math
 
 __all__ = ['Skeleton3D']
-
-
-def _merge_intersect_lists(list_origion):
-    seen = []
-    merged = []
-    for n in list_origion:
-        if n in seen:
-            continue
-        for m in list_origion[1:]:
-            if m in seen:
-                continue
-            if set(n) & set(m):
-                n = list(set(n) | set(m))
-                seen.append(m)
-
-        merged.append(n)
-    return merged
-
-def merge_intersect_lists(list_origion):
-    """ merge all lists which have intersection.
-    
-    Attributes
-    ----------
-    list_origion : a list of lists
-
-    Return
-    --------
-    list : a list of merged lists
-
-    Examples
-    --------
-    >>> from compas.utilities import flatten
-    >>>
-    >>> example_list = [
-    >>> ['b', 'a'],
-    >>> ['w', 'u'],
-    >>> ['y', 'v', 'z'],
-    >>> ['u', 'v', 'w', 'x'],
-    >>> ['v', 'u', 'y'],
-    >>> ['x', 'u'],
-    >>> ['a', 'b'],
-    >>> ]
-    >>> merge_intersect_lists(example_list)
-    >>> [['b', 'a'], ['y', 'x', 'z', 'u', 'w', 'v']]
-    """
-
-    target_len = len(list(set(flatten(list_origion))))
-    merged = list_origion
-    result_len = len(list(flatten(merged)))
-
-    while result_len <> target_len:
-        merged = _merge_intersect_lists(merged)
-        result_len = len(list(flatten(merged)))
-
-    return merged
 
 
 class Skeleton3D(Mesh):
@@ -109,19 +52,17 @@ class Skeleton3D(Mesh):
 
     def generate_mesh(self):
         self._get_pts_for_branches()
-        # self._generate_branches_mesh()
+        self._generate_branches_mesh()
         self._generate_nodes_mesh()
 
     def _generate_nodes_mesh(self):
         for key in self.nodes_joint:
             self._generate_node_mesh(key)
-        # for keys in self._merge_close_nodes():
-        #     self._generate_node_mesh(keys)
 
     def _generate_node_mesh(self, u):
         keys = []
         for v in self.halfbranch[u]:
-            keys.extend(self.halfbranch[u][v]['keys'])
+            keys.extend(self.halfbranch[u][v])
 
         points = [self.vertex_attributes(key, 'xyz') for key in keys]
         faces_index = convex_hull(points)
@@ -131,72 +72,20 @@ class Skeleton3D(Mesh):
             add_face = True
 
             for v in self.halfbranch[u]:
-                if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
+                if len(set(face) & set(self.halfbranch[u][v])) == 3:
                     add_face = False
                     break
 
             if add_face:
                 self.add_face(face)
 
-    # def _generate_node_mesh(self, keys):
-
-    #     vertices = []
-    #     for u in keys:
-    #         for v in self.halfbranch[u]:
-    #             if self.halfbranch[u][v]['keys']:
-    #                 vertices.extend(self.halfbranch[u][v]['keys'])
-
-    #     points = [self.vertex_attributes(key, 'xyz') for key in vertices]
-    #     faces_index = convex_hull(points)
-
-    #     for face_index in faces_index:
-    #         face = [vertices[i] for i in face_index]
-    #         add_face = True
-
-    #         # for v in self.halfbranch[u]:
-    #         #     if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
-    #         #         add_face = False
-    #         #         break
-
-    #         if add_face:
-    #             self.add_face(face)
-
-    def _merge_close_nodes(self):
-        merged_nodes = []
-        for u in self.nodes_joint:
-            merged_nodes_u = [u]
-            for v in self.halfbranch[u]:
-
-                pt_u = [self.node[u][xyz] for xyz in 'xyz']
-                pt_v = [self.node[v][xyz] for xyz in 'xyz']
-                edge_len = distance_point_point(pt_u, pt_v)
-
-                buffer_dist_u = self.halfbranch[u][v]['d']
-                buffer_dist_v = self.halfbranch[v][u]['d']
-                
-                if edge_len <= buffer_dist_u + buffer_dist_v:
-                    self._merge_nodes(u, v)
-                    merged_nodes_u.append(v)
-
-            merged_nodes.append(merged_nodes_u)
-        return merge_intersect_lists(merged_nodes)
-
-    def _merge_nodes(self, u, v):
-        keys = self.halfbranch[u][v]['keys']
-        for key in keys:
-            self.delete_vertex(key)
-        
-        # self.halfbranch[u][v].update({'keys': None})
-        
-        return keys
-
     def _generate_branches_mesh(self):
         for u, v in self.branches():
             self._generate_branch_mesh(u, v)
 
     def _generate_branch_mesh(self, u, v):
-        keys1 = self.halfbranch[u][v]['keys']
-        keys2 = self.halfbranch[v][u]['keys']
+        keys1 = self.halfbranch[u][v]
+        keys2 = self.halfbranch[v][u]
 
         index = list(pairwise(range(len(keys1)))) + [(len(keys1)-1, 0)]
         for i, j in index:
@@ -219,17 +108,14 @@ class Skeleton3D(Mesh):
         vec.unitize()
 
         buffer_dist = self._calculate_nodes_radius() * self.node_radius_fac
-        if self.is_node_leaf(u):
-            buffer_dist = 0
-        # if not self.is_node_leaf(u):
-        #     pt_u = add_vectors(pt_u, vec * buffer_dist)
-        pt_u = add_vectors(pt_u, vec * buffer_dist)
+        if not self.is_node_leaf(u):
+            pt_u = add_vectors(pt_u, vec * buffer_dist)
 
         target_plane = (pt_u, vec * flag)  # flip vec for the other end
         points = self._generate_section(target_plane)
 
         keys = [self.add_vertex(x=x, y=y, z=z) for x, y, z in points]
-        self.halfbranch[u][v] = {'keys': keys, 'd': buffer_dist}
+        self.halfbranch[u][v] = keys
 
     def _generate_section(self, target_plane):
         theta = 2 * math.pi / self.section_seg

@@ -35,21 +35,24 @@ def get_convex_hull_mesh(points):
 
     return mesh
 
-guids = compas_rhino.select_lines()
-lines = compas_rhino.get_line_coordinates(guids)
+# guids = compas_rhino.select_lines()
+# lines = compas_rhino.get_line_coordinates(guids)
 
-network = Network.from_lines(lines)
-joints = []
-leafs = []
-for key in network.node:
-    if network.is_leaf(key):
-        leafs.append(key)
-    else:
-        joints.append(key)
+# network = Network.from_lines(lines)
+# joints = []
+# leafs = []
+# for key in network.node:
+#     if network.is_leaf(key):
+#         leafs.append(key)
+#     else:
+#         joints.append(key)
 
-points = []
-for key in leafs:
-    points.append(network.node_coordinates(key))
+# points = []
+# for key in leafs:
+#     points.append(network.node_coordinates(key))
+
+guid = compas_rhino.select_points()
+points = compas_rhino.get_point_coordinates(guid)
 
 mesh = get_convex_hull_mesh(points)
 print(mesh)

@@ -113,53 +113,53 @@ class Skeleton3D(Mesh):
         self._generate_nodes_mesh()
 
     def _generate_nodes_mesh(self):
-        for key in self.nodes_joint:
-            self._generate_node_mesh(key)
-        # for keys in self._merge_close_nodes():
-        #     self._generate_node_mesh(keys)
+        # for key in self.nodes_joint:
+        #     self._generate_node_mesh(key)
+        for keys in self._merge_close_nodes():
+            self._generate_node_mesh(keys)
 
-    def _generate_node_mesh(self, u):
-        keys = []
-        for v in self.halfbranch[u]:
-            keys.extend(self.halfbranch[u][v]['keys'])
+    # def _generate_node_mesh(self, u):
+    #     keys = []
+    #     for v in self.halfbranch[u]:
+    #         keys.extend(self.halfbranch[u][v]['keys'])
 
-        points = [self.vertex_attributes(key, 'xyz') for key in keys]
-        faces_index = convex_hull(points)
-
-        for face_index in faces_index:
-            face = [keys[i] for i in face_index]
-            add_face = True
-
-            for v in self.halfbranch[u]:
-                if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
-                    add_face = False
-                    break
-
-            if add_face:
-                self.add_face(face)
-
-    # def _generate_node_mesh(self, keys):
-
-    #     vertices = []
-    #     for u in keys:
-    #         for v in self.halfbranch[u]:
-    #             if self.halfbranch[u][v]['keys']:
-    #                 vertices.extend(self.halfbranch[u][v]['keys'])
-
-    #     points = [self.vertex_attributes(key, 'xyz') for key in vertices]
+    #     points = [self.vertex_attributes(key, 'xyz') for key in keys]
     #     faces_index = convex_hull(points)
 
     #     for face_index in faces_index:
-    #         face = [vertices[i] for i in face_index]
+    #         face = [keys[i] for i in face_index]
     #         add_face = True
 
-    #         # for v in self.halfbranch[u]:
-    #         #     if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
-    #         #         add_face = False
-    #         #         break
+    #         for v in self.halfbranch[u]:
+    #             if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
+    #                 add_face = False
+    #                 break
 
     #         if add_face:
     #             self.add_face(face)
+
+    def _generate_node_mesh(self, keys):
+
+        vertices = []
+        for u in keys:
+            for v in self.halfbranch[u]:
+                if self.halfbranch[u][v]['keys']:
+                    vertices.extend(self.halfbranch[u][v]['keys'])
+
+        points = [self.vertex_attributes(key, 'xyz') for key in vertices]
+        faces_index = convex_hull(points)
+
+        for face_index in faces_index:
+            face = [vertices[i] for i in face_index]
+            add_face = True
+
+            # for v in self.halfbranch[u]:
+            #     if len(set(face) & set(self.halfbranch[u][v]['keys'])) == 3:
+            #         add_face = False
+            #         break
+
+            if add_face:
+                self.add_face(face)
 
     def _merge_close_nodes(self):
         merged_nodes = []
@@ -186,7 +186,7 @@ class Skeleton3D(Mesh):
         for key in keys:
             self.delete_vertex(key)
         
-        # self.halfbranch[u][v].update({'keys': None})
+        self.halfbranch[u][v].update({'keys': None})
         
         return keys
 
