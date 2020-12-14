@@ -318,10 +318,55 @@ class SkeletonObject(BaseObject):
     # ==============================================================================
 
     def add_lines(self):
-        raise NotImplementedError
+        """Update skeleton by adding more skeleon lines from Rhino.
+
+        Examples
+        --------
+        >>> skeletonobjcet.add_lines()
+        >>> skeletonobjcet.draw()
+
+        """
+        self.clear_subd()
+        guids = compas_rhino.select_lines()
+        if not guids:
+            return
+
+        guids = list(self.guid_skeleton_edge.keys()) + guids
+        lines = compas_rhino.get_line_coordinates(guids)
+        compas_rhino.rs.HideObjects(guids)
+        self.skeleton.update_skeleton_lines(lines)
 
     def remove_lines(self):
-        raise NotImplementedError
+        """Update skeleton by removing current skeleon lines.
+
+        Examples
+        --------
+        >>> skeletonobjcet.remove_lines()
+        >>> skeletonobjcet.draw()
+
+        """
+        self.clear_subd()
+
+        def custom_filter(rhino_object, geometry, component_index):
+            if rhino_object.Attributes.ObjectId in list(self.guid_skeleton_edge.keys()):
+                return True
+            return False
+
+        guids = compas_rhino.rs.GetObjects('select skeleton lines to remove', custom_filter=custom_filter)
+
+        if not guids:
+            return
+
+        for guid in guids:
+            del self.guid_skeleton_edge[guid]
+
+        compas_rhino.rs.HideObjects(guids)
+
+        lines = compas_rhino.get_line_coordinates(list(self.guid_skeleton_edge.keys()))
+        if not lines:
+            return
+
+        self.skeleton.update_skeleton_lines(lines)
 
     def dynamic_draw_widths(self):
         """Dynamic draw leaf width, node width, leaf extend and update the mesh in rhino.
@@ -381,7 +426,7 @@ class SkeletonObject(BaseObject):
             try:
                 node_vertex = self.skeleton.skeleton_vertices[0][0]
             except Exception as e:
-                print(e)
+                print('this skeleton doesn\'t have node')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(node_vertex)))
             gp.SetCommandPrompt('select the node vertex')
@@ -389,7 +434,7 @@ class SkeletonObject(BaseObject):
             try:
                 leaf_vertex = self.skeleton.skeleton_vertices[1][0]
             except Exception as e:
-                print(e)
+                print('this skeleton doesn\'t have leaf')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(leaf_vertex)))
             gp.SetCommandPrompt('select the leaf vertex')
@@ -684,7 +729,7 @@ class SkeletonObject(BaseObject):
     }
 
     def update(self):
-        """update Skeleton by directly typing command name in Rhino command window.
+        """update Skeleton by selecting the options in rhino command window.
 
         Examples
         --------
