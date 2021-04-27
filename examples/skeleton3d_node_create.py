@@ -23,8 +23,13 @@ guids = compas_rhino.select_lines()
 lines = compas_rhino.get_line_coordinates(guids)
 
 sk3_node = Skeleton3D_Node.from_skeleton_lines(lines)
+<<<<<<< Updated upstream
 sk3_node.joint_width = 0.8
 sk3_node.leaf_width = 0.2
+=======
+sk3_node.joint_width = 1
+sk3_node.leaf_width = 1
+>>>>>>> Stashed changes
 sk3_node.update_vertices_location()
 sk3_node = mesh_fast_copy(sk3_node)
 sk3_node.to_json('../data/sk3_node.json', pretty=True)

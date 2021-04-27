@@ -21,7 +21,7 @@ from __future__ import division
 
 from .skeleton import Skeleton
 from .skeleton3d import Skeleton3D
-from .skeleton3d_quad import Skeleton3D_Node
+# from .skeleton3d_quad import Skeleton3D_Node
 # from .skeleton3d_quad import Skeleton3D_Branch
 
 

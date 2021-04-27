@@ -29,7 +29,7 @@ compas_rhino.rs.HideObjects(guids)
 skeleton = Skeleton.from_skeleton_lines(lines)
 skeletonobject = SkeletonObject(skeleton)
 skeletonobject.draw()
-skeletonobject.dynamic_draw_widths()
+# skeletonobject.dynamic_draw_widths()
 skeletonobject.update()
 
 # ==============================================================================

@@ -15,8 +15,13 @@ lines = compas_rhino.get_line_coordinates(guids)
 
 sk3 = Skeleton3D.from_skeleton_lines(lines)
 sk3.section_seg = 4
+<<<<<<< Updated upstream
 sk3.branch_radius = 2
 sk3.node_radius_fac = 1.5
+=======
+sk3.branch_radius = 0.3
+sk3.node_radius_fac = 1.0
+>>>>>>> Stashed changes
 sk3.generate_mesh()
 sk3.merge_triangles()
 # print(sk3._merge_close_nodes())

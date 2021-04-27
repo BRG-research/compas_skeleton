@@ -172,7 +172,29 @@ def create_sk3_quad(lines, joint_width=1, leaf_width=1, joint_length=0.4):
 
 guids = compas_rhino.select_lines()
 lines = compas_rhino.get_line_coordinates(guids)
+<<<<<<< Updated upstream
 create_sk3_quad(lines)
+=======
+network_global = Network.from_lines(lines)
+
+joint_width = 0.5
+leaf_width = 0.5
+joint_length = 0.4
+
+joints = []
+leafs = []
+for key in network_global.node:
+    if network_global.is_leaf(key):
+        leafs.append(key)
+    else:
+        joints.append(key)
+
+networks, descendent_tree = create_networks()
+sk3_joints = create_sk3_joints(networks)
+sk3_branches = create_sk3_branches()
+
+mesh = meshes_join(sk3_joints.values() + sk3_branches)
+>>>>>>> Stashed changes
 
 # artist = MeshArtist(mesh)
 # # artist.draw_vertices()
