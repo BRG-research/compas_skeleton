@@ -34,7 +34,6 @@ class Skeleton(Mesh):
     Examples
     --------
     >>> from compas_skeleton.datastructure import Skeleton
-    >>>
     >>> lines = [
     >>> ([0.0, 0.0, 0.0], [0.0, 10.0, 0.0]),
     >>> ([0.0, 0.0, 0.0], [-8.6, -5.0, 0.0]),
@@ -202,7 +201,7 @@ class Skeleton(Mesh):
         network = Network.from_lines(lines)
 
         self.clear()
-        self._mesh_from_network(network) 
+        self._mesh_from_network(network)
 
     # --------------------------------------------------------------------------
     # builders
@@ -243,7 +242,7 @@ class Skeleton(Mesh):
 
         if self.node_width == 0:
             self.node_width = 2 # for default display.
-        
+
         self.update_mesh_vertices_pos()
 
     def _add_skeleton_vertices(self, network):
@@ -446,7 +445,7 @@ class Skeleton(Mesh):
             vertex = self._find_previous_vertex(u, v)
         else:
             vertex = self._find_next_vertex(u, v)
-        
+
         vec1 = Vector(*self.edge_vector(u, v))
         vec2 = Vector(*self.edge_vector(vertex, u))
         normal = vec1.cross(vec2)
@@ -465,14 +464,14 @@ class Skeleton(Mesh):
         vec_offset.unitize()
         if dirct == 'right':
             vec_offset.scale(-1)
-        
+
         return vec_offset
 
     def _get_leaf_vertex_frame(self, key):
         pt = self.vertex_coordinates(key)
         vec_along_edge = self._get_vec_along_branch(key)
         vec_perp = vec_along_edge.cross(Vector.Zaxis())
-        
+
         return Frame(pt, vec_along_edge, vec_perp)
 
     def _get_joint_vertex_frame(self, u, v):

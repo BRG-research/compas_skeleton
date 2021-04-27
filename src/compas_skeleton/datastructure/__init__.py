@@ -25,4 +25,8 @@ from .skeleton3d_quad import Skeleton3D_Node
 # from .skeleton3d_quad import Skeleton3D_Branch
 
 
-__all__ = [name for name in dir() if not name.startswith('_')]
+__all__ = [
+    'Skeleton',
+    'Skeleton3D',
+    'Skeleton3D_Node'
+]

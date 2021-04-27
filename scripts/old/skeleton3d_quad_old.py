@@ -85,8 +85,8 @@ class Skeleton3D_Node(Mesh):
         self.network_convexhull = {}
         # self.leaf_width = []
         self.attributes.update({
-            'network': None
-            'convexhull_mesh': None
+            'network': None,
+            'convexhull_mesh': None,
             'descendent_tree': None
         })
 
