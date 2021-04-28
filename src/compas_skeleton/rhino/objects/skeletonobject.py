@@ -425,7 +425,7 @@ class SkeletonObject(BaseObject):
         if param == 'node_width':
             try:
                 node_vertex = self.skeleton.skeleton_vertices[0][0]
-            except Exception as e:
+            except Exception:
                 print('this skeleton doesn\'t have node')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(node_vertex)))
@@ -433,7 +433,7 @@ class SkeletonObject(BaseObject):
         else:
             try:
                 leaf_vertex = self.skeleton.skeleton_vertices[1][0]
-            except Exception as e:
+            except Exception:
                 print('this skeleton doesn\'t have leaf')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(leaf_vertex)))

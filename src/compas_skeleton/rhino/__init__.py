@@ -30,8 +30,11 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
-from .artists import * 
-from .objects import * 
+from .artists import SkeletonArtist  # noqa: F401
+from .objects import SkeletonObject  # noqa: F401
 
 
-__all__ = [name for name in dir() if not name.startswith('_')]
+__all__ = [
+    'SkeletonArtist',
+    'SkeletonObject'
+]

@@ -214,7 +214,8 @@ class Skeleton(Mesh):
 
         # assign default mesh width, because with 0 width the mesh cannot be visualised.
         if self.node_width == 0 and self.leaf_width == 0:
-            average_edge_length = sum([self.edge_length(u, v) for u, v in self.edges()])/self.number_of_edges()
+            average_edge_length = sum(
+                [self.edge_length(u, v) for u, v in self.edges()])/self.number_of_edges()
             self.leaf_width = average_edge_length * 0.2
             self.node_width = average_edge_length * 0.2 * 2
 
@@ -228,7 +229,8 @@ class Skeleton(Mesh):
     def _mesh_from_center_point(self, pt):
         # add the point as the skeleton node
         self.add_vertex(0)
-        self.vertex[0].update({'x': pt[0], 'y': pt[1], 'z': pt[2], 'type': 'skeleton_node'})
+        self.vertex[0].update(
+            {'x': pt[0], 'y': pt[1], 'z': pt[2], 'type': 'skeleton_node'})
 
         # add 4 more vertices to compose a mesh
         for index in range(1, 5):
@@ -241,7 +243,7 @@ class Skeleton(Mesh):
             self.add_face([0, u, v])
 
         if self.node_width == 0:
-            self.node_width = 2 # for default display.
+            self.node_width = 2  # for default display.
 
         self.update_mesh_vertices_pos()
 
@@ -295,7 +297,8 @@ class Skeleton(Mesh):
 
                 vertex_prvs = self._find_previous_vertex(u, v)
                 get_boundary_vertex_keys(network, u, v, sp=current_key)
-                get_boundary_vertex_keys(network, vertex_prvs, u, ep=current_key)
+                get_boundary_vertex_keys(
+                    network, vertex_prvs, u, ep=current_key)
 
                 self.add_vertex(current_key)
                 current_key += 1
@@ -402,7 +405,8 @@ class Skeleton(Mesh):
         vec_along_edge = Vector(*self.edge_vector(v, u))
         vec_offset = vec_along_edge.cross(Vector.Zaxis())
         if vec_offset.length < 0.001:
-            raise Exception('skeleton line shouldn\'t be perpendicular to the ground')
+            raise Exception(
+                'skeleton line shouldn\'t be perpendicular to the ground')
 
         vec_offset.unitize()
         vec_offset.scale(self.leaf_width)
@@ -457,9 +461,11 @@ class Skeleton(Mesh):
                 self.vertex_coordinates(vertex),
                 self.vertex_coordinates(u),
                 self.vertex_coordinates(v)
-                ])
-            vec_offset = Vector.from_start_end(self.vertex_coordinates(u), pt_face_center)
-            vec_offset.scale(normal[2] * -1)  # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
+            ])
+            vec_offset = Vector.from_start_end(
+                self.vertex_coordinates(u), pt_face_center)
+            # if the angle between two vectors is bigger than 180, the offset direction should be flipped.
+            vec_offset.scale(normal[2] * -1)
 
         vec_offset.unitize()
         if dirct == 'right':
@@ -568,7 +574,8 @@ class Skeleton(Mesh):
                 corners.append(key)
 
         self.default_edge_attributes.update({'crease': 0})
-        self.edges_attribute('crease', k + 1, keys=[edge for boundary in self.edges_on_boundaries() for edge in boundary])
+        self.edges_attribute(
+            'crease', k + 1, keys=[edge for boundary in self.edges_on_boundaries() for edge in boundary])
 
         return mesh_subdivide_catmullclark(self, k, fixed=corners)
 

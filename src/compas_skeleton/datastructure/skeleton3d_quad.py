@@ -4,26 +4,17 @@ from __future__ import print_function
 
 from compas.datastructures import Mesh
 from compas.datastructures import Network
-from compas.datastructures import mesh_smooth_centroid
-from compas.datastructures import mesh_subdivide_catmullclark
-from compas.datastructures import mesh_subdivide_quad
 from compas.geometry import convex_hull
 from compas.geometry import Vector
 from compas.geometry import add_vectors
 from compas.geometry import cross_vectors
 from compas.geometry import Plane
 from compas.geometry import project_point_plane
-from compas.geometry import angle_vectors
-from compas.geometry.transformations import mirror_points_plane
 from compas.topology import unify_cycles
 from compas.utilities import flatten
 from compas.utilities import pairwise
 
-import compas_rhino
-from compas_rhino.artists import MeshArtist
-
 import copy
-import math
 
 
 __all__ = ['Skeleton3D_Node', 'Skeleton3D_Branch']
@@ -291,13 +282,10 @@ class Skeleton3D_Node(Mesh):
                 vertex_key = self.descendent_tree[key][nbr]['lp']
                 self.vertex[vertex_key].update({'x': pt[0], 'y': pt[1], 'z': pt[2]})
 
+
 class Skeleton3D_Branch(Mesh):
     def __init__(self):
         super(Skeleton3D_Branch, self).__init__()
         self.attributes.update({
             'sk3_nodes': None,
         })
-
-
-if __name__ == '__main__':
-    pass
