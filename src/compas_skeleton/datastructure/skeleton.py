@@ -567,6 +567,9 @@ class Skeleton(Mesh):
             if self.vertex_degree(key) == 2:
                 corners.append(key)
 
+        self.default_edge_attributes.update({'crease': 0})
+        self.edges_attribute('crease', k + 1, keys=[edge for boundary in self.edges_on_boundaries() for edge in boundary])
+
         return mesh_subdivide_catmullclark(self, k, fixed=corners)
 
     # --------------------------------------------------------------------------
