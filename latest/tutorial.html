@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <title>compas_skeleton - Tutorial</title>
+  
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -25,17 +27,6 @@
   
 
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-  <style>
-    .footer-text,
-    .footer-link,
-    .footer-title {
-      color: rgba(255, 255, 255, 0.25);
-    }
-    .footer-link:hover {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    </style>
 </head>
 
 <body data-spy="scroll" data-target="#compas-toc">
@@ -59,7 +50,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            1.1.0
+            1.1.2rc0
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -85,13 +76,23 @@
   <div class="container-fluid">
     <div class="row">
       <!-- main -->
-      <main class="col-12 col-md-9 col-xl-7 px-2 px-md-5 py-5 compas-content" role="main">
+      <main class="col-12 col-md-9 col-xl-7 px-2 px-md-5 pt-2 pb-5 compas-content" role="main">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-3 bg-white px-0">
+            <li class="breadcrumb-item"><a href="index.html">docs</a></li>
+            
+            <li class="breadcrumb-item active" aria-current="page">Tutorial</li>
+          </ol>
+        </nav>
+        
+
         
         
         <div class="section" id="tutorial">
-<h1 class="display-4 p-0 mb-5">Tutorial</h1>
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="skeleton">
-<h2>Skeleton</h2>
+<h2>Skeleton<a class="headerlink" href="#skeleton" title="Permalink to this headline">¶</a></h2>
 <p>A Skeleton contains below attributes.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_concept_diagram.png" class="figure-img img-fluid" src="_images/skeleton_concept_diagram.png" />
@@ -110,7 +111,7 @@ Descendent vertices and face are then added to the skeleton coarse mesh.</p>
 <p>Skeleton high-poly mesh is the result of coarse mesh subdivision, which is decided by attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code>.
 <code class="docutils literal notranslate"><span class="pre">sub_leve</span></code> can be increased or decreased during any step of modification, for a preferred visualisation.</p>
 <div class="section" id="create-skeleton">
-<h3>Create Skeleton</h3>
+<h3>Create Skeleton<a class="headerlink" href="#create-skeleton" title="Permalink to this headline">¶</a></h3>
 <p>Create Skeleton from lines:</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.datastructure</span> <span class="kn">import</span> <span class="n">Skeleton</span>
 <span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonArtist</span>
@@ -134,7 +135,7 @@ Descendent vertices and face are then added to the skeleton coarse mesh.</p>
 </div>
 </div>
 <div class="section" id="skeleton-artist">
-<h2>Skeleton Artist</h2>
+<h2>Skeleton Artist<a class="headerlink" href="#skeleton-artist" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code> is a customized <a class="reference external" href="https://compas-dev.github.io/main/api/generated/compas_rhino.artists.MeshArtist.html#compas_rhino.artists.MeshArtist">MeshArtist</a>
 for displaying Skeleton vertices, branches and mesh in Rhino.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">from</span> <span class="nn">compas_skeleton.rhino</span> <span class="kn">import</span> <span class="n">SkeletonArtist</span>
@@ -145,11 +146,11 @@ for displaying Skeleton vertices, branches and mesh in Rhino.</p>
 </div>
 </div>
 <div class="section" id="skeleton-object">
-<h2>Skeleton object</h2>
+<h2>Skeleton object<a class="headerlink" href="#skeleton-object" title="Permalink to this headline">¶</a></h2>
 <p>While <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> is a datastructure independed from third party software, <code class="docutils literal notranslate"><span class="pre">SkeletonObject</span></code> is the implementation of <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> in Rhino.
 Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject</span></code> contains a <code class="docutils literal notranslate"><span class="pre">Skeleton</span></code> as its datastructure and a <code class="docutils literal notranslate"><span class="pre">SkeletonArtist</span></code>. It provides interactive editing methods and visulisation in Rhino.</p>
 <div class="section" id="create-skeleton-object">
-<h3>Create Skeleton Object</h3>
+<h3>Create Skeleton Object<a class="headerlink" href="#create-skeleton-object" title="Permalink to this headline">¶</a></h3>
 <div class="figure align-default">
 <img alt="_images/skeleton_create.gif" class="figure-img img-fluid" src="_images/skeleton_create.gif" />
 </div>
@@ -167,7 +168,7 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 </div>
 </div>
 <div class="section" id="interactive-input-width">
-<h3>Interactive input width</h3>
+<h3>Interactive input width<a class="headerlink" href="#interactive-input-width" title="Permalink to this headline">¶</a></h3>
 <div class="figure align-default">
 <img alt="_images/skeleton_dynamic_draw.gif" class="figure-img img-fluid" src="_images/skeleton_dynamic_draw.gif" />
 </div>
@@ -183,7 +184,7 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 </ul>
 </div>
 <div class="section" id="serialization-and-reloading">
-<h3>Serialization and reloading</h3>
+<h3>Serialization and reloading<a class="headerlink" href="#serialization-and-reloading" title="Permalink to this headline">¶</a></h3>
 <p>Serilize the datastructure for further editing.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="kn">import</span> <span class="nn">os</span>
 
@@ -205,7 +206,7 @@ Each <code class="docutils literal notranslate"><span class="pre">SkeletonObject
 But after a skeleton object is created, we should always choose the second method so that all the modifications will be stored.</p>
 </div>
 <div class="section" id="interactive-editing">
-<h3>Interactive editing</h3>
+<h3>Interactive editing<a class="headerlink" href="#interactive-editing" title="Permalink to this headline">¶</a></h3>
 <p>After the skeleton mesh is created, it can be modified with interactive input.
 Editing skeleton branches or changing width parameters will update related descendent vertices and as well as the entire mesh.</p>
 <div class="language-python notranslate"><div class="highlight"><pre><code><span></span><span class="c1"># load skeleton from previous step</span>
@@ -219,28 +220,28 @@ Editing skeleton branches or changing width parameters will update related desce
 </div>
 <p>Once update mode is activated, editing methods can be called by typing command name directly in Rhino command window. Following commands are available:</p>
 <div class="section" id="node-width">
-<h4>node_width</h4>
+<h4>node_width<a class="headerlink" href="#node-width" title="Permalink to this headline">¶</a></h4>
 <p>Change the skeleton mesh width at all joint nodes.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_node_width.gif" class="figure-img img-fluid" src="_images/skeleton_node_width.gif" />
 </div>
 </div>
 <div class="section" id="leaf-width">
-<h4>leaf_width</h4>
+<h4>leaf_width<a class="headerlink" href="#leaf-width" title="Permalink to this headline">¶</a></h4>
 <p>Change the skeleton mesh width at all leaf ends.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_leaf_width.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_width.gif" />
 </div>
 </div>
 <div class="section" id="leaf-extend">
-<h4>leaf_extend</h4>
+<h4>leaf_extend<a class="headerlink" href="#leaf-extend" title="Permalink to this headline">¶</a></h4>
 <p>Change how far or to which direction to extend the leaf ends.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_leaf_extend.gif" class="figure-img img-fluid" src="_images/skeleton_leaf_extend.gif" />
 </div>
 </div>
 <div class="section" id="m-skeleton">
-<h4>m_skeleton</h4>
+<h4>m_skeleton<a class="headerlink" href="#m-skeleton" title="Permalink to this headline">¶</a></h4>
 <p>Move a skeleton vertex.
 All related descendent vertices will be updated accordingly.</p>
 <div class="figure align-default">
@@ -248,7 +249,7 @@ All related descendent vertices will be updated accordingly.</p>
 </div>
 </div>
 <div class="section" id="m-mesh">
-<h4>m_mesh</h4>
+<h4>m_mesh<a class="headerlink" href="#m-mesh" title="Permalink to this headline">¶</a></h4>
 <p>Move a mesh vertex.
 Local transformation will be stored in the datastructure.
 When this vertex moves following skeleton vertex, the local movement will be transformed accordingly.</p>
@@ -257,32 +258,32 @@ When this vertex moves following skeleton vertex, the local movement will be tra
 </div>
 </div>
 <div class="section" id="subdivide">
-<h4>subdivide</h4>
+<h4>subdivide<a class="headerlink" href="#subdivide" title="Permalink to this headline">¶</a></h4>
 <p>Increase the high poly mesh subdivision level by increasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
 <div class="figure align-default">
 <img alt="_images/skeleton_merge.gif" class="figure-img img-fluid" src="_images/skeleton_merge.gif" />
 </div>
 </div>
 <div class="section" id="merge">
-<h4>merge</h4>
+<h4>merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h4>
 <p>Decrease the high poly mesh subdivision level by decreasing attribute <code class="docutils literal notranslate"><span class="pre">sub_level</span></code></p>
 </div>
 <div class="section" id="add-lines">
-<h4>add_lines</h4>
+<h4>add_lines<a class="headerlink" href="#add-lines" title="Permalink to this headline">¶</a></h4>
 <p>Add more lines to the current skeleton branches.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_add_lines.gif" class="figure-img img-fluid" src="_images/skeleton_add_lines.gif" />
 </div>
 </div>
 <div class="section" id="remove-lines">
-<h4>remove_lines</h4>
+<h4>remove_lines<a class="headerlink" href="#remove-lines" title="Permalink to this headline">¶</a></h4>
 <p>Remove lines from the current skeleton branches.</p>
 <div class="figure align-default">
 <img alt="_images/skeleton_remove_lines.gif" class="figure-img img-fluid" src="_images/skeleton_remove_lines.gif" />
 </div>
 </div>
 <div class="section" id="finish">
-<h4>finish</h4>
+<h4>finish<a class="headerlink" href="#finish" title="Permalink to this headline">¶</a></h4>
 <p>End this round of editing and draw the resulting high-poly mesh in Rhino.</p>
 </div>
 </div>
@@ -357,24 +358,48 @@ When this vertex moves following skeleton vertex, the local movement will be tra
   </div>
   <!-- main -->
   <!-- footer -->
+  <footer class="compas-footer">
+    <nav class="nav p-2">
+      
+        <a href="gettingstarted.html" title="Getting Started" class="nav-link footer-link float-start text-left d-flex w-50" rel="prev">
+          <div class="nav-button p-2 m-2"><i class="fas fa-arrow-left"></i></div>
+          <div class="nav-title flex-grow-1 align-self-center">
+            <div class="nav-direction small font-weight-light">Previous</div>
+            Getting Started
+          </div>
+        </a>
+      
+
+      
+        <a href="examples.html" title="Examples" class="nav-link footer-link float-end text-right d-flex w-50" rel="next">
+          <div class="nav-title footer-link flex-grow-1 align-self-center">
+            <div class="nav-direction small font-weight-light">Next</div>
+            Examples
+          </div>
+          <div class="nav-button p-2 m-2"><i class="fas fa-arrow-right"></i></div>
+        </a>
+      
+    </nav>  
+  </footer>
   <!-- footer -->
+  <!-- below -->
   <div class="below py-5" style="background-color: #222;">
     <div class="container">
       <div class="row flex-column">
       <div class="col-12 col-md-6 mx-md-auto text-center">
-        <h4 class="pb-3 footer-text">COMPAS</h4>
-        <p class="footer-text">
+        <h4 class="pb-3 below-text">COMPAS</h4>
+        <p class="below-text">
           A computational framework for collaboration and research
           in Architecture, Engineering, Fabrication, and Construction.
         </p>
         <nav class="nav justify-content-center pb-3">
-          <a class="nav-link mx-2 px-0 footer-link" href="http://github.com/compas-dev" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="http://github.com/compas-dev" target="_blank">
             <span class="fab fa-github fa-1x"></span>
           </a>
-          <a class="nav-link mx-2 px-0 footer-link" href="http://forum.compas-framework.org" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="http://forum.compas-framework.org" target="_blank">
             <span class="fab fa-discourse fa-1x"></span>
           </a>
-          <a class="nav-link mx-2 px-0 footer-link" href="https://pypi.org/project/COMPAS/" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="https://pypi.org/project/COMPAS/" target="_blank">
             <span class="fab fa-python fa-1x"></span>
           </a>
         </nav>
@@ -382,16 +407,17 @@ When this vertex moves following skeleton vertex, the local movement will be tra
       </div>
       <div class="row">
       <div class="col text-center">
-        <p class="p-0 m-0 footer-text">Copyright &copy; 2017-2020 compas-dev</p>
+        <p class="p-0 m-0 below-text">Copyright &copy; 2017-2021 compas-dev</p>
       </div>
       </div>
     </div>
   </div>
-
+  <!-- below -->
+  <!-- scripts -->
   <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
   URL_ROOT          : '',
-  VERSION           : '1.1.0',
+  VERSION           : '1.1.2rc0',
   COLLAPSE_INDEX    : false,
   FILE_SUFFIX       : '.html',
   HAS_SOURCE        : 'false',
@@ -440,8 +466,8 @@ When this vertex moves following skeleton vertex, the local movement will be tra
       });
     })
   }
-
   </script>
+  <!-- scripts -->
   
   
 </body>

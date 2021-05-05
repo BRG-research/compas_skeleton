@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <title>compas_skeleton - COMPAS Skeleton</title>
+  
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -23,17 +25,6 @@
   
 
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-  <style>
-    .footer-text,
-    .footer-link,
-    .footer-title {
-      color: rgba(255, 255, 255, 0.25);
-    }
-    .footer-link:hover {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    </style>
 </head>
 
 <body data-spy="scroll" data-target="#compas-toc">
@@ -57,7 +48,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            1.1.0
+            1.1.2rc0
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -83,27 +74,37 @@
   <div class="container-fluid">
     <div class="row">
       <!-- main -->
-      <main class="col-12 col-md-9 col-xl-7 px-2 px-md-5 py-5 compas-content" role="main">
+      <main class="col-12 col-md-9 col-xl-7 px-2 px-md-5 pt-2 pb-5 compas-content" role="main">
+        
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-3 bg-white px-0">
+            <li class="breadcrumb-item"><a href="#">docs</a></li>
+            
+            <li class="breadcrumb-item active" aria-current="page">COMPAS Skeleton</li>
+          </ol>
+        </nav>
+        
+
         
         
         <div class="section" id="compas-skeleton">
-<h1 class="display-4 p-0 mb-5">COMPAS Skeleton</h1>
+<h1>COMPAS Skeleton<a class="headerlink" href="#compas-skeleton" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-default">
 <img alt="_images/intro.png" class="figure-img img-fluid" src="_images/intro.png" />
 </div>
 <div class="section" id="introduction">
-<h2>Introduction</h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/BlockResearchGroup/compas_skeleton">COMPAS Skeleton</a> (compas_skeleton) is a mesh modeling package for the <a class="reference external" href="https://compas-dev.github.io/">COMPAS</a> framework.
 It generates a coarse(low-poly) or a high resolution mesh from a set of branch lines while allowing interactive user input.
 It offers efficient modification methods for the resulting mesh, by modifying the input branch lines or changing skeleton parameters (such as width etc).</p>
 </div>
 <div class="section" id="applications">
-<h2>Applications</h2>
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
 <p>Skeleton provides a way of sketching 2D diagrams and meshes from minimal inputs.
 For example, it can be used to create force patterns for <a class="reference external" href="https://blockresearchgroup.github.io/compas-RV2">RhinoVault</a> and <a class="reference external" href="https://blockresearchgroup.github.io/compas_tna">TNA</a>.</p>
 </div>
 <div class="section" id="table-of-contents">
-<h2>Table of Contents</h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
@@ -117,7 +118,8 @@ For example, it can be used to create force patterns for <a class="reference ext
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/compas_skeleton.html">compas_skeleton</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="api/compas_skeleton.html">compas_skeleton</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_skeleton.datastructure.html">compas_skeleton.datastructure</a></li>
 </ul>
 </li>
 </ul>
@@ -175,24 +177,40 @@ For example, it can be used to create force patterns for <a class="reference ext
   </div>
   <!-- main -->
   <!-- footer -->
+  <footer class="compas-footer">
+    <nav class="nav p-2">
+      
+
+      
+        <a href="gettingstarted.html" title="Getting Started" class="nav-link footer-link float-end text-right d-flex w-50" rel="next">
+          <div class="nav-title footer-link flex-grow-1 align-self-center">
+            <div class="nav-direction small font-weight-light">Next</div>
+            Getting Started
+          </div>
+          <div class="nav-button p-2 m-2"><i class="fas fa-arrow-right"></i></div>
+        </a>
+      
+    </nav>  
+  </footer>
   <!-- footer -->
+  <!-- below -->
   <div class="below py-5" style="background-color: #222;">
     <div class="container">
       <div class="row flex-column">
       <div class="col-12 col-md-6 mx-md-auto text-center">
-        <h4 class="pb-3 footer-text">COMPAS</h4>
-        <p class="footer-text">
+        <h4 class="pb-3 below-text">COMPAS</h4>
+        <p class="below-text">
           A computational framework for collaboration and research
           in Architecture, Engineering, Fabrication, and Construction.
         </p>
         <nav class="nav justify-content-center pb-3">
-          <a class="nav-link mx-2 px-0 footer-link" href="http://github.com/compas-dev" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="http://github.com/compas-dev" target="_blank">
             <span class="fab fa-github fa-1x"></span>
           </a>
-          <a class="nav-link mx-2 px-0 footer-link" href="http://forum.compas-framework.org" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="http://forum.compas-framework.org" target="_blank">
             <span class="fab fa-discourse fa-1x"></span>
           </a>
-          <a class="nav-link mx-2 px-0 footer-link" href="https://pypi.org/project/COMPAS/" target="_blank">
+          <a class="nav-link mx-2 px-0 below-link" href="https://pypi.org/project/COMPAS/" target="_blank">
             <span class="fab fa-python fa-1x"></span>
           </a>
         </nav>
@@ -200,16 +218,17 @@ For example, it can be used to create force patterns for <a class="reference ext
       </div>
       <div class="row">
       <div class="col text-center">
-        <p class="p-0 m-0 footer-text">Copyright &copy; 2017-2020 compas-dev</p>
+        <p class="p-0 m-0 below-text">Copyright &copy; 2017-2021 compas-dev</p>
       </div>
       </div>
     </div>
   </div>
-
+  <!-- below -->
+  <!-- scripts -->
   <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
   URL_ROOT          : '',
-  VERSION           : '1.1.0',
+  VERSION           : '1.1.2rc0',
   COLLAPSE_INDEX    : false,
   FILE_SUFFIX       : '.html',
   HAS_SOURCE        : 'false',
@@ -258,8 +277,8 @@ For example, it can be used to create force patterns for <a class="reference ext
       });
     })
   }
-
   </script>
+  <!-- scripts -->
   
   
 </body>
