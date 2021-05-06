@@ -25,7 +25,7 @@ __author__ = ["Wenqian Yang"]
 __copyright__ = "Block Research Group - ETH Zurich"
 __license__ = "MIT License"
 __email__ = "yang@arch.ethz.ch"
-__version__ = "1.1.2rc0"
+__version__ = "1.1.2"
 
 
 HERE = os.path.dirname(__file__)
