@@ -268,6 +268,7 @@ class SkeletonObject(BaseObject):
 
         self.draw_skeleton()
         self.draw_subd()
+        self.redraw()
 
         # conditional drawing based on settings
         # similar to mesh, network, diagram ...

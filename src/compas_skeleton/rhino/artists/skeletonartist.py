@@ -5,7 +5,7 @@ from __future__ import division
 from functools import partial
 
 import compas_rhino
-from compas_rhino.artists._artist import BaseArtist
+from compas_rhino.artists import BaseArtist
 
 from compas.utilities import color_to_colordict
 from compas.geometry import centroid_polygon
