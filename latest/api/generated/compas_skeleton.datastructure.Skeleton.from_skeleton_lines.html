@@ -50,7 +50,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            1.1.2
+            1.1.3
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -97,15 +97,15 @@
 
         
         
-        <div class="detail section" id="skeleton-from-skeleton-lines">
-<h1>Skeleton.from_skeleton_lines<a class="headerlink" href="#skeleton-from-skeleton-lines" title="Permalink to this headline">¶</a></h1>
+        <section class="detail" id="skeleton-from-skeleton-lines">
+<h1>Skeleton.from_skeleton_lines</h1>
 <dl class="py method">
-<dt id="compas_skeleton.datastructure.Skeleton.from_skeleton_lines">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-prename descclassname"><span class="pre">Skeleton.</span></code><code class="sig-name descname"><span class="pre">from_skeleton_lines</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#compas_skeleton.datastructure.Skeleton.from_skeleton_lines" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="compas_skeleton.datastructure.Skeleton.from_skeleton_lines">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-prename descclassname"><span class="pre">Skeleton.</span></span><span class="sig-name descname"><span class="pre">from_skeleton_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Instantiate a skeleton from lines.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lines</strong> (<a class="reference external" href="https://compas.dev/compas/latest/api/generated/compas.geometry.Line.html#compas.geometry.Line" title="(in COMPAS v1.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas.geometry.Line</span></code></a>) – a list of compas lines</p>
+<dd class="field-odd"><p><strong>lines</strong> (<a class="reference external" href="https://compas.dev/compas/latest/api/generated/compas.geometry.Line.html#compas.geometry.Line" title="(in COMPAS v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas.geometry.Line</span></code></a>) – a list of compas lines</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>skeleton</strong> (<a class="reference internal" href="compas_skeleton.datastructure.Skeleton.html#compas_skeleton.datastructure.Skeleton" title="compas_skeleton.datastructure.Skeleton"><code class="xref py py-class docutils literal notranslate"><span class="pre">compas_skeleton.datastructure.Skeleton</span></code></a>) – a skeleton object</p>
@@ -122,7 +122,7 @@
 </div>
 </dd></dl>
 
-</div>
+</section>
 
         
       </main>
@@ -231,7 +231,7 @@
   <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
   URL_ROOT          : '',
-  VERSION           : '1.1.2',
+  VERSION           : '1.1.3',
   COLLAPSE_INDEX    : false,
   FILE_SUFFIX       : '.html',
   HAS_SOURCE        : 'false',
@@ -262,10 +262,6 @@
     hljs.initHighlighting();
     anchors.add();
 
-    $('.nav-versions .dropdown-item').filter(function(i, ver) {
-      return window.location.href.startsWith(ver.href);
-    }).addClass("active");
-
   });
 
 
@@ -278,6 +274,13 @@
       lines.forEach(version => {
         $("#doc_version_list").append("<a class=\"dropdown-item\" href=\""+ docs_site + version + "\">" + version + "</a>");
       });
+
+      var selected_version = $('.nav-versions .dropdown-item').filter(function(i, ver) {
+        return window.location.href.startsWith(ver.href);
+      });
+      selected_version.addClass('active');
+      $("#bd-versions").text(selected_version.text());
+
     })
   }
   </script>

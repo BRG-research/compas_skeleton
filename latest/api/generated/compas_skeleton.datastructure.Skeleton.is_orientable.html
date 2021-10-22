@@ -50,7 +50,7 @@
         <li class="nav-item nav-versions dropdown">
           <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            1.1.2
+            1.1.3
           </a>
           <div id="doc_version_list" class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions"></div>
         </li>
@@ -97,11 +97,11 @@
 
         
         
-        <div class="detail section" id="skeleton-is-orientable">
-<h1>Skeleton.is_orientable<a class="headerlink" href="#skeleton-is-orientable" title="Permalink to this headline">¶</a></h1>
+        <section class="detail" id="skeleton-is-orientable">
+<h1>Skeleton.is_orientable</h1>
 <dl class="py method">
-<dt id="compas_skeleton.datastructure.Skeleton.is_orientable">
-<code class="sig-prename descclassname"><span class="pre">Skeleton.</span></code><code class="sig-name descname"><span class="pre">is_orientable</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/blockresearchgroup/compas_skeleton/blob/master/src/compas_skeleton/datastructure/skeleton.py#L1698"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#compas_skeleton.datastructure.Skeleton.is_orientable" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="compas_skeleton.datastructure.Skeleton.is_orientable">
+<span class="sig-prename descclassname"><span class="pre">Skeleton.</span></span><span class="sig-name descname"><span class="pre">is_orientable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/blockresearchgroup/compas_skeleton/blob/master/src/compas_skeleton/datastructure/skeleton.py#L1644"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Verify that the mesh is orientable.</p>
 <p>A manifold mesh is orientable if the following conditions are fulfilled:</p>
 <ul class="simple">
@@ -115,7 +115,7 @@ False, otherwise.</p>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
         
       </main>
@@ -224,7 +224,7 @@ False, otherwise.</p>
   <script type="text/javascript">
   var DOCUMENTATION_OPTIONS = {
   URL_ROOT          : '',
-  VERSION           : '1.1.2',
+  VERSION           : '1.1.3',
   COLLAPSE_INDEX    : false,
   FILE_SUFFIX       : '.html',
   HAS_SOURCE        : 'false',
@@ -255,10 +255,6 @@ False, otherwise.</p>
     hljs.initHighlighting();
     anchors.add();
 
-    $('.nav-versions .dropdown-item').filter(function(i, ver) {
-      return window.location.href.startsWith(ver.href);
-    }).addClass("active");
-
   });
 
 
@@ -271,6 +267,13 @@ False, otherwise.</p>
       lines.forEach(version => {
         $("#doc_version_list").append("<a class=\"dropdown-item\" href=\""+ docs_site + version + "\">" + version + "</a>");
       });
+
+      var selected_version = $('.nav-versions .dropdown-item').filter(function(i, ver) {
+        return window.location.href.startsWith(ver.href);
+      });
+      selected_version.addClass('active');
+      $("#bd-versions").text(selected_version.text());
+
     })
   }
   </script>
