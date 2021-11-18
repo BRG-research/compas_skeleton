@@ -423,6 +423,8 @@ class SkeletonObject(BaseObject):
 
         # get start point
         gp = Rhino.Input.Custom.GetPoint()
+        compas_rhino.rs.Redraw()
+
         if param == 'node_width':
             try:
                 node_vertex = self.skeleton.skeleton_vertices[0][0]
@@ -430,7 +432,7 @@ class SkeletonObject(BaseObject):
                 print('this skeleton doesn\'t have node')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(node_vertex)))
-            gp.SetCommandPrompt('select the node vertex')
+            # gp.SetCommandPrompt('select the node vertex')
         else:
             try:
                 leaf_vertex = self.skeleton.skeleton_vertices[1][0]
@@ -438,8 +440,9 @@ class SkeletonObject(BaseObject):
                 print('this skeleton doesn\'t have leaf')
                 return
             sp = Point3d(*(self.skeleton.vertex_coordinates(leaf_vertex)))
-            gp.SetCommandPrompt('select the leaf vertex')
+            # gp.SetCommandPrompt('select the leaf vertex')
 
+        compas_rhino.rs.EnableRedraw(True)
         gp.SetBasePoint(sp, False)
         gp.ConstrainDistanceFromBasePoint(0.01)
         gp.Get()
@@ -447,10 +450,13 @@ class SkeletonObject(BaseObject):
         if gp.CommandResult() != Rhino.Commands.Result.Success:
             return gp.CommandResult()
 
+        compas_rhino.rs.Redraw()
         sp = gp.Point()
 
         gp.SetCommandPrompt('confirm the distance')
         self.clear_subd()
+
+        compas_rhino.rs.Redraw()
 
         # get current point
         def OnDynamicDraw(sender, e):
@@ -460,7 +466,7 @@ class SkeletonObject(BaseObject):
             mp = Point3d.Add(sp, cp)
             mp = Point3d.Divide(mp, 2)
             dist = cp.DistanceTo(sp)
-            e.Display.Draw2dText(str(dist), FromArgb(0, 0, 0), mp, False, 20)
+            # e.Display.Draw2dText(str(dist), FromArgb(0, 0, 0), mp, False, 20)
 
             if param == 'leaf_extend':
                 direction = _get_leaf_extend_direction(cp)
@@ -514,6 +520,7 @@ class SkeletonObject(BaseObject):
         gp.DynamicDraw += OnDynamicDraw
 
         # get end point
+        compas_rhino.rs.EnableRedraw(True)
         gp.Get()
         ep = gp.Point()
 
@@ -744,10 +751,12 @@ class SkeletonObject(BaseObject):
         >>> skeletonobject.draw()
         >>> skeletonobject.update()
         """
+        compas_rhino.rs.EnableRedraw(True)
 
         while True:
             menu = CommandMenu(self.config)
             action = menu.select_action()
+
             if not action:
                 return
 
