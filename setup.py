@@ -28,7 +28,7 @@ optional_requirements = {}
 
 setup(
     name="compas_skeleton",
-    version="1.1.4rc0",
+    version="1.1.4",
     description="topologically generating branching diagram mesh ",
     long_description=long_description,
     long_description_content_type="text/markdown",
